@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // temporary -- testing nav menu
-        nav_button = (Button) findViewById(R.id.nav_menu_button);
-        nav_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendToNav();
-            }
-        });
+//        nav_button = (Button) findViewById(R.id.nav_menu_button);
+//        nav_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendToNav();
+//            }
+//        });
     }
 
     public void sendToLogin() {
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // send to test page with the "hamburger"/navigation menu
-    public void sendToNav() {
-        Intent nav_menu_intent = new Intent(this, NavMenu.class);
-        startActivity(nav_menu_intent);
-    }
+//    public void sendToNav() {
+//        Intent nav_menu_intent = new Intent(this, NavMenu.class);
+//        startActivity(nav_menu_intent);
+//    }
 
 }

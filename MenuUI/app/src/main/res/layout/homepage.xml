@@ -70,18 +70,18 @@
                 android:textSize="18sp" />
 
             <!--temporary button used to test the nav menu-->
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:id="@+id/nav_menu_button"
-                android:clickable="true"
-                android:onClick="sendToNav"
-                android:padding="16dp"
-                android:text="Test out nav menu"
-                android:textAllCaps="false"
-                android:textColor="#444444"
-                android:textSize="18sp" />
+            <!--<Button-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:id="@+id/nav_menu_button"-->
+                <!--android:clickable="true"-->
+                <!--android:onClick="sendToNav"-->
+                <!--android:padding="16dp"-->
+                <!--android:text="Test out nav menu"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textColor="#444444"-->
+                <!--android:textSize="18sp" />-->
 
 
         </LinearLayout>

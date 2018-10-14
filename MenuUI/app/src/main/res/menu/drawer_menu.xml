@@ -4,11 +4,14 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_message"
-            android:title="Message" />
-        <item android:id="@+id/nav_chat"
-            android:title="Chat" />
         <item android:id="@+id/nav_profile"
-            android:title="profile"/>
+            android:title="Profile"
+            android:icon="@drawable/ic_menu_profile"/>
+        <item android:id="@+id/nav_favorites"
+            android:title="Favorites"
+            android:icon="@drawable/ic_menu_favorites"/>
+        <item android:id="@+id/nav_settings"
+            android:title="Settings"
+            android:icon="@drawable/ic_menu_settings"/>
     </group>
 </menu>

@@ -9,6 +9,9 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button login_button;
 
+    // temporary -- used to test nav menu
+    private Button nav_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,11 +19,19 @@ public class MainActivity extends AppCompatActivity {
 
         login_button = (Button) findViewById(R.id.login_button);
         login_button.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 sendToLogin();
 
+            }
+        });
+
+        // temporary -- testing nav menu
+        nav_button = (Button) findViewById(R.id.nav_menu_button);
+        nav_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendToNav();
             }
         });
     }
@@ -34,4 +45,11 @@ public class MainActivity extends AppCompatActivity {
     public void sendToRegister(View view) {
 
     }
+
+    // send to test page with the "hamburger"/navigation menu
+    public void sendToNav() {
+        Intent nav_menu_intent = new Intent(this, NavMenu.class);
+        startActivity(nav_menu_intent);
+    }
+
 }

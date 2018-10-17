@@ -4,4 +4,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="first">Filler 1</string>
+    <string name="second">Filler 2</string>
+    <string name="third">Filler 3</string>
+    <string name="fourth">Filler 4</string>
 </resources>

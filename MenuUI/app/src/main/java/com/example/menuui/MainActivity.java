@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendToRegister(View view) {
-
+        Intent register_intent = new Intent(this, Register.class);
+        startActivity(register_intent);
     }
 
     // send to test page with the "hamburger"/navigation menu

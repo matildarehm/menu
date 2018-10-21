@@ -6,47 +6,45 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_bg">
+    android:background="@drawable/blurredbg">
 
     <EditText
 
         android:id="@+id/editText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="237dp"
+        android:layout_marginBottom="207dp"
         android:background="@drawable/rounded_border"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
         android:padding="10dp" />
 
-    <android.support.v7.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="55dp"
+    <Button
+        android:id="@+id/LoginText"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="209dp"
-        app:cardBackgroundColor="#000000"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        tools:style="@style/CardView">
+        android:layout_marginBottom="127dp"
+        android:background="@drawable/background_signup"
+        android:clickable="true"
+        android:padding="16dp"
+        android:text="Send a link"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Reset Password"
-            android:textColor="#FFFFFF"
-            android:textSize="34sp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="279dp"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@drawable/menuyellow" />
 
 </RelativeLayout>

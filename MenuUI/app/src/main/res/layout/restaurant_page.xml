@@ -91,7 +91,8 @@
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Popular Dishes" />
+                    android:text="Popular Dishes"
+                    android:layout_marginLeft="5dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -103,7 +104,8 @@
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dishes" />
+                    android:text="Dishes"
+                    android:layout_marginLeft="5dp"/>
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"

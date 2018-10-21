@@ -12,9 +12,9 @@
         android:id="@+id/editText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="259dp"
+        android:layout_marginBottom="214dp"
         android:background="@drawable/rounded_border"
         android:ems="10"
         android:hint="Username"
@@ -29,7 +29,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="226dp"
+        android:layout_marginBottom="155dp"
         android:background="@drawable/rounded_border"
         android:drawableRight="@drawable/ic_action_pass"
         android:ems="10"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/background_signup"
         android:clickable="true"
         android:onClick="sendToLogin"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/imageView"
         android:layout_below="@+id/passText"
-        android:layout_marginTop="-226dp"
+        android:layout_marginTop="-155dp"
         android:text="Forgot your password?"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
@@ -72,43 +72,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="286dp"
-        android:layout_height="250dp"
+        android:layout_width="278dp"
+        android:layout_height="291dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
         app:srcCompat="@drawable/menuyellow" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="83dp"
-        android:text="OR"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="-77dp"
-        android:layout_toStartOf="@+id/textView3"
-        app:srcCompat="@drawable/fbalt"
-        android:layout_toLeftOf="@+id/textView3" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/imageView6"
-        android:layout_marginEnd="110dp"
-        app:srcCompat="@drawable/googleplus"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="110dp" />
 
 </RelativeLayout>

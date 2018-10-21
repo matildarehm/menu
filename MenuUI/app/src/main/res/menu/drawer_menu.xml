@@ -7,9 +7,12 @@
         <item android:id="@+id/nav_profile"
             android:title="Profile"
             android:icon="@drawable/ic_menu_profile"/>
-        <item android:id="@+id/nav_favorites"
-            android:title="Favorites"
+        <item android:id="@+id/nav_favorite_restaurants"
+            android:title="Favorite Restaurants"
             android:icon="@drawable/ic_menu_favorites"/>
+        <item android:id="@+id/nav_favorite_dishes"
+            android:title="Favorite Dishes"
+            android:icon="@drawable/ic_menu_star"/>
         <item android:id="@+id/nav_settings"
             android:title="Settings"
             android:icon="@drawable/ic_menu_settings"/>

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+
+import java.net.URI;
 
 public class Register extends AppCompatActivity {
     private Button btn_signUp;
@@ -14,6 +17,10 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
+//        hideActionBar();
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+
         btn_signUp = (Button) findViewById(R.id.btn_signUp);
         btn_signUp.setOnClickListener(new View.OnClickListener() {
 
@@ -22,13 +29,23 @@ public class Register extends AppCompatActivity {
             signUp();
 
         }
-    });
+    }
+
+    );
+
 }
+
+//    public void hideActionBar() {
+//        this.getWindow().getDecorView().setSystemUiVisibility(
+//                View.SYSTEM_UI_
+//        );
+//    }
 
     public void signUp() {
         // TODO: Implement homepage, switch to homepage
 //        Intent homepage_intent = new Intent(this, Homepage.class);
 //        startActivity(homepage_intent);
     }
+
 }
 

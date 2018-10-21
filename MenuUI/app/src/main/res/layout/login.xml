@@ -1,76 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_bg">
+    android:background="@drawable/blurredbg">
 
     <EditText
 
         android:id="@+id/editText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="214dp"
         android:background="@drawable/rounded_border"
         android:ems="10"
-        android:padding="10dp"
+        android:hint="Username"
         android:inputType="textPersonName"
-        android:hint="Username" />
+        android:padding="10dp"
+        android:textColorHint="#3d3a33"
+        android:typeface="normal" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:drawableRight="@drawable/ic_action_pass"
+        android:id="@+id/passText"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
-        android:layout_marginBottom="201dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="155dp"
         android:background="@drawable/rounded_border"
+        android:drawableRight="@drawable/ic_action_pass"
         android:ems="10"
-        android:padding="10dp"
+        android:fontFamily="sans-serif"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:hint="Password" />
+        android:padding="10dp"
+        android:textColorHint="#3d3a33"
+        android:typeface="normal" />
 
-    <android.support.v7.widget.CardView
-        tools:style="@style/CardView"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+    <Button
+        android:id="@+id/LoginText"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="86dp"
-        app:cardBackgroundColor="#000000"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Login"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/background_signup"
+        android:clickable="true"
+        android:onClick="sendToLogin"
+        android:padding="16dp"
+        android:text="Log in"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/fyp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="168dp"
-        android:text="Forgot your Password?"
-        android:textColor="#FFFFFF" />
+        android:layout_alignEnd="@+id/imageView"
+        android:layout_below="@+id/passText"
+        android:layout_marginTop="-155dp"
+        android:text="Forgot your password?"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:layout_alignRight="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="278dp"
+        android:layout_height="291dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        app:srcCompat="@drawable/menuyellow" />
 
 </RelativeLayout>

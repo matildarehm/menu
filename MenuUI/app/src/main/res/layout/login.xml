@@ -67,7 +67,8 @@
         android:text="Forgot your password?"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:layout_alignRight="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -75,7 +76,7 @@
         android:layout_height="291dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="13dp"
         app:srcCompat="@drawable/menuyellow" />
 
 </RelativeLayout>

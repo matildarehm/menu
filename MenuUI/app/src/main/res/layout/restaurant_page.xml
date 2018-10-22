@@ -8,7 +8,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,12 +16,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/restaurant_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
-                android:text="Mexican Restaurant Name"
+                android:text="@string/restaurant_name"
                 android:textColor="#000000"
                 android:textSize="20dp" />
 
@@ -33,7 +33,7 @@
                 tools:layout_editor_absoluteY="8dp">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/restaurant_main_image"
                     android:layout_width="125dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -47,36 +47,36 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/restaurant_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_restaurant_location"
                         android:drawablePadding="5dp"
-                        android:text="123 Main Street, Troy NY" />
+                        android:text="@string/restaurant_address" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/restaurant_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_restaurant_phone"
                         android:drawablePadding="5dp"
-                        android:text="123-456-7890" />
+                        android:text="@string/restaurant_phonenum" />
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/restaurant_hours"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_restaurant_clock"
                         android:drawablePadding="5dp"
-                        android:text="Hours" />
+                        android:text="@string/restaurant_hours_m" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/restaurant_delivery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_restaurant_delivery"
                         android:drawablePadding="5dp"
-                        android:text="Delivers" />
+                        android:text="@string/restaurant_delivers" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -88,7 +88,7 @@
                 tools:layout_editor_absoluteY="37dp">
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/rest_pop_dish_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Popular Dishes"
@@ -100,24 +100,45 @@
                 android:layout_height="272dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView9"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dishes"
-                    android:layout_marginLeft="5dp"/>
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/rest_dishes_tile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:text="Dishes" />
+
+                    <Button
+                        android:id="@+id/rest_dish_filter_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_restaurant_filter"
+                        android:text="Filter" />
+
+                </RelativeLayout>
+
+                <!--card view of all the menu items -->
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" >
 
+                    <!--card for menu item-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="105dp"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/imageView4"
+                            android:id="@+id/rest_dish_image"
                             android:layout_width="200dp"
                             android:layout_height="match_parent"
                             android:layout_margin="15dp"
@@ -132,10 +153,10 @@
                             android:layout_margin="15dp">
 
                             <TextView
-                                android:id="@+id/textView11"
+                                android:id="@+id/rest_dish_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Tacos"
+                                android:text="@string/restaurant_dish_name"
                                 android:textSize="20dp"
                                 android:textStyle="bold"
                                 android:textColor="#000000"
@@ -148,25 +169,27 @@
                                 android:gravity="bottom">
 
                                 <TextView
-                                    android:id="@+id/textView13"
+                                    android:id="@+id/rest_avg_rating"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:drawableLeft="@drawable/ic_restaurant_heart"
                                     android:drawablePadding="5dp"
-                                    android:text=" 4.0" />
+                                    android:text="@string/restaurant_dish_rating"/>
 
                                 <TextView
-                                    android:id="@+id/textView15"
+                                    android:id="@+id/rest_avg_recommendation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Recommended 75.5%"
+                                    android:text="@string/restaurant_dish_recommendation"
                                     android:layout_marginLeft="10dp"/>
 
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
+
+                    
                 </android.support.v7.widget.CardView>
             </LinearLayout>
         </LinearLayout>

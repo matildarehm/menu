@@ -7,4 +7,21 @@
     <string name="second">Second</string>
     <string name="third">Third</string>
     <string name="fourth">Fourth</string>
+
+    <!--Restaurant page strings -->
+    <string name="restaurant_name">Mexican Restaurant Name</string>
+    <string name="restaurant_address">123 Main Street, Troy NY</string>
+    <string name="restaurant_phonenum">123-456-7890</string>
+    <string name="restaurant_hours_m">9 AM - 9 PM</string>
+    <string name="restaurant_hours_tu">9 AM - 9 PM</string>
+    <string name="restaurant_hours_w">9 AM - 9 PM</string>
+    <string name="restaurant_hours_th">9 AM - 9 PM</string>
+    <string name="restaurant_hours_f">9 AM - 10 PM</string>
+    <string name="restaurant_hours_sat">10 AM - 10 PM</string>
+    <string name="restaurant_hours_sun">CLOSED</string>
+    <string name="restaurant_delivers">Delivers</string>
+    <string name="restaurant_dish_name">Tacos</string>
+    <string name="restaurant_dish_rating">4.0</string>
+    <string name="restaurant_dish_recommendation">Recommended 75.5%</string>
+
 </resources>

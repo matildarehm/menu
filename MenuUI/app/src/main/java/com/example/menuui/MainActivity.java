@@ -49,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(register_intent);
     }
 
+
+    // sent to restaurant page
+//    public void sendToRestaurant(View view) {
+//        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
+//        startActivity(restaurant_intent);
+//    }
+
+
     // send to test page with the "hamburger"/navigation menu
 //    public void sendToNav() {
 //        Intent nav_menu_intent = new Intent(this, NavMenu.class);

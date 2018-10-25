@@ -28,6 +28,10 @@
         </activity>
 
         <activity android:name=".FYP"></activity>
+
+        <activity android:name=".RestaurantPage">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

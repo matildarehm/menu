@@ -1,5 +1,6 @@
 package com.example.menuui;
 
+import android.drm.DrmStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,7 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-public class RestaurantPage extends AppCompatActivity {
+public class RestaurantPage extends NavBarBase {
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -24,22 +25,34 @@ public class RestaurantPage extends AppCompatActivity {
 //        actionbar.setDisplayHomeAsUpEnabled(true);
 //        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 //
-//        mDrawerLayout = findViewById(R.id.nav_drawer);
+//
+//        mDrawerLayout = findViewById(R.id.drawer_layout);
 //
 //        NavigationView navigationView = findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(
 //                new NavigationView.OnNavigationItemSelectedListener() {
 //                    @Override
-//                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                        // set item as selected
 //                        menuItem.setChecked(true);
-//                        // close drawer when item is tapped
 //                        mDrawerLayout.closeDrawers();
 //
-//                        // add code to update UI based on item selected (for example, swap UI fragments)
+//                        // Update the UI based on the item selected
+//
 //                        return true;
 //                    }
 //                }
 //        );
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                mDrawerLayout.openDrawer(GravityCompat.START);
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }

@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // sent to restaurant page
+    // send to restaurant page
 //    public void sendToRestaurant(View view) {
 //        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
 //        startActivity(restaurant_intent);

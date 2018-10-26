@@ -24,4 +24,8 @@
     <string name="restaurant_dish_rating">4.0</string>
     <string name="restaurant_dish_recommendation">Recommended 75.5%</string>
 
+    <!--Favorite dishes strings-->
+    <string name="fav_dish_name">Tacos</string>
+    <string name="fav_dish_rest_name">From The Mexican Restaurant</string>
+
 </resources>

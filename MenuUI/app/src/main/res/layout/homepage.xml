@@ -71,20 +71,20 @@
                 android:textSize="24sp" />
 
 
-            <!--temporary button to test restaurant page-->
+            <!--temporary button to test restaurant test page-->
             <!--<Button-->
-                <!--style="@style/Base.TextAppearance.AppCompat.Body1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="12dp"-->
-                <!--android:background="#000000"-->
-                <!--android:clickable="true"-->
-                <!--android:onClick="sendToRestaurant"-->
-                <!--android:padding="16dp"-->
-                <!--android:text="Restaurant Page"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textColor="#fff"-->
-                <!--android:textSize="24sp" />-->
+            <!--style="@style/Base.TextAppearance.AppCompat.Body1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="12dp"-->
+            <!--android:background="#000000"-->
+            <!--android:clickable="true"-->
+            <!--android:onClick="sendToRestaurantTest"-->
+            <!--android:padding="16dp"-->
+            <!--android:text="Restaurant Page"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="#fff"-->
+            <!--android:textSize="24sp" />-->
 
 
 

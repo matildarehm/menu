@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <activity android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -29,9 +29,12 @@
 
         <activity android:name=".FYP"></activity>
 
-        <activity android:name=".RestaurantPage">
+        <activity android:name=".RestaurantTestPage">
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
+
+
     </application>
 
 </manifest>

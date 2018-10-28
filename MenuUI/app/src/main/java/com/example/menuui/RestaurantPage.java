@@ -1,6 +1,7 @@
 package com.example.menuui;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.NavigationView;
@@ -46,27 +47,38 @@ public class RestaurantPage extends AppCompatActivity {
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
 
+                        int id = menuItem.getItemId();
+                        switch (id) {
+                            case R.id.nav_favorite_dishes:
+                                // send to favorite dishes page
+                                Intent fav_dishes_page_intent = new Intent(RestaurantPage.this, FavoriteDishes.class);
+                                startActivity(fav_dishes_page_intent);
+                            case R.id.nav_favorite_restaurants:
+                                // send to favorite restaurants page
+                                Intent fav_rest_page_intent = new Intent(RestaurantPage.this, FavoriteRestaurants.class);
+                                startActivity(fav_rest_page_intent);
+                        }
+
+
                         return true;
                     }
                 });
 
+        // take out?
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
                     @Override
                     public void onDrawerSlide(View drawerView, float slideOffset) {
                         // Respond when the drawer's position changes
                     }
-
                     @Override
                     public void onDrawerOpened(View drawerView) {
                         // Respond when the drawer is opened
                     }
-
                     @Override
                     public void onDrawerClosed(View drawerView) {
                         // Respond when the drawer is closed
                     }
-
                     @Override
                     public void onDrawerStateChanged(int newState) {
                         // Respond when the drawer motion state changes
@@ -110,4 +122,5 @@ public class RestaurantPage extends AppCompatActivity {
         filterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         filterDialog.show();
     }
+
 }

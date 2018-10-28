@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     // send to restaurant test page
-//    public void sendToRestaurantTest(View view) {
-//        Intent restaurant_test_intent = new Intent(this, RestaurantTestPage.class);
-//        startActivity(restaurant_test_intent);
-//    }
+    public void sendToRestaurantPage(View view) {
+        Intent restaurant_page_intent = new Intent(this, RestaurantPage.class);
+        startActivity(restaurant_page_intent);
+    }
 
 
     // send to test page with the "hamburger"/navigation menu

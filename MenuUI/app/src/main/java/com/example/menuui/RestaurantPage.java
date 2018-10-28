@@ -1,5 +1,8 @@
 package com.example.menuui;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,15 +12,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class RestaurantTestPage extends AppCompatActivity {
+public class RestaurantPage extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+    Dialog filterDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.restaurant_test_page);
+        setContentView(R.layout.restaurant_page);
 
+        // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
@@ -67,8 +74,13 @@ public class RestaurantTestPage extends AppCompatActivity {
                 }
         );
 
+        // create dialog for filter popup
+        filterDialog = new Dialog(this);
+
+
     }
 
+    // nav bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -77,5 +89,25 @@ public class RestaurantTestPage extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    // handle filter popup
+    public void showFilterPopup(View view) {
+        TextView close_txt;
+        Button btn_filter_alpha;
+        Button btn_filter_rating;
+        filterDialog.setContentView(R.layout.filter_dishes_popup);
+        close_txt = (TextView) filterDialog.findViewById(R.id.close_txt);
+        btn_filter_alpha = (Button)filterDialog.findViewById(R.id.filter_dishes_alpha);
+        btn_filter_rating = (Button)filterDialog.findViewById(R.id.filter_dishes_rating);
+        close_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterDialog.dismiss();
+            }
+        });
+        filterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        filterDialog.show();
     }
 }

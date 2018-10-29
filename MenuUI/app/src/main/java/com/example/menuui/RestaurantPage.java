@@ -57,6 +57,10 @@ public class RestaurantPage extends AppCompatActivity {
                                 // send to favorite restaurants page
                                 Intent fav_rest_page_intent = new Intent(RestaurantPage.this, FavoriteRestaurants.class);
                                 startActivity(fav_rest_page_intent);
+                            case R.id.nav_logout:
+                                // log out and send to the welcome page
+                                Intent logout_intent = new Intent(RestaurantPage.this, MainActivity.class);
+                                startActivity(logout_intent);
                         }
 
 

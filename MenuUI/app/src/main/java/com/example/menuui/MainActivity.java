@@ -51,8 +51,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     // send to restaurant test page
+//    public void sendToRestaurantPage(View view) {
+//        Intent restaurant_page_intent = new Intent(this, RestaurantPage.class);
+//        startActivity(restaurant_page_intent);
+//    }
+
+    // send to restaurant test page 2
     public void sendToRestaurantPage(View view) {
-        Intent restaurant_page_intent = new Intent(this, RestaurantPage.class);
+        Intent restaurant_page_intent = new Intent(this, RestaurantPage2.class);
         startActivity(restaurant_page_intent);
     }
 

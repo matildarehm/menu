@@ -39,6 +39,10 @@
         <activity android:name=".FavoriteRestaurants">
         </activity>
 
+        <activity android:name=".RestaurantPage2">
+            android:theme="@style/Theme.AppCompat.Light">
+        </activity>
+
 
 
     </application>

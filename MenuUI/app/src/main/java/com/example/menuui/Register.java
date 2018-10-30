@@ -42,9 +42,8 @@ public class Register extends AppCompatActivity {
 //    }
 
     public void signUp() {
-        // TODO: Implement homepage, switch to homepage
-//        Intent homepage_intent = new Intent(this, Homepage.class);
-//        startActivity(homepage_intent);
+        Intent landing_intent = new Intent(this, Landing.class);
+        startActivity(landing_intent);
     }
 
 }

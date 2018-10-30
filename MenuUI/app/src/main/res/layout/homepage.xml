@@ -57,6 +57,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/register_button"
                 style="@style/Base.TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

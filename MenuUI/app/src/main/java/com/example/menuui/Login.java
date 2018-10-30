@@ -5,10 +5,12 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Login extends AppCompatActivity {
     private TextView fyp_text;
+    private Button login_button;
     Typeface login_button_font;
 
     @Override
@@ -42,6 +44,10 @@ public class Login extends AppCompatActivity {
     public void sendToFYP() {
         Intent fyp_intent = new Intent(this, FYP.class);
         startActivity(fyp_intent);
+    }
 
+    public void sendToLanding(View view) {
+        Intent landing_intent = new Intent(this, Landing.class);
+        startActivity(landing_intent);
     }
 }

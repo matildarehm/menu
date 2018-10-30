@@ -27,7 +27,11 @@
         <activity android:name=".Register">
         </activity>
 
-        <activity android:name=".FYP"></activity>
+        <activity android:name=".FYP">
+        </activity>
+
+        <activity android:name=".Landing">
+        </activity>
 
         <activity android:name=".RestaurantPage">
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

@@ -48,22 +48,43 @@
             android:orientation="vertical"
             android:focusable="true">
 
+            <TextView
+                android:id="@+id/rest_label_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Restaurant Label 1" />
+
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/rest_img_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/second"
                 app:srcCompat="@drawable/img2" />
 
+            <TextView
+                android:id="@+id/rest_label_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Restaurant Label 2" />
+
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/rest_img_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/third"
                 app:srcCompat="@drawable/img3" />
 
+            <TextView
+                android:id="@+id/rest_label_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Restaurant Label 3" />
+
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/rest_img_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/fourth"

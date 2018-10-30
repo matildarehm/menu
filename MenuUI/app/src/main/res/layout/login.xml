@@ -41,7 +41,7 @@
         android:typeface="normal" />
 
     <Button
-        android:id="@+id/LoginText"
+        android:id="@+id/login_button"
         style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/background_signup"
         android:clickable="true"
-        android:onClick="sendToLogin"
+        android:onClick="sendToLanding"
         android:padding="16dp"
         android:text="Log in"
         android:textAllCaps="false"

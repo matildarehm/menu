@@ -7,6 +7,9 @@
         <!--<item android:id="@+id/nav_profile"-->
             <!--android:title="Profile"-->
             <!--android:icon="@drawable/ic_menu_profile"/>-->
+        <item android:id="@+id/nav_homepage"
+            android:title="Home"
+            android:icon="@drawable/ic_menu_home"/>
         <item android:id="@+id/nav_favorite_restaurants"
             android:title="Favorite Restaurants"
             android:icon="@drawable/ic_menu_favorites"/>

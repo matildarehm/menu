@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +34,7 @@ public class RestaurantPage extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        mDrawerLayout = findViewById(R.id. drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -49,18 +51,26 @@ public class RestaurantPage extends AppCompatActivity {
 
                         int id = menuItem.getItemId();
                         switch (id) {
+                            case R.id.nav_homepage:
+                                // send to the landing page
+                                Intent home_intent = new Intent(RestaurantPage.this, Landing.class);
+                                startActivity(home_intent);
+                                break;
                             case R.id.nav_favorite_dishes:
                                 // send to favorite dishes page
                                 Intent fav_dishes_page_intent = new Intent(RestaurantPage.this, FavoriteDishes.class);
                                 startActivity(fav_dishes_page_intent);
+                                break;
                             case R.id.nav_favorite_restaurants:
                                 // send to favorite restaurants page
                                 Intent fav_rest_page_intent = new Intent(RestaurantPage.this, FavoriteRestaurants.class);
                                 startActivity(fav_rest_page_intent);
+                                break;
                             case R.id.nav_logout:
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(RestaurantPage.this, MainActivity.class);
                                 startActivity(logout_intent);
+                                break;
                         }
 
 
@@ -92,8 +102,6 @@ public class RestaurantPage extends AppCompatActivity {
 
         // create dialog for filter popup
         filterDialog = new Dialog(this);
-
-
     }
 
     // nav bar
@@ -107,6 +115,14 @@ public class RestaurantPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.nav_bar_menu, menu);
+
+        return true;
+    }
 
     // handle filter popup
     public void showFilterPopup(View view) {

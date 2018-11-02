@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,14 +19,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.yelp.fusion.client.models.Business;
+
 public class RestaurantPage extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+    private String restaurant_info;
     Dialog filterDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_page);
+
+        // Retrieve data that was passed through intent
+        restaurant_info = getIntent().getStringExtra("RESTAURANT_INFO");
+        Log.d("DEBUG", "" + restaurant_info);
 
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);

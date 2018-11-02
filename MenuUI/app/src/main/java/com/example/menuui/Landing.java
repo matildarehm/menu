@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -44,10 +45,15 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private com.google.android.gms.location.LocationListener listener;
-    double latitude = 42.745994;
-    double longitude = -73.694263;
+    private double latitude = 42.745994;
+    private double longitude = -73.694263;
     private long UPDATE_INTERVAL = 2 * 1000;
     private long FASTEST_INTERVAL = 2000;
+
+    // Restaurant info to be passed to restaurant page
+    private String restaurant_1_info = "{\"name\":\"OOF TEST MY ASS\"}";
+    private String restaurant_2_info;
+    private String restaurant_3_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         searchView.onActionViewExpanded();
         searchView.clearFocus();
 
+        // Set listeners for UI Objects
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -86,6 +93,31 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+
+        final ImageView restaurantImg1 = (ImageView) findViewById(R.id.rest_img_1);
+        final ImageView restaurantImg2 = (ImageView) findViewById(R.id.rest_img_2);
+        final ImageView restaurantImg3 = (ImageView) findViewById(R.id.rest_img_3);
+
+        restaurantImg1.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_1_info);
+            }
+        });
+
+        restaurantImg2.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_2_info);
+            }
+        });
+
+        restaurantImg3.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_3_info);
             }
         });
     }
@@ -233,6 +265,11 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                     new DownloadImageTask(image_1).execute(businesses.get(0).getImageUrl());
                     new DownloadImageTask(image_2).execute(businesses.get(1).getImageUrl());
                     new DownloadImageTask(image_3).execute(businesses.get(2).getImageUrl());
+
+                    // Reset and update restaurant info
+                    restaurant_1_info = getBusinessJSON(businesses.get(0));
+                    restaurant_2_info = getBusinessJSON(businesses.get(1));
+                    restaurant_3_info = getBusinessJSON(businesses.get(2));
                 }
             } catch (Exception e) {
                 Log.d("DEBUG", "Error: " + e.toString());
@@ -309,6 +346,31 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    /**
+     * Convert business information to a JSON String
+     * @param {Business} b is the business object that we are extracting info from
+     * @return {String} ret is the info in a JSON style string
+     */
+    private String getBusinessJSON(Business b) {
+
+        String ret = "{\"name\":" + b.getName() + ",";
+        ret += "\"image\":" + b.getImageUrl() + ",";
+        ret += "\"phone\":" + b.getPhone() + ",";
+        ret += "\"location\":" + b.getLocation() + "}";
+
+        return ret;
+    }
+
+    /**
+     * Open a restaurant page activity for a specific restaurant name
+     * @param {String} restaurant_name is the name of the restaurant to access menu items for
+     */
+    private void openRestaurantPage(String restaurant_info) {
+        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
+        restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_info);
+        startActivity(restaurant_intent);
     }
 }
 

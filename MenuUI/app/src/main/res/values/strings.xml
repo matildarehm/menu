@@ -9,7 +9,7 @@
     <string name="fourth">Fourth</string>
 
     <!--Restaurant page strings -->
-    <string name="restaurant_name">Mexican Restaurant Name</string>
+    <string name="restaurant_name">Restaurant Name</string>
     <string name="restaurant_address">123 Main Street, Troy NY</string>
     <string name="restaurant_phonenum">123-456-7890</string>
     <string name="restaurant_hours_m">9 AM - 9 PM</string>

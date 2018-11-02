@@ -355,10 +355,13 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
      */
     private String getBusinessJSON(Business b) {
 
-        String ret = "{\"name\":" + b.getName() + ",";
-        ret += "\"image\":" + b.getImageUrl() + ",";
-        ret += "\"phone\":" + b.getPhone() + ",";
-        ret += "\"location\":" + b.getLocation() + "}";
+        String ret = "{\"name\":\"" + b.getName() + "\",";
+        ret += "\"image\":\"" + b.getImageUrl() + "\",";
+        ret += "\"phone\":\"" + b.getPhone() + "\",";
+        ret += "\"street\":\"" + b.getLocation().getAddress1() + "\",";
+        ret += "\"city\":\"" + b.getLocation().getCity() + "\",";
+        ret += "\"state\":\"" + b.getLocation().getState() + "\",";
+        ret += "\"zip\":\"" + b.getLocation().getZipCode() + "\"}";
 
         return ret;
     }

@@ -46,13 +46,9 @@ public class Login extends AppCompatActivity {
         startActivity(fyp_intent);
     }
 
-//    public void sendToLanding(View view) {
-//        Intent landing_intent = new Intent(this, Landing.class);
-//        startActivity(landing_intent);
-//    }
-
     public void sendToLanding(View view) {
-        Intent landing_intent = new Intent(this, LandingPage.class);
+        Intent landing_intent = new Intent(this, Landing.class);
         startActivity(landing_intent);
     }
+
 }

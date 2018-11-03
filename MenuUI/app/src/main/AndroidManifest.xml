@@ -48,10 +48,6 @@
             android:label="@string/restaurant_name"
         </activity>
 
-        <activity android:name=".LandingPage">
-        </activity>
-
-
 
     </application>
 

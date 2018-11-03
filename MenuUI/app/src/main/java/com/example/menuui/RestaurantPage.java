@@ -27,6 +27,10 @@ public class RestaurantPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_page);
 
+        // set restaurant information
+        TextView textElement = (TextView) findViewById(R.id.restaurant_title);
+        textElement.setText("Restaurant Name");
+
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -116,6 +120,7 @@ public class RestaurantPage extends AppCompatActivity {
     }
 
 
+    // add search bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

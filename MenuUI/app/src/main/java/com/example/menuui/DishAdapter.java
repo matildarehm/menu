@@ -53,7 +53,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     public void onBindViewHolder(final DishViewHolder dishViewHolder, int i) {
         dishViewHolder.dish_name.setText(dishes.get(i).name);
         dishViewHolder.dish_rating.setText(String.format("%.2f", dishes.get(i).avg_rating));
-        dishViewHolder.dish_recommended.setText(String.format("%.2f", dishes.get(i).avg_rating));
+        dishViewHolder.dish_recommended.setText(String.format("%.2f", dishes.get(i).avg_recommended));
         dishViewHolder.dish_photo.setImageResource(dishes.get(i).dish_img);
 
         dishViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

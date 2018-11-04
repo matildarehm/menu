@@ -78,8 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/second"
-                        app:srcCompat="@drawable/img2"
-                        android:onClick="sendToRestaurantPage"/>
+                        app:srcCompat="@drawable/img2"/>
 
                     <TextView
                         android:id="@+id/rest_label_2"

@@ -38,6 +38,7 @@
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
+                <!--rating and recommend line-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -46,18 +47,32 @@
 
                     <TextView
                         android:id="@+id/rest_avg_rating"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="3"
                         android:drawableLeft="@drawable/ic_restaurant_heart"
                         android:drawablePadding="5dp" />
 
-                    <TextView
-                        android:id="@+id/rest_avg_recommendation"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1" />
+                        android:layout_weight = "2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recommend:"
+                            android:layout_marginRight="5dp"/>
+
+                        <TextView
+                            android:id="@+id/rest_avg_recommendation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

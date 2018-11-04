@@ -29,7 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant extends AppCompatActivity {
+    // DrawerLayout for the nav menu
     private DrawerLayout mDrawerLayout;
+
+    // Dialog for filter dishes button
     Dialog filterDialog;
 
     // dishes list for recycler

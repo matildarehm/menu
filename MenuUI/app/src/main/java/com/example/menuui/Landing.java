@@ -150,16 +150,50 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         });
 
 
-        // redirect to restaurant page
+        // redirect to restaurant page -- pass the restaurant information as well
         ImageView restaurant_image = (ImageView) findViewById(R.id.rest_img_1);
         restaurant_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                // get the restaurant name
                 TextView restaurant_name = (TextView)findViewById(R.id.rest_label_1);
                 String name = restaurant_name.getText().toString();
 
                 Intent restaurant_page_intent = new Intent(Landing.this, Restaurant.class);
+                // pass information to the Restaurant page
+                restaurant_page_intent.putExtra("restaurantName", name);
+                startActivity(restaurant_page_intent);
+            }
+        });
+
+        ImageView restaurant_image2 = (ImageView) findViewById(R.id.rest_img_2);
+        restaurant_image2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // get the restaurant_name
+                TextView restaurant_name = (TextView)findViewById(R.id.rest_label_2);
+                String name = restaurant_name.getText().toString();
+
+                Intent restaurant_page_intent = new Intent(Landing.this, Restaurant.class);
+                // pass information to the Restaurant page
+                restaurant_page_intent.putExtra("restaurantName", name);
+                startActivity(restaurant_page_intent);
+            }
+        });
+
+        ImageView restaurant_image3 = (ImageView) findViewById(R.id.rest_img_3);
+        restaurant_image3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // get the restaurant name
+                TextView restaurant_name = (TextView)findViewById(R.id.rest_label_3);
+                String name = restaurant_name.getText().toString();
+
+                Intent restaurant_page_intent = new Intent(Landing.this, Restaurant.class);
+                // pass information to the Restaurant page
                 restaurant_page_intent.putExtra("restaurantName", name);
                 startActivity(restaurant_page_intent);
             }

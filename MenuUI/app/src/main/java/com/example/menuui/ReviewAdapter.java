@@ -15,12 +15,16 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         CardView cv;
         TextView review_text;
         TextView review_recommend;
+        TextView review_rating;
+        TextView review_author;
 
         ReviewViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.review_card);
             review_text = (TextView)itemView.findViewById(R.id.review_text);
             review_recommend = (TextView)itemView.findViewById(R.id.review_recommend);
+            review_rating = (TextView)itemView.findViewById(R.id.dish_rating_score);
+            review_author = (TextView)itemView.findViewById(R.id.review_author);
         }
     }
 
@@ -45,6 +49,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     public void onBindViewHolder(ReviewViewHolder reviewViewHolder, int i) {
         reviewViewHolder.review_text.setText(reviews.get(i).review);
         reviewViewHolder.review_recommend.setText(reviews.get(i).would_recommend);
+        reviewViewHolder.review_rating.setText(Integer.toString(reviews.get(i).hearts));
+        reviewViewHolder.review_author.setText(reviews.get(i).author);
     }
 
     @Override

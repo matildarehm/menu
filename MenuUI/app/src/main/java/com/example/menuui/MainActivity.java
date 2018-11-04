@@ -28,17 +28,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(register_intent);
     }
 
-
-    // send to restaurant page with recycler view
-    public void sendToRestaurantPage(View view) {
-        Intent restaurant_page_intent = new Intent(this, Restaurant.class);
-        startActivity(restaurant_page_intent);
-    }
-
-    public void sendToLanding(View view) {
-        Intent landing_intent = new Intent(this, Landing.class);
-        startActivity(landing_intent);
-    }
-
-
 }

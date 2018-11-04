@@ -193,9 +193,9 @@ public class Restaurant extends AppCompatActivity {
     // initialize dish data
     private void initializeData() {
         dishes = new ArrayList<>();
-        dishes.add(new Dish("Tacos", 3.7, 77.5, R.drawable.tacos));
-        dishes.add(new Dish("Tacos2", 3.5, 70.5, R.drawable.tacos));
-        dishes.add(new Dish("Tacos3", 3.2, 80, R.drawable.tacos));
+        dishes.add(new Dish("Tacos", 3.7, 77.5, R.drawable.menuyellow));
+        dishes.add(new Dish("Tacos2", 3.5, 70.5, R.drawable.menuyellow));
+        dishes.add(new Dish("Tacos3", 3.2, 80, R.drawable.menuyellow));
     }
 
 }

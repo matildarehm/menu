@@ -1,5 +1,6 @@
 package com.example.menuui;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
             dish_recommended = (TextView)itemView.findViewById(R.id.rest_avg_recommendation);
             dish_photo = (ImageView)itemView.findViewById(R.id.rest_dish_image);
         }
+
     }
 
     List<Restaurant.Dish> dishes;
@@ -48,11 +50,23 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     }
 
     @Override
-    public void onBindViewHolder(DishViewHolder dishViewHolder, int i) {
+    public void onBindViewHolder(final DishViewHolder dishViewHolder, int i) {
         dishViewHolder.dish_name.setText(dishes.get(i).name);
         dishViewHolder.dish_rating.setText(String.format("%.2f", dishes.get(i).avg_rating));
         dishViewHolder.dish_recommended.setText(String.format("%.2f", dishes.get(i).avg_rating));
         dishViewHolder.dish_photo.setImageResource(dishes.get(i).dish_img);
+
+        dishViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView dish_name = view.findViewById(R.id.rest_dish_title);
+                String dish = dish_name.getText().toString();
+
+                Intent dish_reviews_intent = new Intent(view.getContext(), DishPage.class);
+                dish_reviews_intent.putExtra("dishName", dish);
+                view.getContext().startActivity(dish_reviews_intent);
+            }
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.menuui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,6 +38,14 @@ public class DishPage extends AppCompatActivity {
         // review recycler adapter
         ReviewAdapter adapter = new ReviewAdapter(reviews);
         rv.setAdapter(adapter);
+
+
+        // get dish name from intent -- and set the name
+        Intent intent = getIntent();
+        String dish_name = intent.getStringExtra("dishName");
+        TextView dish_title = (TextView) findViewById(R.id.dish_title);
+        dish_title.setText(dish_name);
+
     }
 
 

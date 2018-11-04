@@ -43,11 +43,6 @@
             android:label="Favorite Restaurants"
         </activity>
 
-        <activity android:name=".RestaurantPage">
-            android:theme="@style/Theme.AppCompat.Light"
-            android:label="@string/restaurant_name"
-        </activity>
-
 
         <activity android:name=".Restaurant">
             android:theme="@style/Theme.AppCompat.Light"

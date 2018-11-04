@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.design.widget.NavigationView;
@@ -21,6 +22,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -144,6 +146,22 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+
+
+        // redirect to restaurant page
+        ImageView restaurant_image = (ImageView) findViewById(R.id.rest_img_1);
+        restaurant_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                TextView restaurant_name = (TextView)findViewById(R.id.rest_label_1);
+                String name = restaurant_name.getText().toString();
+
+                Intent restaurant_page_intent = new Intent(Landing.this, Restaurant.class);
+                restaurant_page_intent.putExtra("restaurantName", name);
+                startActivity(restaurant_page_intent);
             }
         });
     }

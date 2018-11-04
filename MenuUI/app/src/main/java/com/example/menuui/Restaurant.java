@@ -41,8 +41,10 @@ public class Restaurant extends AppCompatActivity {
         setContentView(R.layout.restaurant);
 
         // set restaurant information
-        TextView textElement = (TextView) findViewById(R.id.restaurant_title);
-        textElement.setText("Restaurant Name");
+        Intent intent = getIntent();
+        String restaurant_name = intent.getStringExtra("restaurantName");
+        TextView restaurant_title = (TextView) findViewById(R.id.restaurant_title);
+        restaurant_title.setText(restaurant_name);
 
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);

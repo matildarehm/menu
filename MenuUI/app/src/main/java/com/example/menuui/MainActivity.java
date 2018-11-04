@@ -16,14 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
 
-        // temporary -- testing nav menu
-//        nav_button = (Button) findViewById(R.id.nav_menu_button);
-//        nav_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                sendToNav();
-//            }
-//        });
     }
 
     public void sendToLogin(View view) {
@@ -37,13 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // send to restaurant test page
-//    public void sendToRestaurantPage(View view) {
-//        Intent restaurant_page_intent = new Intent(this, RestaurantPage.class);
-//        startActivity(restaurant_page_intent);
-//    }
-
-    // send to restaurant test page with recycler view
+    // send to restaurant page with recycler view
     public void sendToRestaurantPage(View view) {
         Intent restaurant_page_intent = new Intent(this, Restaurant.class);
         startActivity(restaurant_page_intent);

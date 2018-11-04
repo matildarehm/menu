@@ -21,6 +21,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -127,12 +129,30 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         // Pass null on first call to just get restaurants in area
         new populate().execute();
 
-        final SearchView searchView = (SearchView) findViewById(R.id.search);
-        searchView.setQueryHint("Search for food, restaurants, ...");
-        searchView.setFocusable(false);
+        // redirect to restaurant page
+        ImageView restaurant_image = (ImageView) findViewById(R.id.rest_img_1);
+        restaurant_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                TextView restaurant_name = (TextView)findViewById(R.id.rest_label_1);
+                String name = restaurant_name.getText().toString();
+
+                Intent restaurant_page_intent = new Intent(Landing.this, Restaurant.class);
+                restaurant_page_intent.putExtra("restaurantName", name);
+                startActivity(restaurant_page_intent);
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.nav_bar_menu, menu);
+        final SearchView searchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
         searchView.setIconified(false);
+        searchView.setQueryHint("Search for food, restaurants, ...");
         searchView.onActionViewExpanded();
-        searchView.clearFocus();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -148,7 +168,6 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 return false;
             }
         });
-
 
         // redirect to restaurant page -- pass the restaurant information as well
         ImageView restaurant_image = (ImageView) findViewById(R.id.rest_img_1);
@@ -198,8 +217,8 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 startActivity(restaurant_page_intent);
             }
         });
+        return true;
     }
-
     // nav bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

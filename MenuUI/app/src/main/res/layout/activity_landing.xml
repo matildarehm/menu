@@ -9,47 +9,25 @@
 
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <!--custom nav bar toolbar-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/appbar"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
-
-                <android.support.design.widget.CollapsingToolbarLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:contentScrim="?attr/colorPrimary"
-                    app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-                    app:toolbarId="@+id/toolbar">
-
-                    <android.support.v7.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        android:background="?attr/colorPrimary"
-                        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-                        <SearchView
-                            android:id="@+id/search"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/white" />
-                    </android.support.v7.widget.Toolbar>
-
-
-
-                </android.support.design.widget.CollapsingToolbarLayout>
-            </android.support.design.widget.AppBarLayout>
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"></android.support.v7.widget.Toolbar>
 
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -70,46 +48,42 @@
                         android:id="@+id/rest_label_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Restaurant Label 1" />
+                        android:gravity="center_horizontal"/>
 
                     <ImageView
                         android:id="@+id/rest_img_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/second"
-                        app:srcCompat="@drawable/img2"/>
+                        android:contentDescription="@string/second"/>
 
                     <TextView
                         android:id="@+id/rest_label_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Restaurant Label 2" />
+                        android:gravity="center_horizontal"/>
 
                     <ImageView
                         android:id="@+id/rest_img_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/third"
-                        app:srcCompat="@drawable/img3" />
+                        android:contentDescription="@string/third"/>
 
                     <TextView
                         android:id="@+id/rest_label_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Restaurant Label 3" />
+                        android:gravity="center_horizontal"/>
 
                     <ImageView
                         android:id="@+id/rest_img_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/fourth"
-                        app:srcCompat="@drawable/img4" />
+                        android:contentDescription="@string/fourth"/>
 
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
+
+
         </LinearLayout>
 
     </FrameLayout>

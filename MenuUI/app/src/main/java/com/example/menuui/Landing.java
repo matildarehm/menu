@@ -21,6 +21,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -127,29 +129,6 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         // Pass null on first call to just get restaurants in area
         new populate().execute();
 
-        final SearchView searchView = (SearchView) findViewById(R.id.search);
-        searchView.setQueryHint("Search for food, restaurants, ...");
-        searchView.setFocusable(false);
-        searchView.setIconified(false);
-        searchView.onActionViewExpanded();
-        searchView.clearFocus();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                new populate().execute(query);
-                // searchView.setQuery("", false); // Not sure if this is best UX
-                searchView.clearFocus();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-
         // redirect to restaurant page
         ImageView restaurant_image = (ImageView) findViewById(R.id.rest_img_1);
         restaurant_image.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +145,32 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.nav_bar_menu, menu);
+        final SearchView searchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
+        searchView.setIconified(false);
+        searchView.setQueryHint("Search for food, restaurants, ...");
+        searchView.onActionViewExpanded();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                new populate().execute(query);
+                // searchView.setQuery("", false); // Not sure if this is best UX
+                searchView.clearFocus();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        return true;
+    }
     // nav bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

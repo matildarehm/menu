@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -131,6 +132,24 @@ public class Restaurant extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.nav_bar_menu, menu);
+        final SearchView searchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
+        searchView.setIconified(false);
+        searchView.setQueryHint("Search for food, restaurants, ...");
+        searchView.onActionViewExpanded();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // searchView.setQuery("", false); // Not sure if this is best UX
+                searchView.clearFocus();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         return true;
     }

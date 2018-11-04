@@ -38,8 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     // send to restaurant test page
+//    public void sendToRestaurantPage(View view) {
+//        Intent restaurant_page_intent = new Intent(this, RestaurantPage.class);
+//        startActivity(restaurant_page_intent);
+//    }
+
+    // send to restaurant test page with recycler view
     public void sendToRestaurantPage(View view) {
-        Intent restaurant_page_intent = new Intent(this, RestaurantPage.class);
+        Intent restaurant_page_intent = new Intent(this, Restaurant.class);
         startActivity(restaurant_page_intent);
     }
 
@@ -48,10 +54,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(landing_intent);
     }
 
-    // send to test page with the "hamburger"/navigation menu
-//    public void sendToNav() {
-//        Intent nav_menu_intent = new Intent(this, NavMenu.class);
-//        startActivity(nav_menu_intent);
-//    }
 
 }

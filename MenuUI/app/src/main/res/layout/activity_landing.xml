@@ -48,44 +48,38 @@
                         android:id="@+id/rest_label_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Restaurant Label 1" />
+                        android:gravity="center_horizontal"/>
 
                     <ImageView
                         android:id="@+id/rest_img_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/second"
-                        android:onClick="sendToRestaurantPage"
-                        app:srcCompat="@drawable/img2" />
+                        android:onClick="sendToRestaurantPage"/>
 
                     <TextView
                         android:id="@+id/rest_label_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Restaurant Label 2" />
+                        android:gravity="center_horizontal"/>
 
                     <ImageView
                         android:id="@+id/rest_img_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/third"
-                        app:srcCompat="@drawable/img3" />
+                        android:contentDescription="@string/third"/>
 
                     <TextView
                         android:id="@+id/rest_label_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Restaurant Label 3" />
+                        android:gravity="center_horizontal"/>
 
                     <ImageView
                         android:id="@+id/rest_img_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription="@string/fourth"
-                        app:srcCompat="@drawable/img4" />
+                        android:contentDescription="@string/fourth"/>
 
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>

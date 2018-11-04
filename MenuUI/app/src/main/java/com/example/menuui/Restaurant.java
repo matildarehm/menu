@@ -177,28 +177,12 @@ public class Restaurant extends AppCompatActivity {
     }
 
 
-
-    // class for the dish objects
-    class Dish {
-        String name;
-        double avg_rating;
-        double avg_recommended;
-        int dish_img;
-
-        Dish(String name, double avg_rating, double avg_recommended, int dish_img) {
-            this.name = name;
-            this.avg_rating = avg_rating;
-            this.avg_recommended = avg_recommended;
-            this.dish_img = dish_img;
-        }
-    }
-
-    // initialize dish data
+    // get/set dish data
     private void initializeData() {
         dishes = new ArrayList<>();
-        dishes.add(new Dish("Tacos", 3.7, 77.5, R.drawable.menuyellow));
-        dishes.add(new Dish("Tacos2", 3.5, 70.5, R.drawable.menuyellow));
-        dishes.add(new Dish("Tacos3", 3.2, 80, R.drawable.menuyellow));
+        dishes.add(new Dish("Tacos", "Description", 3.7, 77.5, R.drawable.menuyellow));
+        dishes.add(new Dish("Tacos2", "Description", 3.5, 70.5, R.drawable.menuyellow));
+        dishes.add(new Dish("Tacos3", "Description", 3.2, 80, R.drawable.menuyellow));
     }
 
 }

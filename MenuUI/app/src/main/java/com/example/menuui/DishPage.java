@@ -121,9 +121,9 @@ public class DishPage extends AppCompatActivity {
     // get/set reviews
     private void initializeReviews(){
         reviews = new ArrayList<>();
-        reviews.add(new Review("This dish was excellent", 5, "Yes", "User1"));
-        reviews.add(new Review("This dish was delicious", 4, "Yes", "User2"));
-        reviews.add(new Review("This dish was mediocre", 3, "Yes", "User3"));
+        reviews.add(new Review("This dish was excellent", 5, true, "User1"));
+        reviews.add(new Review("This dish was delicious", 4, true, "User2"));
+        reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
     }
 
 }

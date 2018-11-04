@@ -18,6 +18,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         CardView cv;
         TextView dish_name;
         TextView dish_rating;
+        TextView dish_description;
         TextView dish_recommended;
         ImageView dish_photo;
 
@@ -26,14 +27,15 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
             cv = (CardView)itemView.findViewById(R.id.dish_cardv);
             dish_name = (TextView)itemView.findViewById(R.id.rest_dish_title);
             dish_rating = (TextView)itemView.findViewById(R.id.rest_avg_rating);
+            dish_description = (TextView)itemView.findViewById(R.id.rest_dish_description);
             dish_recommended = (TextView)itemView.findViewById(R.id.rest_avg_recommendation);
             dish_photo = (ImageView)itemView.findViewById(R.id.rest_dish_image);
         }
 
     }
 
-    List<Restaurant.Dish> dishes;
-    DishAdapter(List<Restaurant.Dish> dishes) {
+    List<Dish> dishes;
+    DishAdapter(List<Dish> dishes) {
         this.dishes = dishes;
     }
 
@@ -53,6 +55,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     public void onBindViewHolder(final DishViewHolder dishViewHolder, int i) {
         dishViewHolder.dish_name.setText(dishes.get(i).name);
         dishViewHolder.dish_rating.setText(String.format("%.2f", dishes.get(i).avg_rating));
+        dishViewHolder.dish_description.setText(dishes.get(i).description);
         dishViewHolder.dish_recommended.setText(String.format("%.2f", dishes.get(i).avg_recommended));
         dishViewHolder.dish_photo.setImageResource(dishes.get(i).dish_img);
 

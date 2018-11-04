@@ -48,8 +48,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     @Override
     public void onBindViewHolder(ReviewViewHolder reviewViewHolder, int i) {
         reviewViewHolder.review_text.setText(reviews.get(i).review);
-        reviewViewHolder.review_recommend.setText(reviews.get(i).would_recommend);
-        reviewViewHolder.review_rating.setText(Integer.toString(reviews.get(i).hearts));
+        boolean recommend_bool = reviews.get(i).would_recommend;
+        if (recommend_bool) {
+            reviewViewHolder.review_recommend.setText("Yes");
+        }
+        else {
+            reviewViewHolder.review_recommend.setText("No");
+        }
+        reviewViewHolder.review_rating.setText(Integer.toString(reviews.get(i).rating));
         reviewViewHolder.review_author.setText(reviews.get(i).author);
     }
 

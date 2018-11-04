@@ -397,4 +397,3 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 }
-

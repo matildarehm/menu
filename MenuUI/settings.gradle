@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':aws-android-sdk-cognitoidentityprovider-2.7.6'

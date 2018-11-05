@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -124,6 +125,16 @@ public class DishPage extends AppCompatActivity {
         reviews.add(new Review("This dish was excellent", 5, true, "User1"));
         reviews.add(new Review("This dish was delicious", 4, true, "User2"));
         reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
+    }
+
+    public void sendToLeaveReview(View view) {
+        // get the dish name
+        TextView dish_name = (TextView)findViewById(R.id.dish_title);
+        String dish = dish_name.getText().toString();
+
+        Intent leave_review_intent = new Intent(this, LeaveReview.class);
+        leave_review_intent.putExtra("dish", dish);
+        startActivity(leave_review_intent);
     }
 
 }

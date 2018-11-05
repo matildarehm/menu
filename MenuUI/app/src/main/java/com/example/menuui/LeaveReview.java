@@ -22,7 +22,12 @@ public class LeaveReview extends AppCompatActivity {
     }
 
     public void goBackDishPage(View view) {
+        // get the dish name
+        TextView dish_name = (TextView)findViewById(R.id.review_dish_name);
+        String dish = dish_name.getText().toString();
+
         Intent dish_page_intent = new Intent(this, DishPage.class);
+        dish_page_intent.putExtra("dishName", dish);
         startActivity(dish_page_intent);
     }
 }

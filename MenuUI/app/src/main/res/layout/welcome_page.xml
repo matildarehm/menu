@@ -16,8 +16,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Here you can put your logo or brand name -->
-
             <ImageView
                 android:layout_width="286dp"
                 android:layout_height="250dp"

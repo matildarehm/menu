@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('aws-android-sdk-cognitoidentityprovider-2.7.6.jar'))

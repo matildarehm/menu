@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.menuui">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,36 +14,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Login"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-        <activity android:name=".Register">
-        </activity>
-
-        <activity android:name=".FYP">
-        </activity>
-
-        <activity android:name=".Landing">
-        </activity>
-
+        <activity
+            android:name=".Login"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".Register" />
+        <activity android:name=".FYP" />
+        <activity android:name=".Landing" />
         <activity android:name=".FavoriteDishes">
             android:label="Favorite Dishes"
         </activity>
-
         <activity android:name=".FavoriteRestaurants">
             android:label="Favorite Restaurants"
         </activity>
-
 
         <activity android:name=".Restaurant">
             android:theme="@style/Theme.AppCompat.Light"
@@ -52,8 +44,9 @@
         <activity android:name=".DishPage">
 
         </activity>
-
-
+        <activity android:name=".PrivateRegister" />
+        <activity android:name=".VerifyUser" />
+        <activity android:name=".LeaveReview"></activity>
     </application>
 
 </manifest>

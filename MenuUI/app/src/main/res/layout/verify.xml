@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <View
+        android:id="@+id/rectangle_at_the_top"
+        android:layout_width="wrap_content"
+        android:layout_height="320dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/navy_blue"
+        android:elevation="5dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <Button
+        android:id="@+id/verify_pass"
+        style="@style/Base.TextAppearance.AppCompat.Body1"
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_login"
+        android:clickable="true"
+        android:padding="16dp"
+        android:text="Verify account"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="487dp" />
+
+    <EditText
+
+        android:id="@+id/code_verify"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="105dp"
+        android:background="@drawable/rounded_border"
+        android:ems="10"
+        android:hint="Enter verification code"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="#3d3a33"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="418dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="214dp"
+        android:text="We've sent a unique code that you"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="355dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="181dp"
+        android:text="can use to confirm your account."
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="49dp"
+        tools:layout_editor_absoluteY="379dp" />
+
+</RelativeLayout>

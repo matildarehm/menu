@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LeaveReview">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="174dp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="318dp"
+            android:layout_height="203dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="33dp"
+            android:layout_marginBottom="115dp"
+            android:background="@drawable/rounded_border"
+            android:elevation="5dp"
+            android:text="Enter review text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="173dp"
+            android:layout_marginBottom="418dp"
+            android:text="Would you recommand?"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/verify_pass"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="278dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="47dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/background_login"
+            android:clickable="true"
+            android:padding="16dp"
+            android:text="Submit Review"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_editor_absoluteY="487dp" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="113dp"
+            android:layout_marginEnd="45dp"
+            android:textOff="No"
+            android:textOn="Yes" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="73dp"
+            android:layout_marginTop="26dp"
+            android:text="Review for Item1"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -2,9 +2,12 @@ package com.example.menuui;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +18,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,8 +43,9 @@ public class Restaurant extends AppCompatActivity {
 
     // dishes list for recycler
     private List<Dish> dishes;
-    
-    private JSONObject restaurant_info
+
+    // Restaurant info
+    private JSONObject restaurant_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,7 @@ public class Restaurant extends AppCompatActivity {
 
         // Retrieve data that was passed through intent
         try {
-            restaurant_info = new JSONObject(getIntent().getStringExtra("RESTAURANT_INFO");
+            restaurant_info = new JSONObject(getIntent().getStringExtra("RESTAURANT_INFO"));
         } catch(Exception e) {
             Log.d("DEBUG", "ERROR: " + e.toString());
         }

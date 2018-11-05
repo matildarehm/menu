@@ -64,7 +64,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private DrawerLayout mDrawerLayout;
 
     // Restaurant info to be passed to restaurant page
-    private String restaurant_1_info = "{\"name\":\"OOF TEST MY ASS\"}";
+    private String restaurant_1_info;
     private String restaurant_2_info;
     private String restaurant_3_info;
 
@@ -136,17 +136,28 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         new populate().execute();
 
         // redirect to restaurant page
-        ImageView restaurant_image = (ImageView) findViewById(R.id.rest_img_1);
-        restaurant_image.setOnClickListener(new View.OnClickListener() {
+        final ImageView restaurantImg1 = (ImageView) findViewById(R.id.rest_img_1);
+        final ImageView restaurantImg2 = (ImageView) findViewById(R.id.rest_img_2);
+        final ImageView restaurantImg3 = (ImageView) findViewById(R.id.rest_img_3);
+
+        restaurantImg1.setOnClickListener(new ImageView.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_1_info);
+            }
+        });
 
-                TextView restaurant_name = (TextView)findViewById(R.id.rest_label_1);
-                String name = restaurant_name.getText().toString();
+        restaurantImg2.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_2_info);
+            }
+        });
 
-                Intent restaurant_page_intent = new Intent(Landing.this, Restaurant.class);
-                restaurant_page_intent.putExtra("restaurantName", name);
-                startActivity(restaurant_page_intent);
+        restaurantImg3.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_3_info);
             }
         });
     }
@@ -200,6 +211,8 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 openRestaurantPage(restaurant_3_info);
             }
         });
+
+        return true;
     }
 
     // nav bar
@@ -461,7 +474,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
      * @param {String} restaurant_name is the name of the restaurant to access menu items for
      */
     private void openRestaurantPage(String restaurant_info) {
-        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
+        Intent restaurant_intent = new Intent(this, Restaurant.class);
         restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_info);
         startActivity(restaurant_intent);
     }

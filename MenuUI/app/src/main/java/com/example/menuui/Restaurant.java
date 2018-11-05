@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 
-public class RestaurantPage extends AppCompatActivity {
+public class Restaurant extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private JSONObject restaurant_info;
     Dialog filterDialog;
@@ -76,22 +76,22 @@ public class RestaurantPage extends AppCompatActivity {
                         switch (id) {
                             case R.id.nav_homepage:
                                 // send to the landing page
-                                Intent home_intent = new Intent(RestaurantPage.this, Landing.class);
+                                Intent home_intent = new Intent(Restaurant.this, Landing.class);
                                 startActivity(home_intent);
                                 break;
                             case R.id.nav_favorite_dishes:
                                 // send to favorite dishes page
-                                Intent fav_dishes_page_intent = new Intent(RestaurantPage.this, FavoriteDishes.class);
+                                Intent fav_dishes_page_intent = new Intent(Restaurant.this, FavoriteDishes.class);
                                 startActivity(fav_dishes_page_intent);
                                 break;
                             case R.id.nav_favorite_restaurants:
                                 // send to favorite restaurants page
-                                Intent fav_rest_page_intent = new Intent(RestaurantPage.this, FavoriteRestaurants.class);
+                                Intent fav_rest_page_intent = new Intent(Restaurant.this, FavoriteRestaurants.class);
                                 startActivity(fav_rest_page_intent);
                                 break;
                             case R.id.nav_logout:
                                 // log out and send to the welcome page
-                                Intent logout_intent = new Intent(RestaurantPage.this, MainActivity.class);
+                                Intent logout_intent = new Intent(Restaurant.this, MainActivity.class);
                                 startActivity(logout_intent);
                                 break;
                         }

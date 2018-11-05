@@ -83,8 +83,9 @@
                 android:hint="Enter review text" />
         </android.support.design.widget.TextInputLayout>
 
+
         <Button
-            android:id="@+id/verify_pass"
+            android:id="@+id/submit_review"
             style="@style/Base.TextAppearance.AppCompat.Body1"
             android:layout_width="278dp"
             android:layout_height="wrap_content"
@@ -95,7 +96,6 @@
             android:layout_margin="20dp"
             android:padding="16dp"
             android:text="Submit Review"
-            android:onClick="goBackDishPage"
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textSize="24sp" />

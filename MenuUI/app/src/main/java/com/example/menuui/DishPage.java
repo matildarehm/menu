@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class DishPage extends AppCompatActivity {
     // DrawerLayout for the nav menu
+    private Button leave_review;
     private DrawerLayout mDrawerLayout;
 
     private List<Review> reviews;
@@ -29,6 +31,15 @@ public class DishPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dish_page);
+
+        leave_review = (Button) findViewById(R.id.button2);
+        leave_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                review_popup();
+
+            }
+        });
 
 
         // handle nav bar implementation
@@ -125,6 +136,10 @@ public class DishPage extends AppCompatActivity {
         reviews.add(new Review("This dish was excellent", 5, true, "User1"));
         reviews.add(new Review("This dish was delicious", 4, true, "User2"));
         reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
+    }
+    private void review_popup() {
+        Intent verify_intent = new Intent(this, LeaveReview.class);
+        startActivity(verify_intent);
     }
 
     public void sendToLeaveReview(View view) {

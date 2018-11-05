@@ -23,7 +23,7 @@
         android:padding="10dp" />
 
     <Button
-        android:id="@+id/LoginText"
+        android:id="@+id/fyp_button"
         style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="250dp"
         android:layout_height="wrap_content"

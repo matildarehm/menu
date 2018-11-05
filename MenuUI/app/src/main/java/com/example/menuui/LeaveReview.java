@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
 
 public class LeaveReview extends AppCompatActivity {
+    private Button post_review;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,16 +20,21 @@ public class LeaveReview extends AppCompatActivity {
         String dish_name = intent.getStringExtra("dish");
         TextView dish_title = (TextView) findViewById(R.id.review_dish_name);
         dish_title.setText(dish_name);
-        
+
+        post_review = (Button) findViewById(R.id.submit_review);
+        post_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                add_review();
+
+            }
+        });
+
     }
 
-    public void goBackDishPage(View view) {
-        // get the dish name
-        TextView dish_name = (TextView)findViewById(R.id.review_dish_name);
-        String dish = dish_name.getText().toString();
-
-        Intent dish_page_intent = new Intent(this, DishPage.class);
-        dish_page_intent.putExtra("dishName", dish);
-        startActivity(dish_page_intent);
+    private void add_review() {
+        Intent verify_intent = new Intent(this, DishPage.class);
+        startActivity(verify_intent);
     }
+
 }

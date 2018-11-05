@@ -25,7 +25,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
-
+import org.json.JSONObject;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,17 +39,24 @@ public class Restaurant extends AppCompatActivity {
 
     // dishes list for recycler
     private List<Dish> dishes;
+    
+    private JSONObject restaurant_info
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant);
 
-        // set restaurant information
-        Intent intent = getIntent();
-        String restaurant_name = intent.getStringExtra("restaurantName");
-        TextView restaurant_title = (TextView) findViewById(R.id.restaurant_title);
-        restaurant_title.setText(restaurant_name);
+        // Retrieve data that was passed through intent
+        try {
+            restaurant_info = new JSONObject(getIntent().getStringExtra("RESTAURANT_INFO");
+        } catch(Exception e) {
+            Log.d("DEBUG", "ERROR: " + e.toString());
+        }
+        
+        if (restaurant_info != null) {
+            updateInfo();
+        }
 
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -185,7 +193,50 @@ public class Restaurant extends AppCompatActivity {
         dishes.add(new Dish("Tacos3", "Description", 3.2, 80, R.drawable.menuyellow));
     }
 
+    /**
+     * Update the UI elements with restaurant info passed from the landing page
+     */
+    private void updateInfo() {
+        TextView restaurant_title = findViewById(R.id.restaurant_title);
+        TextView restaurant_location = findViewById(R.id.restaurant_location);
+        TextView restaurant_phone = findViewById(R.id.restaurant_phone);
+        ImageView restaurant_image = findViewById(R.id.restaurant_main_image);
+        try {
+            String location = restaurant_info.getString("street") + ", "
+                    + restaurant_info.getString("city") + ", "
+                    + restaurant_info.getString("state");
+            restaurant_title.setText(restaurant_info.getString("name"));
+            restaurant_location.setText(location);
+            restaurant_phone.setText(restaurant_info.getString("phone"));
+            new DownloadImageTask(restaurant_image).execute(restaurant_info.getString("image"));
+        } catch (Exception e) {
+            Log.d("DEBUG", "ERROR: Could not extract JSON from restaurant info");
+        }
+    }
+    
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String url = urls[0];
+            Bitmap mIcon11 = null;
+
+            try {
+                InputStream in = new java.net.URL(url).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("DEBUG", "Error: " + e.toString());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+        protected void onPostExecute(Bitmap result) {
+
+            bmImage.setImageBitmap(result);
+        }
+    }
 }
-
-
-

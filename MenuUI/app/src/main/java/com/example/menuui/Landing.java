@@ -460,7 +460,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
 
         String ret = "{\"name\":\"" + b.getName() + "\",";
         ret += "\"image\":\"" + b.getImageUrl() + "\",";
-        ret += "\"phone\":\"" + b.getPhone() + "\",";
+        ret += "\"phone\":\"" + phoneString(b.getPhone()) + "\",";
         ret += "\"street\":\"" + b.getLocation().getAddress1() + "\",";
         ret += "\"city\":\"" + b.getLocation().getCity() + "\",";
         ret += "\"state\":\"" + b.getLocation().getState() + "\",";
@@ -477,5 +477,23 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         Intent restaurant_intent = new Intent(this, Restaurant.class);
         restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_info);
         startActivity(restaurant_intent);
+    }
+
+    /**
+     * Change a 12 digit number into a phone number format
+     * @param {String] phone is the 12 digit number to be converted to a string
+     * @return {String} ret is the number in a phone number format +X (XXX) XXX-XXXX
+     * Returns the input if it is not a 12 digit string
+     */
+    private String phoneString(String phone) {
+        if (phone.length() != 12) {
+            return phone;
+        }
+        String ret = "+1";
+//        ret += phone.charAt(0) + phone.charAt(1);
+        ret += " (" + phone.charAt(2) + phone.charAt(3) + phone.charAt(4) + ") ";
+        ret += phone.charAt(5) + phone.charAt(6) + phone.charAt(7) + " ";
+        ret += phone.charAt(8) + phone.charAt(9) + phone.charAt(10) + phone.charAt(11);
+        return ret;
     }
 }

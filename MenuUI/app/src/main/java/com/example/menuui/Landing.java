@@ -492,7 +492,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         String ret = "+1";
 //        ret += phone.charAt(0) + phone.charAt(1);
         ret += " (" + phone.charAt(2) + phone.charAt(3) + phone.charAt(4) + ") ";
-        ret += phone.charAt(5) + phone.charAt(6) + phone.charAt(7) + " ";
+        ret += phone.charAt(5) + phone.charAt(6) + phone.charAt(7) + "-";
         ret += phone.charAt(8) + phone.charAt(9) + phone.charAt(10) + phone.charAt(11);
         return ret;
     }

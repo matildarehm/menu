@@ -50,7 +50,7 @@
                 android:layout_marginHorizontal="10dp"/>
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/recommend_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
@@ -61,7 +61,7 @@
 
 
         <RatingBar
-            android:id="@+id/ratingBar2"
+            android:id="@+id/rating_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
@@ -75,6 +75,7 @@
             android:elevation="5dp">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/review_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:inputType="text|textMultiLine"

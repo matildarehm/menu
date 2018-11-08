@@ -32,16 +32,6 @@ public class DishPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dish_page);
 
-//        leave_review = (Button) findViewById(R.id.button2);
-//        leave_review.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                review_popup();
-//
-//            }
-//        });
-
-
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -138,17 +128,10 @@ public class DishPage extends AppCompatActivity {
         reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
     }
 
-//    private void review_popup() {
-//        Intent verify_intent = new Intent(this, LeaveReview.class);
-//        startActivity(verify_intent);
-//    }
-
     public void sendToLeaveReview(View view) {
         // get the dish name
         TextView dish_name = (TextView)findViewById(R.id.dish_title);
         String dish = dish_name.getText().toString();
-        System.out.println("Dish Page intent -- get dish name");
-        System.out.println(dish);
 
         Intent leave_review_intent = new Intent(this, LeaveReview.class);
         leave_review_intent.putExtra("dish", dish);

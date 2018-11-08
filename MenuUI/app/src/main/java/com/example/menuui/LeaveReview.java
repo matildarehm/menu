@@ -18,6 +18,7 @@ public class LeaveReview extends AppCompatActivity {
         // get dish name from intent -- and set the name
         Intent intent = getIntent();
         String dish_name = intent.getStringExtra("dish");
+        System.out.println(dish_name);
         TextView dish_title = (TextView) findViewById(R.id.review_dish_name);
         dish_title.setText(dish_name);
 

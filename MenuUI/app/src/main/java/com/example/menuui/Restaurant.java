@@ -41,7 +41,8 @@ public class Restaurant extends AppCompatActivity {
     // Dialog for filter dishes button
     Dialog filterDialog;
 
-    // dishes list for recycler
+    // dishes list for recycler views
+    private List<Dish> popular_dishes;
     private List<Dish> dishes;
 
     // Restaurant info
@@ -114,18 +115,30 @@ public class Restaurant extends AppCompatActivity {
                     }
                 });
 
-        // create dialog for filter popup
+        //recycler view for most popular dishes - reuse the dish adapter
+        RecyclerView popular_rv = (RecyclerView)findViewById(R.id.restaurant_popular_recycler);
+        // linear layout manager for the popular dish recycler view
+        LinearLayoutManager popular_llm = new LinearLayoutManager(this);
+        popular_rv.setLayoutManager(popular_llm);
+        // get the 3 most popular dishes
+        getPopularDishes();
+        // call the dish adapter on the popular dishes
+        DishAdapter popular_dish_adapter = new DishAdapter(popular_dishes);
+        popular_rv.setAdapter(popular_dish_adapter);
+
+
+        // create dialog for dish filter popup
         filterDialog = new Dialog(this);
 
 
         // recycler view for dish cards
         RecyclerView rv = (RecyclerView)findViewById(R.id.restaurant_dishes_recycler);
-
+        // linear layout manager for the dish recycler view
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-
-        initializeData();
-
+        // get the dish data for the adapter
+        getDishData();
+        // call the dish adapter on the restaurant dishes
         DishAdapter adapter = new DishAdapter(dishes);
         rv.setAdapter(adapter);
 
@@ -170,6 +183,16 @@ public class Restaurant extends AppCompatActivity {
         return true;
     }
 
+
+    // get the 3 most popular dishes for this restaurant
+    private void getPopularDishes() {
+        // create new dish objects for these popular dishes
+        popular_dishes = new ArrayList<>();
+        popular_dishes.add(new Dish("Fav Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow));
+        popular_dishes.add(new Dish("Fav Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow));
+        popular_dishes.add(new Dish("Fav Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow));
+    }
+
     // handle filter popup
     public void showFilterPopup(View view) {
         TextView close_txt;
@@ -190,8 +213,9 @@ public class Restaurant extends AppCompatActivity {
     }
 
 
-    // get/set dish data
-    private void initializeData() {
+    // get the dish data for this restaurant
+    private void getDishData() {
+        // create new dish objects
         dishes = new ArrayList<>();
         dishes.add(new Dish("Dish", "Description", 3.7, 77.5, R.drawable.menuyellow));
         dishes.add(new Dish("Dish2", "Description", 3.5, 70.5, R.drawable.menuyellow));

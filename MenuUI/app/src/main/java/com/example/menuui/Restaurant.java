@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import org.json.JSONObject;
@@ -132,15 +133,15 @@ public class Restaurant extends AppCompatActivity {
 
 
         // recycler view for dish cards
-        RecyclerView rv = (RecyclerView)findViewById(R.id.restaurant_dishes_recycler);
+        RecyclerView menu_rv = (RecyclerView)findViewById(R.id.restaurant_dishes_recycler);
         // linear layout manager for the dish recycler view
         LinearLayoutManager llm = new LinearLayoutManager(this);
-        rv.setLayoutManager(llm);
+        menu_rv.setLayoutManager(llm);
         // get the dish data for the adapter
         getDishData();
         // call the dish adapter on the restaurant dishes
         DishAdapter adapter = new DishAdapter(dishes);
-        rv.setAdapter(adapter);
+        menu_rv.setAdapter(adapter);
 
     }
 

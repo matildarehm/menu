@@ -8,7 +8,7 @@
     <string name="third">Third</string>
     <string name="fourth">Fourth</string>
 
-    <!--Restaurant page strings -->
+    <!--RestaurantPage page strings -->
     <string name="restaurant_name">Restaurant Name</string>
     <string name="restaurant_address">123 Main Street, Troy NY</string>
     <string name="restaurant_phonenum">123-456-7890</string>

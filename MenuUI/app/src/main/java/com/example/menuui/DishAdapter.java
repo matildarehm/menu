@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-// Recycler View Adapter for Dishes on the Restaurant page
+// Recycler View Adapter for Dishes on the RestaurantPage page
 public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder> {
 
     public static class DishViewHolder extends RecyclerView.ViewHolder {

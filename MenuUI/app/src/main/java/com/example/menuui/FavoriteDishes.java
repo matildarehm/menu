@@ -82,9 +82,9 @@ public class FavoriteDishes extends AppCompatActivity {
         // linear layout manager for the favorite dishes recycler view
         LinearLayoutManager favorite_dishes_llm = new LinearLayoutManager(this);
         favorite_dishes_rv.setLayoutManager(favorite_dishes_llm);
-        // get the 3 most popular dishes
+        // get the favorite dishes
         getFavoriteDishes();
-        // call the dish adapter on the popular dishes
+        // call the dish adapter on the favorite dishes
         FavoriteDishAdapter favorite_dish_adapter = new FavoriteDishAdapter(favorite_dishes);
         favorite_dishes_rv.setAdapter(favorite_dish_adapter);
     }

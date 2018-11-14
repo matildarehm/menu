@@ -63,7 +63,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     // for nav bar drawer layout
     private DrawerLayout mDrawerLayout;
 
-    // Restaurant info to be passed to restaurant page
+    // RestaurantPage info to be passed to restaurant page
     private String restaurant_1_info;
     private String restaurant_2_info;
     private String restaurant_3_info;
@@ -474,7 +474,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
      * @param {String} restaurant_name is the name of the restaurant to access menu items for
      */
     private void openRestaurantPage(String restaurant_info) {
-        Intent restaurant_intent = new Intent(this, Restaurant.class);
+        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
         restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_info);
         startActivity(restaurant_intent);
     }

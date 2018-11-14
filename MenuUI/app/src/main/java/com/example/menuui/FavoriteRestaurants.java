@@ -10,6 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,8 +20,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FavoriteRestaurants extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+
+    // restaurants list for recycler views
+    private List<Restaurant> favorite_restaurants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +84,16 @@ public class FavoriteRestaurants extends AppCompatActivity {
                         return true;
                     }
                 });
+        //recycler view for the favorite restaurants -- using the restaurant adapter
+        RecyclerView favorite_restaurants_rv = (RecyclerView)findViewById(R.id.favorite_restaurants_recycler);
+        // linear layout manager for the favorite restaurants recycler view
+        LinearLayoutManager favorite_restaurants_llm = new LinearLayoutManager(this);
+        favorite_restaurants_rv.setLayoutManager(favorite_restaurants_llm);
+        // get the favorite restaurants
+        getFavoriteRestaurants();
+        // call the restaurant adapter on the favorite restaurants
+        FavoriteRestaurantAdapter favorite_restaurant_adapter = new FavoriteRestaurantAdapter(favorite_restaurants);
+        favorite_restaurants_rv.setAdapter(favorite_restaurant_adapter);
     }
 
     // nav bar
@@ -97,5 +115,13 @@ public class FavoriteRestaurants extends AppCompatActivity {
         return true;
     }
 
+    // get the user's favorite restaurants
+    private void getFavoriteRestaurants() {
+        // create new restaurant objects for the favorite restaurants
+        favorite_restaurants = new ArrayList<>();
+        favorite_restaurants.add(new Restaurant("Favorite Restaurant 1", R.drawable.menuyellow));
+        favorite_restaurants.add(new Restaurant("Favorite Restaurant 2", R.drawable.menuyellow));
+        favorite_restaurants.add(new Restaurant("Favorite Restaurant 3", R.drawable.menuyellow));
+    }
 
 }

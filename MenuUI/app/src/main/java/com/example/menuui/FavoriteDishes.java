@@ -7,13 +7,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FavoriteDishes extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+
+    // dishes list for recycler views
+    private List<Dish> favorite_dishes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +76,17 @@ public class FavoriteDishes extends AppCompatActivity {
                         return true;
                     }
                 });
+
+        //recycler view for the favorite dishes
+        RecyclerView favorite_dishes_rv = (RecyclerView)findViewById(R.id.favorite_dishes_recycler);
+        // linear layout manager for the favorite dishes recycler view
+        LinearLayoutManager favorite_dishes_llm = new LinearLayoutManager(this);
+        favorite_dishes_rv.setLayoutManager(favorite_dishes_llm);
+        // get the 3 most popular dishes
+        getFavoriteDishes();
+        // call the dish adapter on the popular dishes
+        FavoriteDishAdapter favorite_dish_adapter = new FavoriteDishAdapter(favorite_dishes);
+        favorite_dishes_rv.setAdapter(favorite_dish_adapter);
     }
 
     // nav bar
@@ -87,6 +106,15 @@ public class FavoriteDishes extends AppCompatActivity {
         inflater.inflate(R.menu.nav_bar_menu, menu);
 
         return true;
+    }
+
+    // get the user's favorite dishes
+    private void getFavoriteDishes() {
+        // create new dish objects for the favorite dishes
+        favorite_dishes = new ArrayList<>();
+        favorite_dishes.add(new Dish("Fav Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow, "Restaurant1"));
+        favorite_dishes.add(new Dish("Fav Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "Restaurant2"));
+        favorite_dishes.add(new Dish("Fav Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "Restaurant3"));
     }
 
 }

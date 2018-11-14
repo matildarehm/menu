@@ -189,9 +189,9 @@ public class Restaurant extends AppCompatActivity {
     private void getPopularDishes() {
         // create new dish objects for these popular dishes
         popular_dishes = new ArrayList<>();
-        popular_dishes.add(new Dish("Fav Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow));
-        popular_dishes.add(new Dish("Fav Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow));
-        popular_dishes.add(new Dish("Fav Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow));
+        popular_dishes.add(new Dish("Fav Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow, "RestaurantName"));
+        popular_dishes.add(new Dish("Fav Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "RestaurantName"));
+        popular_dishes.add(new Dish("Fav Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
     }
 
     // handle filter popup
@@ -218,9 +218,9 @@ public class Restaurant extends AppCompatActivity {
     private void getDishData() {
         // create new dish objects
         dishes = new ArrayList<>();
-        dishes.add(new Dish("Dish", "Description", 3.7, 77.5, R.drawable.menuyellow));
-        dishes.add(new Dish("Dish2", "Description", 3.5, 70.5, R.drawable.menuyellow));
-        dishes.add(new Dish("Dish3", "Description", 3.2, 80, R.drawable.menuyellow));
+        dishes.add(new Dish("Dish", "Description", 3.7, 77.5, R.drawable.menuyellow, "RestaurantName"));
+        dishes.add(new Dish("Dish2", "Description", 3.5, 70.5, R.drawable.menuyellow, "RestaurantName"));
+        dishes.add(new Dish("Dish3", "Description", 3.2, 80, R.drawable.menuyellow, "RestaurantName"));
     }
 
     /**

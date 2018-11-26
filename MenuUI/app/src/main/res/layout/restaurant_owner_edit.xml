@@ -140,7 +140,8 @@
                                 android:id="@+id/owner_add_dish_button"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Add Dish" />
+                                android:text="Add Dish"
+                                android:onClick="goToAddDish"/>
 
                         </LinearLayout>
 
@@ -198,16 +199,6 @@
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:text="Dishes" />
-
-                            <Button
-                                android:id="@+id/rest_dish_filter_button"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:background="@null"
-                                android:drawableLeft="@drawable/ic_restaurant_filter"
-                                android:text="Filter"
-                                android:onClick="showFilterPopup"/>
 
                         </RelativeLayout>
 

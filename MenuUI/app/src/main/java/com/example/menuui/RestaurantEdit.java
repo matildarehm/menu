@@ -207,6 +207,12 @@ public class RestaurantEdit extends AppCompatActivity {
 
     }
 
+    // go to the add dish form
+    public void goToAddDish(View view) {
+        Intent add_dish_intent = new Intent(view.getContext(), AddDishPage.class);
+        view.getContext().startActivity(add_dish_intent);
+    }
+
 
     // function that gets the restaurant image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

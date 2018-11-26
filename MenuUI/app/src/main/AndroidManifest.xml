@@ -46,5 +46,6 @@
         <activity android:name=".PrivateRegister" />
         <activity android:name=".VerifyUser" />
         <activity android:name=".LeaveReview"></activity>
+        <activity android:name=".RestaurantEdit"></activity>
     </application>
 </manifest>

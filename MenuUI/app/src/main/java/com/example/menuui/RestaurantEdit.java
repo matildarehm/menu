@@ -35,19 +35,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantPage extends AppCompatActivity {
+public class RestaurantEdit extends AppCompatActivity {
     // DrawerLayout for the nav menu
     private DrawerLayout mDrawerLayout;
-
-    // Dialog for filter dishes button
-    Dialog filterDialog;
 
     // dishes list for recycler views
     private List<Dish> popular_dishes;
     private List<Dish> dishes;
-
-    // RestaurantPage info
-    private JSONObject restaurant_info;
 
     // Restaurant image url
     private String restaurant_image_url;
@@ -55,18 +49,23 @@ public class RestaurantPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.restaurant);
+        setContentView(R.layout.restaurant_owner_edit);
 
         // Retrieve data that was passed through intent
-        try {
-            restaurant_info = new JSONObject(getIntent().getStringExtra("RESTAURANT_INFO"));
-        } catch(Exception e) {
-            Log.d("DEBUG", "ERROR: " + e.toString());
-        }
-        
-        if (restaurant_info != null) {
-            updateInfo();
-        }
+        Intent intent = getIntent();
+        String restaurant_name = intent.getStringExtra("restaurant");
+        TextView restaurant_title = (TextView)findViewById(R.id.restaurant_title);
+        restaurant_title.setText(restaurant_name);
+        String restaurant_location = intent.getStringExtra("location");
+        TextView restaurant_address = (TextView)findViewById(R.id.restaurant_location);
+        restaurant_address.setText(restaurant_location);
+        String restaurant_phone = intent.getStringExtra("phone");
+        TextView phone = (TextView)findViewById(R.id.restaurant_phone);
+        phone.setText(restaurant_phone);
+        String restaurant_image = intent.getStringExtra("image");
+        ImageView image = (ImageView)findViewById(R.id.restaurant_main_image);
+        new DownloadImageTask(image).execute(restaurant_image);
+
 
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,27 +93,25 @@ public class RestaurantPage extends AppCompatActivity {
                         switch (id) {
                             case R.id.nav_homepage:
                                 // send to the landing page
-                                Intent home_intent = new Intent(RestaurantPage.this, Landing.class);
+                                Intent home_intent = new Intent(RestaurantEdit.this, Landing.class);
                                 startActivity(home_intent);
                                 break;
                             case R.id.nav_favorite_dishes:
                                 // send to favorite dishes page
-                                Intent fav_dishes_page_intent = new Intent(RestaurantPage.this, FavoriteDishes.class);
+                                Intent fav_dishes_page_intent = new Intent(RestaurantEdit.this, FavoriteDishes.class);
                                 startActivity(fav_dishes_page_intent);
                                 break;
                             case R.id.nav_favorite_restaurants:
                                 // send to favorite restaurants page
-                                Intent fav_rest_page_intent = new Intent(RestaurantPage.this, FavoriteRestaurants.class);
+                                Intent fav_rest_page_intent = new Intent(RestaurantEdit.this, FavoriteRestaurants.class);
                                 startActivity(fav_rest_page_intent);
                                 break;
                             case R.id.nav_logout:
                                 // log out and send to the welcome page
-                                Intent logout_intent = new Intent(RestaurantPage.this, MainActivity.class);
+                                Intent logout_intent = new Intent(RestaurantEdit.this, MainActivity.class);
                                 startActivity(logout_intent);
                                 break;
                         }
-
-
                         return true;
                     }
                 });
@@ -127,12 +124,8 @@ public class RestaurantPage extends AppCompatActivity {
         // get the 3 most popular dishes
         getPopularDishes();
         // call the dish adapter on the popular dishes
-        DishAdapter popular_dish_adapter = new DishAdapter(popular_dishes);
+        EditDishAdapter popular_dish_adapter = new EditDishAdapter(popular_dishes);
         popular_rv.setAdapter(popular_dish_adapter);
-
-
-        // create dialog for dish filter popup
-        filterDialog = new Dialog(this);
 
 
         // recycler view for dish cards
@@ -143,7 +136,7 @@ public class RestaurantPage extends AppCompatActivity {
         // get the dish data for the adapter
         getDishData();
         // call the dish adapter on the restaurant dishes
-        DishAdapter adapter = new DishAdapter(dishes);
+        EditDishAdapter adapter = new EditDishAdapter(dishes);
         menu_rv.setAdapter(adapter);
 
     }
@@ -197,25 +190,6 @@ public class RestaurantPage extends AppCompatActivity {
         popular_dishes.add(new Dish("Fav Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
     }
 
-    // handle filter popup
-    public void showFilterPopup(View view) {
-        TextView close_txt;
-        Button btn_filter_alpha;
-        Button btn_filter_rating;
-        filterDialog.setContentView(R.layout.filter_dishes_popup);
-        close_txt = (TextView) filterDialog.findViewById(R.id.close_txt);
-        btn_filter_alpha = (Button)filterDialog.findViewById(R.id.filter_dishes_alpha);
-        btn_filter_rating = (Button)filterDialog.findViewById(R.id.filter_dishes_rating);
-        close_txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterDialog.dismiss();
-            }
-        });
-        filterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        filterDialog.show();
-    }
-
 
     // get the dish data for this restaurant
     private void getDishData() {
@@ -227,52 +201,14 @@ public class RestaurantPage extends AppCompatActivity {
     }
 
 
-    // switch to the restaurant owner edit restaurant page
-    public void goToEditRestaurant(View view) {
-        // !!! check if the user is a verified owner of the restaurant !!!
-
-
-        // go to the edit restaurant page
-        // pass data through intent
-        TextView restaurant_title = findViewById(R.id.restaurant_title);
-        String restaurant = restaurant_title.getText().toString();
-        TextView restaurant_location = findViewById(R.id.restaurant_location);
-        String rest_loc = restaurant_location.getText().toString();
-        TextView restaurant_phone = findViewById(R.id.restaurant_phone);
-        String rest_phone = restaurant_phone.getText().toString();
-        String rest_image = restaurant_image_url;
-
-        Intent edit_restaurant_intent = new Intent(view.getContext(), RestaurantEdit.class);
-        edit_restaurant_intent.putExtra("restaurant", restaurant);
-        edit_restaurant_intent.putExtra("location", rest_loc);
-        edit_restaurant_intent.putExtra("phone", rest_phone);
-        edit_restaurant_intent.putExtra("image", rest_image);
-        view.getContext().startActivity(edit_restaurant_intent);
+    // save the edits and return to the main restaurant page
+    public void saveEditRestaurant(View view) {
+        // return to the main restaurant page
 
     }
 
-    /**
-     * Update the UI elements with restaurant info passed from the landing page
-     */
-    private void updateInfo() {
-        TextView restaurant_title = findViewById(R.id.restaurant_title);
-        TextView restaurant_location = findViewById(R.id.restaurant_location);
-        TextView restaurant_phone = findViewById(R.id.restaurant_phone);
-        ImageView restaurant_image = findViewById(R.id.restaurant_main_image);
-        try {
-            String location = restaurant_info.getString("street") + ", "
-                    + restaurant_info.getString("city") + ", "
-                    + restaurant_info.getString("state");
-            restaurant_title.setText(restaurant_info.getString("name"));
-            restaurant_location.setText(location);
-            restaurant_phone.setText(restaurant_info.getString("phone"));
-            restaurant_image_url = restaurant_info.getString("image");
-            new DownloadImageTask(restaurant_image).execute(restaurant_info.getString("image"));
-        } catch (Exception e) {
-            Log.d("DEBUG", "ERROR: Could not extract JSON from restaurant info");
-        }
-    }
-    
+
+    // function that gets the restaurant image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

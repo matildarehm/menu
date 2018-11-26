@@ -82,16 +82,28 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/button2"
+                            android:id="@+id/leave_review_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:text="Leave a Review"
+                            android:onClick="sendToLeaveReview"
+                            android:textAllCaps="false" />
+
+                        <Button
+                            android:id="@+id/add_fav_dish_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
                             android:layout_weight="1"
-                            android:text="Leave a Review"
-                            android:onClick="sendToLeaveReview"
+                            android:text="Add to Favorites"
                             android:textAllCaps="false" />
+
                     </RelativeLayout>
 
                     <android.support.v7.widget.RecyclerView

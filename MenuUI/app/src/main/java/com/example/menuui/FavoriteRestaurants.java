@@ -119,9 +119,9 @@ public class FavoriteRestaurants extends AppCompatActivity {
     private void getFavoriteRestaurants() {
         // create new restaurant objects for the favorite restaurants
         favorite_restaurants = new ArrayList<>();
-        favorite_restaurants.add(new Restaurant("Favorite Restaurant 1", R.drawable.menuyellow));
-        favorite_restaurants.add(new Restaurant("Favorite Restaurant 2", R.drawable.menuyellow));
-        favorite_restaurants.add(new Restaurant("Favorite Restaurant 3", R.drawable.menuyellow));
+        favorite_restaurants.add(new Restaurant("Favorite Restaurant 1", R.drawable.menuyellow, 1));
+        favorite_restaurants.add(new Restaurant("Favorite Restaurant 2", R.drawable.menuyellow, 2));
+        favorite_restaurants.add(new Restaurant("Favorite Restaurant 3", R.drawable.menuyellow, 3));
     }
 
 }

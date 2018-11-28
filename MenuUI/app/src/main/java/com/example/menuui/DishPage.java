@@ -92,7 +92,7 @@ public class DishPage extends AppCompatActivity {
         rv.setLayoutManager(llm);
 
         // get reviews
-        initializeReviews();
+        getReviews();
 
         // review recycler adapter
         ReviewAdapter adapter = new ReviewAdapter(reviews);
@@ -121,7 +121,7 @@ public class DishPage extends AppCompatActivity {
 
 
     // get/set reviews
-    private void initializeReviews(){
+    private void getReviews(){
         reviews = new ArrayList<>();
         reviews.add(new Review("This dish was excellent", 5, true, "User1"));
         reviews.add(new Review("This dish was delicious", 4, true, "User2"));

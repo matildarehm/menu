@@ -119,13 +119,14 @@ public class RestaurantPage extends AppCompatActivity {
                     }
                 });
 
+        // get the dish data for the adapters
+        getDishData();
+
         //recycler view for most popular dishes - reuse the dish adapter
         RecyclerView popular_rv = (RecyclerView)findViewById(R.id.restaurant_popular_recycler);
         // linear layout manager for the popular dish recycler view
         LinearLayoutManager popular_llm = new LinearLayoutManager(this);
         popular_rv.setLayoutManager(popular_llm);
-        // get the 3 most popular dishes
-        getPopularDishes();
         // call the dish adapter on the popular dishes
         DishAdapter popular_dish_adapter = new DishAdapter(popular_dishes);
         popular_rv.setAdapter(popular_dish_adapter);
@@ -140,8 +141,6 @@ public class RestaurantPage extends AppCompatActivity {
         // linear layout manager for the dish recycler view
         LinearLayoutManager llm = new LinearLayoutManager(this);
         menu_rv.setLayoutManager(llm);
-        // get the dish data for the adapter
-        getDishData();
         // call the dish adapter on the restaurant dishes
         DishAdapter adapter = new DishAdapter(dishes);
         menu_rv.setAdapter(adapter);
@@ -190,15 +189,6 @@ public class RestaurantPage extends AppCompatActivity {
     }
 
 
-    // get the 3 most popular dishes for this restaurant
-    private void getPopularDishes() {
-        // create new dish objects for these popular dishes
-        popular_dishes = new ArrayList<>();
-        popular_dishes.add(new Dish("Popular Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow, "RestaurantName"));
-        popular_dishes.add(new Dish("Popular Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "RestaurantName"));
-        popular_dishes.add(new Dish("Popular Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
-    }
-
     // handle filter popup
     public void showFilterPopup(View view) {
         TextView close_txt;
@@ -221,7 +211,13 @@ public class RestaurantPage extends AppCompatActivity {
 
     // get the dish data for this restaurant
     private void getDishData() {
-        // create new dish objects
+        // get the 3 most popular dishes for this restaurant
+        // create new dish objects for these popular dishes
+        popular_dishes = new ArrayList<>();
+        popular_dishes.add(new Dish("Popular Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow, "RestaurantName"));
+        popular_dishes.add(new Dish("Popular Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "RestaurantName"));
+        popular_dishes.add(new Dish("Popular Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
+        // create new dish objects for the remaining dishes
         dishes = new ArrayList<>();
         dishes.add(new Dish("Dish", "Description", 3.7, 77.5, R.drawable.menuyellow, "RestaurantName"));
         dishes.add(new Dish("Dish2", "Description", 3.5, 70.5, R.drawable.menuyellow, "RestaurantName"));

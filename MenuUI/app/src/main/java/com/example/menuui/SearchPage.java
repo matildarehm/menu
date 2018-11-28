@@ -70,7 +70,20 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         setContentView(R.layout.search_page);
 
         String passed_query = getIntent().getStringExtra("SEARCH_INFO");
+        createNavBar();
 
+        // Geolocation code
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+        mLocationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        if (checkLocation()) setupNearbyRestaurants(passed_query);
+    }
+
+    public void createNavBar(){
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -119,18 +132,10 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                         return true;
                     }
                 });
-        // Geolocation code
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-
-        mLocationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-        checkLocation();
-
+    }
+    public void setupNearbyRestaurants(String search_query){
         // Pass null on first call to just get restaurants in area
-        new SearchPage.populate().execute(passed_query);
+        new SearchPage.populate().execute(search_query);
 
         // redirect to restaurant page
         final ImageView restaurantImg1 = (ImageView) findViewById(R.id.rest_img_1);
@@ -416,7 +421,19 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         }
 
         protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
+
+            int currentBitmapWidth = result.getWidth();
+            int currentBitmapHeight = result.getHeight();
+
+            int ivWidth = bmImage.getWidth();
+            int ivHeight = bmImage.getHeight();
+            int newWidth = ivWidth;
+
+            int newHeight = (int) Math.floor((double) currentBitmapHeight *( (double) newWidth / (double) currentBitmapWidth));
+
+            Bitmap newbitMap = Bitmap.createScaledBitmap(result, newWidth, newHeight, true);
+
+            bmImage.setImageBitmap(newbitMap);
         }
     }
 

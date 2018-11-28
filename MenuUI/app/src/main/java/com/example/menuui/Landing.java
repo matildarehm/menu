@@ -41,12 +41,17 @@ import com.yelp.fusion.client.models.SearchResponse;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 
-public class Landing extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+public class Landing extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        com.google.android.gms.location.LocationListener {
 
     // Variables necessary for geo location through Google API
     private GoogleApiClient mGoogleApiClient;
@@ -72,7 +77,18 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+        createNavBar();
+        // Geolocation code
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mLocationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        if (checkLocation()) setupNearbyRestaurants();
+    }
 
+    public void createNavBar(){
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,17 +137,9 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                         return true;
                     }
                 });
+    }
 
-        // Geolocation code
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-
-        mLocationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-        checkLocation();
-
+    public void setupNearbyRestaurants(){
         // Pass null on first call to just get restaurants in area
         new populate().execute();
 
@@ -331,6 +339,9 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                     TextView label_1 = (TextView) findViewById(R.id.rest_label_1);
                     TextView label_2 = (TextView) findViewById(R.id.rest_label_2);
                     TextView label_3 = (TextView) findViewById(R.id.rest_label_3);
+                    TextView openlabel_1 = (TextView) findViewById(R.id.open_1);
+                    TextView openlabel_2 = (TextView) findViewById(R.id.open_2);
+                    TextView openlabel_3 = (TextView) findViewById(R.id.open_3);
                     ImageView image_1 = (ImageView) findViewById(R.id.rest_img_1);
                     ImageView image_2 = (ImageView) findViewById(R.id.rest_img_2);
                     ImageView image_3 = (ImageView) findViewById(R.id.rest_img_3);
@@ -339,6 +350,12 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                     label_1.setText(businesses.get(0).getName());
                     label_2.setText(businesses.get(1).getName());
                     label_3.setText(businesses.get(2).getName());
+                    if(businesses.get(0).getIsClosed()) openlabel_1.setText("Open");
+                    else openlabel_1.setText("Closed");
+                    if(businesses.get(1).getIsClosed()) openlabel_2.setText("Open");
+                    else openlabel_2.setText("Closed");
+                    if(businesses.get(2).getIsClosed()) openlabel_3.setText("Open");
+                    else openlabel_3.setText("Closed");
                     new DownloadImageTask(image_1).execute(businesses.get(0).getImageUrl());
                     new DownloadImageTask(image_2).execute(businesses.get(1).getImageUrl());
                     new DownloadImageTask(image_3).execute(businesses.get(2).getImageUrl());
@@ -366,7 +383,6 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     // Changes the ImageViews using an image URL, in a separate thread
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
-
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
         }
@@ -386,7 +402,18 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         }
 
         protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
+            int currentBitmapWidth = result.getWidth();
+            int currentBitmapHeight = result.getHeight();
+
+            int ivWidth = bmImage.getWidth();
+            int ivHeight = bmImage.getHeight();
+            int newWidth = ivWidth;
+
+            int newHeight = (int) Math.floor((double) currentBitmapHeight *( (double) newWidth / (double) currentBitmapWidth));
+
+            Bitmap newbitMap = Bitmap.createScaledBitmap(result, newWidth, newHeight, true);
+
+            bmImage.setImageBitmap(newbitMap);
         }
     }
 
@@ -470,7 +497,6 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         ret += phone.charAt(8) + phone.charAt(9) + phone.charAt(10) + phone.charAt(11);
         return ret;
     }
-
     public void surpriseRestaurant(View view){
         Intent restaurant_intent = new Intent(this, RestaurantPage.class);
         restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_1_info);

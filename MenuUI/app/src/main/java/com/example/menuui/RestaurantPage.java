@@ -192,9 +192,9 @@ public class RestaurantPage extends AppCompatActivity {
     private void getPopularDishes() {
         // create new dish objects for these popular dishes
         popular_dishes = new ArrayList<>();
-        popular_dishes.add(new Dish("Fav Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow, "RestaurantName"));
-        popular_dishes.add(new Dish("Fav Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "RestaurantName"));
-        popular_dishes.add(new Dish("Fav Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
+        popular_dishes.add(new Dish("Popular Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow, "RestaurantName"));
+        popular_dishes.add(new Dish("Popular Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "RestaurantName"));
+        popular_dishes.add(new Dish("Popular Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
     }
 
     // handle filter popup

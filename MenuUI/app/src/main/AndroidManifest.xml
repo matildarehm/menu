@@ -47,6 +47,7 @@
         <activity android:name=".VerifyUser" />
         <activity android:name=".LeaveReview"></activity>
         <activity android:name=".RestaurantEdit"></activity>
+        <activity android:name=".SearchPage"></activity>
         <activity android:name=".AddDishPage"></activity>
     </application>
 </manifest>

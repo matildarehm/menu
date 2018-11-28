@@ -170,11 +170,13 @@ public class RestaurantPage extends AppCompatActivity {
         searchView.setQueryHint("Search for food, restaurants, ...");
         searchView.onActionViewExpanded();
 
+        // Set listeners for UI Objects
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // searchView.setQuery("", false); // Not sure if this is best UX
-                searchView.clearFocus();
+                Intent search_intent = new Intent(RestaurantPage.this, SearchPage.class);
+                search_intent.putExtra("SEARCH_INFO", query);
+                startActivity(search_intent);
                 return false;
             }
 

@@ -1,5 +1,4 @@
 package com.example.menuui;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,8 +44,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
-
-public class Landing extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+public class SearchPage extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener{
+    private DrawerLayout mDrawerLayout;
 
     // Variables necessary for geo location through Google API
     private GoogleApiClient mGoogleApiClient;
@@ -55,13 +54,10 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private com.google.android.gms.location.LocationListener listener;
-    private double latitude = 42.745994;
-    private double longitude = -73.694263;
+    private double latitude;
+    private double longitude;
     private long UPDATE_INTERVAL = 2 * 1000;
     private long FASTEST_INTERVAL = 2000;
-
-    // for nav bar drawer layout
-    private DrawerLayout mDrawerLayout;
 
     // RestaurantPage info to be passed to restaurant page
     private String restaurant_1_info;
@@ -71,7 +67,9 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_landing);
+        setContentView(R.layout.search_page);
+
+        String passed_query = getIntent().getStringExtra("SEARCH_INFO");
 
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -99,29 +97,28 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                         switch (id) {
                             case R.id.nav_homepage:
                                 // send to the landing page
-                                Intent home_intent = new Intent(Landing.this, Landing.class);
+                                Intent home_intent = new Intent(SearchPage.this, Landing.class);
                                 startActivity(home_intent);
                                 break;
                             case R.id.nav_favorite_dishes:
                                 // send to favorite dishes page
-                                Intent fav_dishes_page_intent = new Intent(Landing.this, FavoriteDishes.class);
+                                Intent fav_dishes_page_intent = new Intent(SearchPage.this, FavoriteDishes.class);
                                 startActivity(fav_dishes_page_intent);
                                 break;
                             case R.id.nav_favorite_restaurants:
                                 // send to favorite restaurants page
-                                Intent fav_rest_page_intent = new Intent(Landing.this, FavoriteRestaurants.class);
+                                Intent fav_rest_page_intent = new Intent(SearchPage.this, FavoriteRestaurants.class);
                                 startActivity(fav_rest_page_intent);
                                 break;
                             case R.id.nav_logout:
                                 // log out and send to the welcome page
-                                Intent logout_intent = new Intent(Landing.this, MainActivity.class);
+                                Intent logout_intent = new Intent(SearchPage.this, MainActivity.class);
                                 startActivity(logout_intent);
                                 break;
                         }
                         return true;
                     }
                 });
-
         // Geolocation code
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -133,7 +130,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         checkLocation();
 
         // Pass null on first call to just get restaurants in area
-        new populate().execute();
+        new SearchPage.populate().execute(passed_query);
 
         // redirect to restaurant page
         final ImageView restaurantImg1 = (ImageView) findViewById(R.id.rest_img_1);
@@ -161,7 +158,6 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
             }
         });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -175,15 +171,40 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Intent search_intent = new Intent(Landing.this, SearchPage.class);
-                search_intent.putExtra("SEARCH_INFO", query);
-                startActivity(search_intent);
+                new SearchPage.populate().execute(query);
+                searchView.clearFocus();
+                searchView.setQuery("", false); // Not sure if this is best UX
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+
+        final ImageView restaurantImg1 = (ImageView) findViewById(R.id.rest_img_1);
+        final ImageView restaurantImg2 = (ImageView) findViewById(R.id.rest_img_2);
+        final ImageView restaurantImg3 = (ImageView) findViewById(R.id.rest_img_3);
+
+        restaurantImg1.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_1_info);
+            }
+        });
+
+        restaurantImg2.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_2_info);
+            }
+        });
+
+        restaurantImg3.setOnClickListener(new ImageView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRestaurantPage(restaurant_3_info);
             }
         });
         return true;
@@ -198,6 +219,15 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    /**
+     * Open a restaurant page activity for a specific restaurant name
+     * @param {String} restaurant_name is the name of the restaurant to access menu items for
+     */
+    private void openRestaurantPage(String restaurant_info) {
+        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
+        restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_info);
+        startActivity(restaurant_intent);
     }
 
     @Override
@@ -276,7 +306,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
      * @param {String} message - Message to show the user in the dialog
      */
     public void dialog(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Landing.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(SearchPage.this);
         builder.setMessage(message)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
@@ -339,9 +369,9 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                     label_1.setText(businesses.get(0).getName());
                     label_2.setText(businesses.get(1).getName());
                     label_3.setText(businesses.get(2).getName());
-                    new DownloadImageTask(image_1).execute(businesses.get(0).getImageUrl());
-                    new DownloadImageTask(image_2).execute(businesses.get(1).getImageUrl());
-                    new DownloadImageTask(image_3).execute(businesses.get(2).getImageUrl());
+                    new SearchPage.DownloadImageTask(image_1).execute(businesses.get(0).getImageUrl());
+                    new SearchPage.DownloadImageTask(image_2).execute(businesses.get(1).getImageUrl());
+                    new SearchPage.DownloadImageTask(image_3).execute(businesses.get(2).getImageUrl());
 
                     // Reset and update restaurant info
                     restaurant_1_info = getBusinessJSON(businesses.get(0));
@@ -443,15 +473,6 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         return ret;
     }
 
-    /**
-     * Open a restaurant page activity for a specific restaurant name
-     * @param {String} restaurant_name is the name of the restaurant to access menu items for
-     */
-    private void openRestaurantPage(String restaurant_info) {
-        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
-        restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_info);
-        startActivity(restaurant_intent);
-    }
 
     /**
      * Change a 12 digit number into a phone number format
@@ -469,11 +490,5 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         ret += phone.charAt(5) + phone.charAt(6) + phone.charAt(7) + "-";
         ret += phone.charAt(8) + phone.charAt(9) + phone.charAt(10) + phone.charAt(11);
         return ret;
-    }
-
-    public void surpriseRestaurant(View view){
-        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
-        restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_1_info);
-        startActivity(restaurant_intent);
     }
 }

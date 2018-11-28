@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Landing">
+    tools:context=".SearchPage">
 
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
@@ -44,13 +44,6 @@
                     android:focusableInTouchMode="true"
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/surprise"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="surpriseRestaurant"
-                        android:text="Surprise Me!" />
-
                     <TextView
                         android:id="@+id/rest_label_1"
                         android:layout_width="match_parent"
@@ -62,6 +55,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
+                        android:focusable="true"
                         android:contentDescription="@string/second"/>
 
                     <TextView
@@ -75,6 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
+                        android:focusable="true"
                         android:contentDescription="@string/third"/>
 
                     <TextView
@@ -88,6 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
+                        android:focusable="true"
                         android:contentDescription="@string/fourth"/>
 
                 </LinearLayout>

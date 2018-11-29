@@ -86,6 +86,9 @@ public class PrivateLogin extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
+                String userPoolId = "";
+                String clientId = "";
+                String clientSecret = "";
                 Region REGION = Region.getRegion(Regions.US_EAST_2);
 
                 AmazonCognitoIdentityProviderClient identityProviderClient = new AmazonCognitoIdentityProviderClient(new AnonymousAWSCredentials(),

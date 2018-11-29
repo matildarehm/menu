@@ -11,7 +11,6 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
-<<<<<<< HEAD
                         <option name="children">
                           <map>
                             <entry key="clipartAsset">
@@ -31,13 +30,6 @@
                           <map>
                             <entry key="outputName" value="ic_save" />
                             <entry key="sourceFile" value="C:\Users\Kristine" />
-=======
-                        <option name="values">
-                          <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_verify10" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/verify10.svg" />
->>>>>>> ecf7e41... CognitoSettings class.
                           </map>
                         </option>
                       </PersistentState>

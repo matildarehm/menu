@@ -85,6 +85,7 @@ public class LeaveReview extends AppCompatActivity {
 
         // return to the dish page
         Intent verify_intent = new Intent(this, DishPage.class);
+        verify_intent.putExtra("dishName", dish);
         startActivity(verify_intent);
     }
 

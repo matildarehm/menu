@@ -10,6 +10,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Button;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 public class LeaveReview extends AppCompatActivity {
     private Button post_review;
 
@@ -58,6 +62,28 @@ public class LeaveReview extends AppCompatActivity {
         review_text = review_edit.getText().toString();
         // System.out.println(review_text);
 
+        // Add the review to the database
+        // Connect to the database
+//        String url = "menuappdb.cctlbaybdt7x.us-east-2.rds.amazonaws.com";
+//        String user = "menuadmin";
+//        String password = "menuappadmin4";
+//
+//        try {
+//            // Get a connection to the database
+//            Connection conn = DriverManager.getConnection(url, user, password);
+//            // Create a statement
+//            Statement stmt = conn.createStatement();
+//            // Execute SQL query
+//            String sql = "insert into reviews "
+//                    + "(rid, did, username, reviewtext, recommend, rating"
+//                    + " values ( , , 'User', review_text, recommend, rating)";
+//            stmt.executeUpdate(sql);
+//        }
+//        catch (Exception exc) {
+//            exc.printStackTrace();
+//        }
+
+        // return to the dish page
         Intent verify_intent = new Intent(this, DishPage.class);
         startActivity(verify_intent);
     }

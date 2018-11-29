@@ -106,7 +106,9 @@ public class PrivateLogin extends AppCompatActivity {
     }
 
     private void go_to_landing() {
+        // go to the landing page
         Intent landing_intent = new Intent(this, Landing.class);
         startActivity(landing_intent);
     }
+
 }

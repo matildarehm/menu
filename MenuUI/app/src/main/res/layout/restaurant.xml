@@ -61,17 +61,17 @@
                             android:textSize="20dp"
                             android:layout_centerVertical="true"/>
 
-                        <ImageView
-                            android:id="@+id/restaurant_edit_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
-                            android:onClick="goToEditRestaurant"
-                            app:srcCompat="@drawable/ic_edit" />
+                        <!--<ImageView-->
+                            <!--android:id="@+id/restaurant_edit_button"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_alignParentEnd="true"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_marginRight="10dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:onClick="goToEditRestaurant"-->
+                            <!--app:srcCompat="@drawable/ic_edit" />-->
 
                     </RelativeLayout>
 
@@ -200,15 +200,15 @@
                                 android:layout_gravity="center"
                                 android:text="Dishes" />
 
-                            <Button
-                                android:id="@+id/rest_dish_filter_button"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:background="@null"
-                                android:drawableLeft="@drawable/ic_restaurant_filter"
-                                android:text="Filter"
-                                android:onClick="showFilterPopup"/>
+                            <!--<Button-->
+                                <!--android:id="@+id/rest_dish_filter_button"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:background="@null"-->
+                                <!--android:drawableLeft="@drawable/ic_restaurant_filter"-->
+                                <!--android:text="Filter"-->
+                                <!--android:onClick="showFilterPopup"/>-->
 
                         </RelativeLayout>
 

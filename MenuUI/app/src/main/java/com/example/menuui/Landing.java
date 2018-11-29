@@ -62,8 +62,8 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private com.google.android.gms.location.LocationListener listener;
-    private double latitude = 42.745994;
-    private double longitude = -73.694263;
+    private double latitude = 42.652580;
+    private double longitude = -73.756233;
     private long UPDATE_INTERVAL = 2 * 1000;
     private long FASTEST_INTERVAL = 2000;
 

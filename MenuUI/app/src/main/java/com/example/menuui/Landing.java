@@ -62,8 +62,8 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private com.google.android.gms.location.LocationListener listener;
-    private double latitude = 42.745994;
-    private double longitude = -73.694263;
+    private double latitude = 42.7284;
+    private double longitude = -73.7770;
     private long UPDATE_INTERVAL = 2 * 1000;
     private long FASTEST_INTERVAL = 2000;
 
@@ -79,6 +79,8 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+
+        // Make the navbar (hamburger menu)
         createNavBar();
         // Geolocation code
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -87,9 +89,11 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 .addApi(LocationServices.API)
                 .build();
         mLocationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        // Set up views for nearby restaurants
         if (checkLocation()) setupNearbyRestaurants();
     }
 
+    // Set up Nav Bar (hamburger menu)
     public void createNavBar(){
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -141,6 +145,17 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 });
     }
 
+    // nav bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    // Populate views with information of nearby restaurants
     public void setupNearbyRestaurants(){
         // Pass null on first call to just get restaurants in area
         new populate().execute();
@@ -172,6 +187,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         });
     }
 
+    // Set up search bar in the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -181,7 +197,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         searchView.setQueryHint("Search for food, restaurants, ...");
         searchView.onActionViewExpanded();
 
-        // Set listeners for UI Objects
+        // Send query information to SearchPage Activity on search
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -199,17 +215,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         return true;
     }
 
-    // nav bar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+    // Google API
     @Override
     public void onConnected(Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -232,18 +238,20 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         }
     }
 
+    // Google API
     @Override
     public void onConnectionSuspended(int i) {
         Log.i("DEBUG", "Connection Suspended");
         mGoogleApiClient.connect();
     }
 
-
+    // Google API
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Log.i("DEBUG", "Connection failed. Error: " + connectionResult.getErrorCode());
     }
 
+    // Google API
     @Override
     protected void onStart() {
         super.onStart();
@@ -252,6 +260,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         }
     }
 
+    // Google API
     @Override
     protected void onStop() {
         super.onStop();
@@ -260,6 +269,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         }
     }
 
+    // Google API
     protected void startLocationUpdates() {
         // Create the location request
         mLocationRequest = LocationRequest.create()
@@ -274,6 +284,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 mLocationRequest, this);
     }
 
+    // Google API
     @Override
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();
@@ -341,9 +352,6 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                     TextView label_1 = (TextView) findViewById(R.id.rest_label_1);
                     TextView label_2 = (TextView) findViewById(R.id.rest_label_2);
                     TextView label_3 = (TextView) findViewById(R.id.rest_label_3);
-                    TextView openlabel_1 = (TextView) findViewById(R.id.open_1);
-                    TextView openlabel_2 = (TextView) findViewById(R.id.open_2);
-                    TextView openlabel_3 = (TextView) findViewById(R.id.open_3);
                     ImageView image_1 = (ImageView) findViewById(R.id.rest_img_1);
                     ImageView image_2 = (ImageView) findViewById(R.id.rest_img_2);
                     ImageView image_3 = (ImageView) findViewById(R.id.rest_img_3);
@@ -419,7 +427,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
             showAlert();
         return isLocationEnabled();
     }
-
+    // Alert user if Location Settings are not turned on
     private void showAlert() {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Enable Location")
@@ -441,7 +449,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                 });
         dialog.show();
     }
-
+    // Check if Location Settings are turned on
     private boolean isLocationEnabled() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
@@ -456,6 +464,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private String getBusinessJSON(Business b) {
 
         String ret = "{\"name\":\"" + b.getName() + "\",";
+        // Add restaurant ID
         ret += "\"image\":\"" + b.getImageUrl() + "\",";
         ret += "\"phone\":\"" + phoneString(b.getPhone()) + "\",";
         ret += "\"street\":\"" + b.getLocation().getAddress1() + "\",";
@@ -493,6 +502,8 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         ret += phone.charAt(8) + phone.charAt(9) + phone.charAt(10) + phone.charAt(11);
         return ret;
     }
+    // Function for Surprise Me's onClick
+    // Send a random restaurant's information to Restaurant activity
     public void surpriseRestaurant(View view){
         List<String> rest_list = new ArrayList<String>();
         rest_list.add(restaurant_1_info);

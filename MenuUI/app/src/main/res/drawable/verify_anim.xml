@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/verify0" android:duration="500" />
+    <item android:drawable="@drawable/verify10" android:duration="500" />
+    <item android:drawable="@drawable/verify20" android:duration="500" />
+    <item android:drawable="@drawable/verify30" android:duration="1000" />
+    <item android:drawable="@drawable/verify50" android:duration="1000" />
+    <item android:drawable="@drawable/verify70" android:duration="500" />
+    <item android:drawable="@drawable/verify80" android:duration="500" />
+    <item android:drawable="@drawable/verify90" android:duration="500" />
+    <item android:drawable="@drawable/verify100" android:duration="500" />
+</animation-list>
+

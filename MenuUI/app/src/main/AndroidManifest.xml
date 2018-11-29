@@ -30,10 +30,8 @@
         <activity android:name=".FYP" />
         <activity android:name=".Landing" />
         <activity android:name=".FavoriteDishes">
-            android:label="Favorite Dishes"
         </activity>
         <activity android:name=".FavoriteRestaurants">
-            android:label="Favorite Restaurants"
         </activity>
 
         <activity android:name=".RestaurantPage">
@@ -43,11 +41,12 @@
 
         <activity android:name=".DishPage">
         </activity>
-        <activity android:name=".PrivateRegister" />
         <activity android:name=".VerifyUser" />
+
         <activity android:name=".LeaveReview"></activity>
         <activity android:name=".RestaurantEdit"></activity>
         <activity android:name=".SearchPage"></activity>
         <activity android:name=".AddDishPage"></activity>
+
     </application>
 </manifest>

@@ -9,5 +9,10 @@
     <color name="textColor">#6e6e6e</color>
     <color name="darkgray">#6c6c6c</color>
     <color name="nav_red">#c53c3c</color>
+    <color name="bright_salmon">#f9545b</color>
+    <color name="light_pink">#f9d4db</color>
+    <color name="light_blue">#9ae1d4</color>
+    <color name="light_salmon">#ff9690</color>
     <color name="navy_blue">#203753</color>
+    <color name="light_gray">#a6a7a5</color>
 </resources>

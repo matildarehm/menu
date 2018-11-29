@@ -69,33 +69,16 @@
                             android:layout_height="wrap_content"
                             android:clickable="true"
                             android:contentDescription="@string/second" />
-
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/rest_label_1"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignTop="@id/rest_img_1"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/rest_label_1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="36sp"
-                                android:textColor="#FFFFFF"
-                                android:shadowColor="#000000"
-                                android:shadowDx="-2"
-                                android:shadowDy="-2"
-                                android:shadowRadius="1"/>
-                            <TextView
-                                android:id="@+id/open_1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="24sp"
-                                android:textColor="#FFFFFF"
-                                android:shadowColor="#000000"
-                                android:shadowDx="-2"
-                                android:shadowDy="-2"
-                                android:shadowRadius="1"/>
-                        </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:textSize="36sp"
+                            android:textColor="#FFFFFF"
+                            android:shadowColor="#000000"
+                            android:shadowDx="-2"
+                            android:shadowDy="-2"
+                            android:shadowRadius="1"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -108,32 +91,16 @@
                             android:layout_height="wrap_content"
                             android:clickable="true"
                             android:contentDescription="@string/second" />
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/rest_label_2"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignTop="@id/rest_img_2"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/rest_label_2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="36sp"
-                                android:textColor="#FFFFFF"
-                                android:shadowColor="#000000"
-                                android:shadowDx="-2"
-                                android:shadowDy="-2"
-                                android:shadowRadius="1"/>
-                            <TextView
-                                android:id="@+id/open_2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="24sp"
-                                android:textColor="#FFFFFF"
-                                android:shadowColor="#000000"
-                                android:shadowDx="-2"
-                                android:shadowDy="-2"
-                                android:shadowRadius="1"/>
-                        </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:textSize="36sp"
+                            android:textColor="#FFFFFF"
+                            android:shadowColor="#000000"
+                            android:shadowDx="-2"
+                            android:shadowDy="-2"
+                            android:shadowRadius="1"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -148,32 +115,16 @@
                             android:clickable="true"
                             android:contentDescription="@string/second" />
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/rest_label_3"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignTop="@id/rest_img_3"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/rest_label_3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="36sp"
-                                android:textColor="#FFFFFF"
-                                android:shadowColor="#000000"
-                                android:shadowDx="-2"
-                                android:shadowDy="-2"
-                                android:shadowRadius="1"/>
-                            <TextView
-                                android:id="@+id/open_3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="24sp"
-                                android:textColor="#FFFFFF"
-                                android:shadowColor="#000000"
-                                android:shadowDx="-2"
-                                android:shadowDy="-2"
-                                android:shadowRadius="1"/>
-                        </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:textSize="36sp"
+                            android:textColor="#FFFFFF"
+                            android:shadowColor="#000000"
+                            android:shadowDx="-2"
+                            android:shadowDy="-2"
+                            android:shadowRadius="1"/>
                     </RelativeLayout>
 
                 </LinearLayout>

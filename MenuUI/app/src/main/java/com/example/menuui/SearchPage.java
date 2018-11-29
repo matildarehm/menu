@@ -48,6 +48,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 public class SearchPage extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener{
+    // Used for Nav bar
     private DrawerLayout mDrawerLayout;
 
     // Variables necessary for geo location through Google API
@@ -57,13 +58,15 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private com.google.android.gms.location.LocationListener listener;
-    private double latitude = 42.745994;
-    private double longitude = -73.694263;
+    private double latitude = 42.7284;
+    private double longitude = -73.7770;
     private long UPDATE_INTERVAL = 2 * 1000;
     private long FASTEST_INTERVAL = 2000;
 
+    // Search Limit
     private int numquery = 4;
-    // RestaurantPage info to be passed to restaurant page
+
+    // Views Layout information and restaurant information to be passed
     private ArrayList<Integer> all_image_id = new ArrayList<Integer>();
     private ArrayList<Integer> all_label_id = new ArrayList<Integer>();
     private ArrayList<String> restaurant_info = new ArrayList<String>();
@@ -73,6 +76,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_page);
 
+        // get search information sent by user
         String passed_query = getIntent().getStringExtra("SEARCH_INFO");
         createNavBar();
 
@@ -85,9 +89,11 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
 
         mLocationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
 
+        // Populate view with clickable restaurant pictures
         if (checkLocation()) setupNearbyRestaurants(passed_query);
     }
 
+    // Set up Nav bar (hamburger menu)
     public void createNavBar(){
         // handle nav bar implementation
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -138,6 +144,18 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                     }
                 });
     }
+    // nav bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    // Dynamically create views to display queried restaurants
+    // @param {String} search_query is the term the user wants to find restaurants with
     public void setupNearbyRestaurants(String search_query){
         LinearLayout layout = (LinearLayout)findViewById(R.id.linLayout);
         for (int i = 0; i < numquery; i++){
@@ -167,6 +185,8 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             });
         }
     }
+
+    // Set up searchbar in the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -176,13 +196,13 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         searchView.setQueryHint("Search for food, restaurants, ...");
         searchView.onActionViewExpanded();
 
-        // Set listeners for UI Objects
+        // Refresh queried restaurants on search
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 new SearchPage.populate().execute(query);
                 searchView.clearFocus();
-                searchView.setQuery("", false); // Not sure if this is best UX
+                searchView.setQuery("", false);
                 return false;
             }
 
@@ -192,17 +212,6 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             }
         });
         return true;
-    }
-
-    // nav bar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
     /**
      * Open a restaurant page activity for a specific restaurant name
@@ -214,6 +223,8 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         startActivity(restaurant_intent);
     }
 
+
+    // GoogleAPI setup
     @Override
     public void onConnected(Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -235,19 +246,18 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             Toast.makeText(this, "Location not Detected", Toast.LENGTH_SHORT).show();
         }
     }
-
+    // GoogleAPI setup
     @Override
     public void onConnectionSuspended(int i) {
         Log.i("DEBUG", "Connection Suspended");
         mGoogleApiClient.connect();
     }
-
-
+    // GoogleAPI setup
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Log.i("DEBUG", "Connection failed. Error: " + connectionResult.getErrorCode());
     }
-
+    // GoogleAPI setup
     @Override
     protected void onStart() {
         super.onStart();
@@ -255,7 +265,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             mGoogleApiClient.connect();
         }
     }
-
+    // GoogleAPI setup
     @Override
     protected void onStop() {
         super.onStop();
@@ -263,7 +273,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             mGoogleApiClient.disconnect();
         }
     }
-
+    // GoogleAPI setup
     protected void startLocationUpdates() {
         // Create the location request
         mLocationRequest = LocationRequest.create()
@@ -277,7 +287,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
                 mLocationRequest, this);
     }
-
+    // GoogleAPI setup
     @Override
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();
@@ -408,7 +418,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             showAlert();
         return isLocationEnabled();
     }
-
+    // Alert user if Location Settings are not turned on
     private void showAlert() {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Enable Location")
@@ -430,7 +440,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                 });
         dialog.show();
     }
-
+    // Check if Location Settings are turned on
     private boolean isLocationEnabled() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||

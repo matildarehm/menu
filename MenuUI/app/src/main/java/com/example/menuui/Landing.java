@@ -37,14 +37,16 @@ import com.google.android.gms.location.LocationServices;
 import com.yelp.fusion.client.connection.YelpFusionApi;
 import com.yelp.fusion.client.connection.YelpFusionApiFactory;
 import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.Hour;
 import com.yelp.fusion.client.models.SearchResponse;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.TimeZone;
 
 import retrofit2.Call;
@@ -350,12 +352,6 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                     label_1.setText(businesses.get(0).getName());
                     label_2.setText(businesses.get(1).getName());
                     label_3.setText(businesses.get(2).getName());
-                    if(businesses.get(0).getIsClosed()) openlabel_1.setText("Open");
-                    else openlabel_1.setText("Closed");
-                    if(businesses.get(1).getIsClosed()) openlabel_2.setText("Open");
-                    else openlabel_2.setText("Closed");
-                    if(businesses.get(2).getIsClosed()) openlabel_3.setText("Open");
-                    else openlabel_3.setText("Closed");
                     new DownloadImageTask(image_1).execute(businesses.get(0).getImageUrl());
                     new DownloadImageTask(image_2).execute(businesses.get(1).getImageUrl());
                     new DownloadImageTask(image_3).execute(businesses.get(2).getImageUrl());
@@ -498,8 +494,13 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
         return ret;
     }
     public void surpriseRestaurant(View view){
+        List<String> rest_list = new ArrayList<String>();
+        rest_list.add(restaurant_1_info);
+        rest_list.add(restaurant_2_info);
+        rest_list.add(restaurant_3_info);
+        String random_rest = rest_list.get(new Random().nextInt(rest_list.size()));
         Intent restaurant_intent = new Intent(this, RestaurantPage.class);
-        restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_1_info);
+        restaurant_intent.putExtra("RESTAURANT_INFO", random_rest);
         startActivity(restaurant_intent);
     }
 }

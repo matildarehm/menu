@@ -26,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.vision.text.Line;
+import com.google.android.gms.vision.text.Text;
 import com.yelp.fusion.client.connection.YelpFusionApi;
 import com.yelp.fusion.client.connection.YelpFusionApiFactory;
 import com.yelp.fusion.client.models.Business;
@@ -54,15 +57,16 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private com.google.android.gms.location.LocationListener listener;
-    private double latitude;
-    private double longitude;
+    private double latitude = 42.745994;
+    private double longitude = -73.694263;
     private long UPDATE_INTERVAL = 2 * 1000;
     private long FASTEST_INTERVAL = 2000;
 
+    private int numquery = 4;
     // RestaurantPage info to be passed to restaurant page
-    private String restaurant_1_info;
-    private String restaurant_2_info;
-    private String restaurant_3_info;
+    private ArrayList<Integer> all_image_id = new ArrayList<Integer>();
+    private ArrayList<Integer> all_label_id = new ArrayList<Integer>();
+    private ArrayList<String> restaurant_info = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                 .build();
 
         mLocationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+
         if (checkLocation()) setupNearbyRestaurants(passed_query);
     }
 
@@ -134,34 +139,33 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                 });
     }
     public void setupNearbyRestaurants(String search_query){
+        LinearLayout layout = (LinearLayout)findViewById(R.id.linLayout);
+        for (int i = 0; i < numquery; i++){
+            TextView label = new TextView(this);
+            Integer label_id = label.generateViewId();
+            all_label_id.add(label_id);
+            label.setId(label_id);
+            layout.addView(label);
+
+            ImageView image = new ImageView(this);
+            Integer image_id = image.generateViewId();
+            all_image_id.add(image_id);
+            image.setId(image_id);
+            layout.addView(image);
+        }
+
         // Pass null on first call to just get restaurants in area
         new SearchPage.populate().execute(search_query);
-
-        // redirect to restaurant page
-        final ImageView restaurantImg1 = (ImageView) findViewById(R.id.rest_img_1);
-        final ImageView restaurantImg2 = (ImageView) findViewById(R.id.rest_img_2);
-        final ImageView restaurantImg3 = (ImageView) findViewById(R.id.rest_img_3);
-
-        restaurantImg1.setOnClickListener(new ImageView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRestaurantPage(restaurant_1_info);
-            }
-        });
-
-        restaurantImg2.setOnClickListener(new ImageView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRestaurantPage(restaurant_2_info);
-            }
-        });
-
-        restaurantImg3.setOnClickListener(new ImageView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRestaurantPage(restaurant_3_info);
-            }
-        });
+        for (int i = 0; i < numquery; i++){
+            ImageView restImg = (ImageView) findViewById(all_image_id.get(i));
+            final int finalI = i;
+            restImg.setOnClickListener(new ImageView.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openRestaurantPage(restaurant_info.get(finalI));
+                }
+            });
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -185,31 +189,6 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
-            }
-        });
-
-        final ImageView restaurantImg1 = (ImageView) findViewById(R.id.rest_img_1);
-        final ImageView restaurantImg2 = (ImageView) findViewById(R.id.rest_img_2);
-        final ImageView restaurantImg3 = (ImageView) findViewById(R.id.rest_img_3);
-
-        restaurantImg1.setOnClickListener(new ImageView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRestaurantPage(restaurant_1_info);
-            }
-        });
-
-        restaurantImg2.setOnClickListener(new ImageView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRestaurantPage(restaurant_2_info);
-            }
-        });
-
-        restaurantImg3.setOnClickListener(new ImageView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRestaurantPage(restaurant_3_info);
             }
         });
         return true;
@@ -361,27 +340,13 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                     // dialog(message);
                 } else {
                     ArrayList<Business> businesses = sr.getBusinesses();
-
-                    // Access the landing page's restaurant labels and images
-                    TextView label_1 = (TextView) findViewById(R.id.rest_label_1);
-                    TextView label_2 = (TextView) findViewById(R.id.rest_label_2);
-                    TextView label_3 = (TextView) findViewById(R.id.rest_label_3);
-                    ImageView image_1 = (ImageView) findViewById(R.id.rest_img_1);
-                    ImageView image_2 = (ImageView) findViewById(R.id.rest_img_2);
-                    ImageView image_3 = (ImageView) findViewById(R.id.rest_img_3);
-
-                    // Change the restaurant labels to restaurant names
-                    label_1.setText(businesses.get(0).getName());
-                    label_2.setText(businesses.get(1).getName());
-                    label_3.setText(businesses.get(2).getName());
-                    new SearchPage.DownloadImageTask(image_1).execute(businesses.get(0).getImageUrl());
-                    new SearchPage.DownloadImageTask(image_2).execute(businesses.get(1).getImageUrl());
-                    new SearchPage.DownloadImageTask(image_3).execute(businesses.get(2).getImageUrl());
-
-                    // Reset and update restaurant info
-                    restaurant_1_info = getBusinessJSON(businesses.get(0));
-                    restaurant_2_info = getBusinessJSON(businesses.get(1));
-                    restaurant_3_info = getBusinessJSON(businesses.get(2));
+                    for (int i = 0; i < numquery; i++){
+                        TextView label = (TextView) findViewById(all_label_id.get(i));
+                        ImageView image = (ImageView) findViewById(all_image_id.get(i));
+                        label.setText(businesses.get(i).getName());
+                        new SearchPage.DownloadImageTask(image).execute(businesses.get(i).getImageUrl());
+                        restaurant_info.add(getBusinessJSON(businesses.get(i)));
+                    }
                 }
             } catch (Exception e) {
                 Log.d("DEBUG", "Error: " + e.toString());

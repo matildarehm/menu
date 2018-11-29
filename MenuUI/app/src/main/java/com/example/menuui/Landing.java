@@ -464,6 +464,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private String getBusinessJSON(Business b) {
 
         String ret = "{\"name\":\"" + b.getName() + "\",";
+        // Add restaurant ID
         ret += "\"image\":\"" + b.getImageUrl() + "\",";
         ret += "\"phone\":\"" + phoneString(b.getPhone()) + "\",";
         ret += "\"street\":\"" + b.getLocation().getAddress1() + "\",";

@@ -208,7 +208,6 @@ public class RestaurantPage extends AppCompatActivity {
         filterDialog.show();
     }
 
-
     // get the dish data for this restaurant
     private void getDishData() {
         // get the 3 most popular dishes for this restaurant
@@ -218,7 +217,15 @@ public class RestaurantPage extends AppCompatActivity {
         popular_dishes.add(new Dish("Popular Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "RestaurantName"));
         popular_dishes.add(new Dish("Popular Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
         // create new dish objects for the remaining dishes
+        // Call database to get dishes
+//        try {
+//            DBMock db = new DBMock(restaurant_info.getString("name"), false);
+//        } catch (Exception e) {
+//            Log.d("DEBUG", "Error when accessing DB: " + e.toString());
+//        }
+        // create new dish objects
         dishes = new ArrayList<>();
+//        DBMock.populate(dishes);
         dishes.add(new Dish("Dish", "Description", 3.7, 77.5, R.drawable.menuyellow, "RestaurantName"));
         dishes.add(new Dish("Dish2", "Description", 3.5, 70.5, R.drawable.menuyellow, "RestaurantName"));
         dishes.add(new Dish("Dish3", "Description", 3.2, 80, R.drawable.menuyellow, "RestaurantName"));

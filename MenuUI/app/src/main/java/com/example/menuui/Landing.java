@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.menuui.GetRestaurantId;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -39,7 +40,6 @@ import com.yelp.fusion.client.connection.YelpFusionApiFactory;
 import com.yelp.fusion.client.models.Business;
 import com.yelp.fusion.client.models.Hour;
 import com.yelp.fusion.client.models.SearchResponse;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,8 +62,8 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private com.google.android.gms.location.LocationListener listener;
-    private double latitude = 42.7284;
-    private double longitude = -73.7770;
+    private double latitude = 42.745994;
+    private double longitude = -73.694263;
     private long UPDATE_INTERVAL = 2 * 1000;
     private long FASTEST_INTERVAL = 2000;
 
@@ -74,6 +74,9 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
     private String restaurant_1_info;
     private String restaurant_2_info;
     private String restaurant_3_info;
+
+    // Database
+    DBHandler db = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -349,17 +352,23 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                     ArrayList<Business> businesses = sr.getBusinesses();
 
                     // Access the landing page's restaurant labels and images
+                    Log.d("INFO", "1");
                     TextView label_1 = (TextView) findViewById(R.id.rest_label_1);
                     TextView label_2 = (TextView) findViewById(R.id.rest_label_2);
                     TextView label_3 = (TextView) findViewById(R.id.rest_label_3);
+                    Log.d("INFO", "2");
                     ImageView image_1 = (ImageView) findViewById(R.id.rest_img_1);
                     ImageView image_2 = (ImageView) findViewById(R.id.rest_img_2);
                     ImageView image_3 = (ImageView) findViewById(R.id.rest_img_3);
+                    Log.d("INFO", "3");
 
                     // Change the restaurant labels to restaurant names
-                    label_1.setText(businesses.get(0).getName());
-                    label_2.setText(businesses.get(1).getName());
+                    String n1 = businesses.get(0).getName();
+                    String n2 = businesses.get(1).getName();
+                    label_1.setText(n1);
+                    label_2.setText(n2);
                     label_3.setText(businesses.get(2).getName());
+                    Log.d("INFO", "TEXT SET");
                     new DownloadImageTask(image_1).execute(businesses.get(0).getImageUrl());
                     new DownloadImageTask(image_2).execute(businesses.get(1).getImageUrl());
                     new DownloadImageTask(image_3).execute(businesses.get(2).getImageUrl());
@@ -462,16 +471,14 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
      * @return {String} ret is the info in a JSON style string
      */
     private String getBusinessJSON(Business b) {
-
         String ret = "{\"name\":\"" + b.getName() + "\",";
-        // Add restaurant ID
+        ret += "\"id\":\"" + db.findRestaurant(b.getName(), b.getLocation().getAddress1()) + "\",";
         ret += "\"image\":\"" + b.getImageUrl() + "\",";
         ret += "\"phone\":\"" + phoneString(b.getPhone()) + "\",";
         ret += "\"street\":\"" + b.getLocation().getAddress1() + "\",";
         ret += "\"city\":\"" + b.getLocation().getCity() + "\",";
         ret += "\"state\":\"" + b.getLocation().getState() + "\",";
         ret += "\"zip\":\"" + b.getLocation().getZipCode() + "\"}";
-
         return ret;
     }
 

@@ -58,10 +58,11 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
     private com.google.android.gms.location.LocationListener listener;
-    private double latitude = 42.7284;
-    private double longitude = -73.7770;
+    private double latitude = 42.745994;
+    private double longitude = -73.694263;
     private long UPDATE_INTERVAL = 2 * 1000;
     private long FASTEST_INTERVAL = 2000;
+    private DBHandler db = new DBHandler(this);
 
     // Search Limit
     private int numquery = 4;
@@ -356,6 +357,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                         label.setText(businesses.get(i).getName());
                         new SearchPage.DownloadImageTask(image).execute(businesses.get(i).getImageUrl());
                         restaurant_info.add(getBusinessJSON(businesses.get(i)));
+
                     }
                 }
             } catch (Exception e) {
@@ -455,6 +457,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
     private String getBusinessJSON(Business b) {
 
         String ret = "{\"name\":\"" + b.getName() + "\",";
+        ret += "\"id\":\"" + db.findRestaurant(b.getName(), b.getLocation().getAddress1()) + "\",";
         ret += "\"image\":\"" + b.getImageUrl() + "\",";
         ret += "\"phone\":\"" + phoneString(b.getPhone()) + "\",";
         ret += "\"street\":\"" + b.getLocation().getAddress1() + "\",";

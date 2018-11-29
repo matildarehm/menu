@@ -52,10 +52,15 @@ public class RestaurantPage extends AppCompatActivity {
     // Restaurant image url
     private String restaurant_image_url;
 
+    // Database object
+    DBHandler db = new DBHandler(this);
+    private Integer id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant);
+        Log.d("INFO", getIntent().getStringExtra("RESTAURANT_INFO"));
 
         // Retrieve data that was passed through intent
         try {
@@ -65,6 +70,7 @@ public class RestaurantPage extends AppCompatActivity {
         }
         
         if (restaurant_info != null) {
+            Log.d("INFO","Success");
             updateInfo();
         }
 
@@ -217,12 +223,6 @@ public class RestaurantPage extends AppCompatActivity {
         popular_dishes.add(new Dish("Popular Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "RestaurantName"));
         popular_dishes.add(new Dish("Popular Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
         // create new dish objects for the remaining dishes
-        // Call database to get dishes
-//        try {
-//            DBMock db = new DBMock(restaurant_info.getString("name"), false);
-//        } catch (Exception e) {
-//            Log.d("DEBUG", "Error when accessing DB: " + e.toString());
-//        }
         // create new dish objects
         dishes = new ArrayList<>();
 //        DBMock.populate(dishes);
@@ -265,6 +265,7 @@ public class RestaurantPage extends AppCompatActivity {
         TextView restaurant_phone = findViewById(R.id.restaurant_phone);
         ImageView restaurant_image = findViewById(R.id.restaurant_main_image);
         try {
+            Log.d("INFO", restaurant_info.toString());
             String location = restaurant_info.getString("street") + ", "
                     + restaurant_info.getString("city") + ", "
                     + restaurant_info.getString("state");
@@ -272,6 +273,8 @@ public class RestaurantPage extends AppCompatActivity {
             restaurant_location.setText(location);
             restaurant_phone.setText(restaurant_info.getString("phone"));
             restaurant_image_url = restaurant_info.getString("image");
+            id = Integer.parseInt(restaurant_info.getString("id"));
+//            db.populateMenuItems(id);
             new DownloadImageTask(restaurant_image).execute(restaurant_info.getString("image"));
         } catch (Exception e) {
             Log.d("DEBUG", "ERROR: Could not extract JSON from restaurant info");

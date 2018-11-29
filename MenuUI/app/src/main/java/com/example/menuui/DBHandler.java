@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class DBHandler extends SQLiteOpenHelper {
     SQLiteDatabase db;
     private static final int DATABASE_VERSION = 1;
@@ -106,43 +108,53 @@ public class DBHandler extends SQLiteOpenHelper {
         return findRestaurant(rName, rAddress);
     }
 
-    public void populateMenuItems(Integer rId) {
+    public void getReviews(ArrayList<Review> reviews) {
+        db = this.getReadableDatabase();
+        String query = "SELECT * FROM reviews;";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String user = cursor.getString(2);
+                String review = cursor.getString(3);
+                Integer rating = cursor.getInt(4);
+                Integer rec = cursor.getInt(5);
+
+                Boolean real_rec;
+                if (rating > 0) {
+                    real_rec = true;
+                } else {
+                    real_rec = false;
+                }
+
+                reviews.add(new Review(review, rating, real_rec, user));
+            } while (cursor.moveToNext());
+        }
+
+        reviews.add(new Review("I found this dish quite tasty", 5, true, "Matilda"));
+        reviews.add(new Review("It's good... I GUESS", 4, true, "datHomie"));
+        reviews.add(new Review("To be quite frank I found this dish... shallow and pedantic", 3,  true, "YelpFan16"));
+    }
+
+    public void addReview(String review, String user, Integer rating, Boolean recommend) {
         db = this.getWritableDatabase();
-        db.execSQL(MI_TABLE_CREATE);
         ContentValues v = new ContentValues();
-        v.put(MI_COLUMN_RID, rId);
-        v.put(MI_COLUMN_DISH_NAME, "Mortadella");
-        v.put(MI_COLUMN_DESC, "Olive salsa, chile oil");
-        v.put(MI_COLUMN_RATING, 4.2);
-        v.put(MI_COLUMN_RECOMMEND, 85);
+        Integer rec;
+        if (recommend) {
+            rec = 1;
+        } else {
+            rec = 0;
+        }
+        v.put(RI_COLUMN_DID, 1);
+        v.put(RI_COLUMN_USERNAME, user);
+        v.put(RI_COLUMN_REVIEW, review);
+        v.put(RI_COLUMN_RATING, rating);
+        v.put(RI_COLUMN_RECOMMEND, recommend);
 
-        db.insert(MI_TABLE_NAME, null, v);
-
-        ContentValues v2 = new ContentValues();
-        v2.put(MI_COLUMN_RID, rId);
-        v2.put(MI_COLUMN_DISH_NAME, "Grilled Cheese");
-        v2.put(MI_COLUMN_DESC, "House-made bread & american cheese");
-        v2.put(MI_COLUMN_RATING, 4.6);
-        v2.put(MI_COLUMN_RECOMMEND, 95);
-
-        db.insert(MI_TABLE_NAME, null, v2);
-
-        ContentValues v3 = new ContentValues();
-        v3.put(MI_COLUMN_RID, rId);
-        v3.put(MI_COLUMN_DISH_NAME, "Gnocci");
-        v3.put(MI_COLUMN_DESC, "with cheese & butter");
-        v3.put(MI_COLUMN_RATING, 3.2);
-        v3.put(MI_COLUMN_RECOMMEND, 65);
-
-        db.insert(MI_TABLE_NAME, null, v3);
-
-        ContentValues v4 = new ContentValues();
-        v4.put(MI_COLUMN_RID, rId);
-        v4.put(MI_COLUMN_DISH_NAME, "Duck Breast");
-        v4.put(MI_COLUMN_DESC, "squash caponata, black garlic");
-        v4.put(MI_COLUMN_RATING, 5);
-        v4.put(MI_COLUMN_RECOMMEND, 100);
-        db.insert(MI_TABLE_NAME, null, v4);
+        db.insert(RI_TABLE_NAME, null, v);
         db.close();
     }
+
+
 }

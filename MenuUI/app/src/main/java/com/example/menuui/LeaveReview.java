@@ -12,6 +12,7 @@ import android.widget.Button;
 
 public class LeaveReview extends AppCompatActivity {
     private Button post_review;
+    private DBHandler db = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class LeaveReview extends AppCompatActivity {
         review_text = review_edit.getText().toString();
         // System.out.println(review_text);
 
+        db.addReview(review_text, "Ben", Math.round(review_rating), recommend);
         Intent verify_intent = new Intent(this, DishPage.class);
         startActivity(verify_intent);
     }

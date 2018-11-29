@@ -384,6 +384,9 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         }
 
         protected Bitmap doInBackground(String... urls) {
+            if (this.bmImage == null) {
+                return null;
+            }
             String url = urls[0];
             Bitmap mIcon11 = null;
 
@@ -398,7 +401,9 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         }
 
         protected void onPostExecute(Bitmap result) {
-
+            if (result == null) {
+                return;
+            }
             int currentBitmapWidth = result.getWidth();
             int currentBitmapHeight = result.getHeight();
 

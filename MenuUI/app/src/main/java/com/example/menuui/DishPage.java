@@ -25,7 +25,8 @@ public class DishPage extends AppCompatActivity {
     private Button leave_review;
     private DrawerLayout mDrawerLayout;
 
-    private List<Review> reviews;
+    private ArrayList<Review> reviews;
+    private DBHandler db = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,9 +124,7 @@ public class DishPage extends AppCompatActivity {
     // get/set reviews
     private void getReviews(){
         reviews = new ArrayList<>();
-        reviews.add(new Review("This dish was excellent", 5, true, "User1"));
-        reviews.add(new Review("This dish was delicious", 4, true, "User2"));
-        reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
+        db.getReviews(reviews);
     }
 
     public void sendToLeaveReview(View view) {

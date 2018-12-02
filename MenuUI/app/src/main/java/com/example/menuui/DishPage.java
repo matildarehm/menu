@@ -38,6 +38,7 @@ public class DishPage extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionbar.setTitle("Menu App");
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -136,6 +137,11 @@ public class DishPage extends AppCompatActivity {
         Intent leave_review_intent = new Intent(this, LeaveReview.class);
         leave_review_intent.putExtra("dish", dish);
         startActivity(leave_review_intent);
+    }
+
+    public void sendBackToRestaurant(View view) {
+        // get the restaurant name
+
     }
 
 }

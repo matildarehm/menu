@@ -74,6 +74,7 @@ public class RestaurantPage extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionbar.setTitle("Menu App");
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 

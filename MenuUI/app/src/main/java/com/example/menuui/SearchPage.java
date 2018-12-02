@@ -101,6 +101,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionbar.setTitle("Menu App");
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 

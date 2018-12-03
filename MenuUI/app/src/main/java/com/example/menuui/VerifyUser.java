@@ -1,5 +1,11 @@
 package com.example.menuui;
 
+<<<<<<< HEAD
+=======
+import android.os.Bundle;
+import android.os.Parcel;
+import android.support.v7.app.AppCompatActivity;
+>>>>>>> adding dish items and designing new UI
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,6 +25,10 @@ import com.amazonaws.services.cognitoidentityprovider.AmazonCognitoIdentityProvi
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHandler;
 
+import org.json.JSONException;
+
+import java.io.Serializable;
+
 public class VerifyUser extends AppCompatActivity {
     private Button verify_button;
     private EditText code;
@@ -32,7 +42,12 @@ public class VerifyUser extends AppCompatActivity {
 
         Bundle user_credentials = getIntent().getExtras();
         final String user_name = user_credentials.getString("username");
+<<<<<<< HEAD
         code = (EditText) findViewById(R.id.code_verify);
+=======
+
+        code = (CodeInputView) findViewById(R.id.code_verify); ;
+>>>>>>> adding dish items and designing new UI
 
 
         verify_button = (Button) findViewById(R.id.verify_pass);
@@ -72,8 +87,28 @@ public class VerifyUser extends AppCompatActivity {
                     new ClientConfiguration());
 
             identityProviderClient.setRegion(REGION);
-            CognitoUserPool userPool = new CognitoUserPool(context, userPoolId, clientId, clientSecret, identityProviderClient);
-            CognitoUser cognito_user = userPool.getUser(strings[1]);
+
+            Bundle user_credentials = getIntent().getExtras();
+            final String user_name = user_credentials.getString("username");
+
+            Parcel user_input = Parcel.obtain();
+            user_input.writeString(user_name);
+
+            CognitoSettings user_creds = new CognitoSettings(user_input);
+
+            try { user_creds.getCredentials(VerifyUser.this); }
+
+            catch (JSONException e) { e.printStackTrace(); }
+            String userPoolId = user_creds.getUserPoolId();
+            String clientId = user_creds.getClientId();
+            String clientSecret = user_creds.getClientSecret();
+
+            Log.i("tagyoureit", userPoolId);
+            Log.i("tagyoureit", clientId);
+            Log.i("tagyoureit", clientSecret);
+
+            //CognitoUserPool userPool = new CognitoUserPool(context, userPoolId, clientId, clientSecret, identityProviderClient);
+            CognitoUser cognito_user = user_creds.getUserPool().getUser(strings[1]);
             cognito_user.confirmSignUp(strings[0], false, confirmationCallback);
 
             return result[0];

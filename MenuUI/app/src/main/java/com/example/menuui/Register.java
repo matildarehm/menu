@@ -1,6 +1,8 @@
 package com.example.menuui;
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
@@ -50,7 +52,10 @@ public class Register extends AppCompatActivity {
         String user_email = email.getText().toString();
         String user_pass = password.getText().toString();
 
-        CognitoSettings user_creds = new CognitoSettings();
+        Parcel user_input = Parcel.obtain();
+        user_input.writeString(user_name);
+
+        CognitoSettings user_creds = new CognitoSettings(user_input);
 
         try { user_creds.getCredentials(this); }
         catch (JSONException e) { e.printStackTrace(); }
@@ -70,6 +75,10 @@ public class Register extends AppCompatActivity {
         String clientId = user_creds.getClientId();
         String clientSecret = user_creds.getClientSecret();
         Region REGION = Region.getRegion(Regions.US_EAST_2);
+
+        Log.i("tagyoureit", userPoolId);
+        Log.i("tagyoureit", clientId);
+        Log.i("tagyoureit", clientSecret);
 
         AmazonCognitoIdentityProviderClient identityProviderClient =
                 new AmazonCognitoIdentityProviderClient(new AnonymousAWSCredentials(),

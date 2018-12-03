@@ -5,31 +5,34 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blurredbg">
+    android:background="@drawable/blurred1">
 
     <EditText
 
         android:id="@+id/username"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="214dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="188dp"
         android:background="@drawable/rounded_border"
         android:ems="10"
+        android:fontFamily="sans-serif"
         android:hint="Username"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textColorHint="#3d3a33"
+        android:textSize="18sp"
         android:typeface="normal" />
 
     <EditText
         android:id="@+id/passText"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_alignStart="@+id/username"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="155dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/rounded_border"
         android:drawableRight="@drawable/ic_action_pass"
         android:ems="10"
@@ -38,45 +41,65 @@
         android:inputType="textPassword"
         android:padding="10dp"
         android:textColorHint="#3d3a33"
+        android:textSize="18sp"
         android:typeface="normal" />
 
     <Button
         android:id="@+id/login_button"
         style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignStart="@+id/username"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/background_signup"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_login"
         android:clickable="true"
-        android:onClick="sendToLanding"
-        android:padding="16dp"
+        android:fontFamily="@font/airbnbcerealbold"
+        android:padding="15dp"
         android:text="Log in"
         android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="24sp" />
 
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="248dp"
+        android:layout_height="187dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="63dp"
+        android:elevation="5dp"
+        app:srcCompat="@drawable/bbmenulogo" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="334dp"
+        android:layout_height="158dp"
+        android:layout_above="@+id/username"
+        android:layout_alignStart="@+id/username"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:elevation="5dp"
+        android:fontFamily="@font/airbnbcerealbold"
+        android:letterSpacing="-0.04"
+        android:text="menu"
+        android:textColor="@color/white"
+        android:textSize="122dp" />
+
     <TextView
         android:id="@+id/fyp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView"
         android:layout_below="@+id/passText"
-        android:layout_marginTop="-155dp"
+        android:layout_alignEnd="@+id/username"
+        android:layout_marginTop="-125dp"
+        android:fontFamily="@font/airbnbcereallight"
         android:text="Forgot your password?"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        android:layout_alignRight="@+id/imageView" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="278dp"
-        android:layout_height="291dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        app:srcCompat="@drawable/menuyellow" />
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 </RelativeLayout>

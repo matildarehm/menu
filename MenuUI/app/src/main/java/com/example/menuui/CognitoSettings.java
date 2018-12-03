@@ -2,6 +2,13 @@ package com.example.menuui;
 
 // JSON Simple imports for reading creds file
 import android.content.Context;
+import android.graphics.Movie;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserPool;
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,9 +19,9 @@ import java.io.IOException;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 
-class CognitoSettings implements Serializable {
+
+class CognitoSettings implements Parcelable {
 
     private String user_email;
     private String user_name;
@@ -25,7 +32,10 @@ class CognitoSettings implements Serializable {
     private String clientId;
     private String clientSecret;
 
+    private Context setting_context;
+
     public void getCredentials(Context context) throws JSONException {
+        setting_context = context;
         JSONParser parser = new JSONParser();
         try {
             InputStream input_json = context.getResources().openRawResource(R.raw.generalusers);
@@ -53,6 +63,31 @@ class CognitoSettings implements Serializable {
         catch (IOException | JSONException  e) { e.printStackTrace(); }
     }
 
+    public CognitoSettings(Parcel in) {
+        user_name = in.readString();
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // Write data into parcel
+        dest.writeString(this.user_name);
+    }
+
+    // This is to de-serialize the object
+    public static final Parcelable.Creator<CognitoSettings> CREATOR = new Parcelable.Creator<CognitoSettings>(){
+        public CognitoSettings createFromParcel(Parcel in) {
+            return new CognitoSettings(in);
+        }
+
+        public CognitoSettings[] newArray(int size) {
+            return new CognitoSettings[size];
+        }
+    };
+
     public String getEmail() { return this.user_email; }
     public String getUsername() { return this.user_name; }
     public String getPassword() { return this.user_pass; }
@@ -78,4 +113,9 @@ class CognitoSettings implements Serializable {
     public String getUserPoolId() { return this.userPoolId; }
     public String getClientId() { return this.clientId; }
     public String getClientSecret() { return this.clientSecret; }
+
+    public CognitoUserPool getUserPool() {
+        Regions cognitoRegion = Regions.US_EAST_2;
+        return new CognitoUserPool(this.setting_context, this.userPoolId, this.clientId, this.clientSecret, cognitoRegion);
+    }
 }

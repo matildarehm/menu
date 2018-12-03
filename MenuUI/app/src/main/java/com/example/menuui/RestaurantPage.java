@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -30,6 +31,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.mashape.unirest.http.async.RequestThread;
+import com.yelp.fusion.client.models.User;
+
 import org.json.JSONObject;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -51,6 +56,8 @@ public class RestaurantPage extends AppCompatActivity {
 
     // Restaurant image url
     private String restaurant_image_url;
+    private String restaurant_name;
+    FetchMenu get_menu = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +67,45 @@ public class RestaurantPage extends AppCompatActivity {
         // Retrieve data that was passed through intent
         try {
             restaurant_info = new JSONObject(getIntent().getStringExtra("RESTAURANT_INFO"));
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.d("DEBUG", "ERROR: " + e.toString());
         }
-        
+
         if (restaurant_info != null) {
             updateInfo();
+
+            if (Looper.myLooper() == Looper.getMainLooper()) {
+                Log.i("here", "im main");
+                get_menu = new FetchMenu(this, restaurant_name);
+                RequestThread get_request = new RequestThread();
+                get_request.start();
+
+                synchronized (get_request) {
+                    try {
+                        System.out.println("Waiting for request get to complete...");
+                        get_request.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                DishThread get_dishes = new DishThread();
+                get_dishes.start();
+
+                synchronized (get_dishes) {
+                    try {
+                        System.out.println("Waiting for dish get to complete...");
+                        get_dishes.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+            }
+            System.out.println("Trying to get here");
         }
 
         // handle nav bar implementation
@@ -124,7 +164,7 @@ public class RestaurantPage extends AppCompatActivity {
         getDishData();
 
         //recycler view for most popular dishes - reuse the dish adapter
-        RecyclerView popular_rv = (RecyclerView)findViewById(R.id.restaurant_popular_recycler);
+        RecyclerView popular_rv = (RecyclerView) findViewById(R.id.restaurant_popular_recycler);
         // linear layout manager for the popular dish recycler view
         LinearLayoutManager popular_llm = new LinearLayoutManager(this);
         popular_rv.setLayoutManager(popular_llm);
@@ -138,10 +178,16 @@ public class RestaurantPage extends AppCompatActivity {
 
 
         // recycler view for dish cards
-        RecyclerView menu_rv = (RecyclerView)findViewById(R.id.restaurant_dishes_recycler);
+        RecyclerView menu_rv = (RecyclerView) findViewById(R.id.restaurant_dishes_recycler);
         // linear layout manager for the dish recycler view
         LinearLayoutManager llm = new LinearLayoutManager(this);
         menu_rv.setLayoutManager(llm);
+<<<<<<< HEAD
+=======
+        // get the dish data for the adapter
+
+        System.out.println("executed?");
+>>>>>>> adding dish items and designing new UI
         // call the dish adapter on the restaurant dishes
         DishAdapter adapter = new DishAdapter(dishes);
         menu_rv.setAdapter(adapter);
@@ -165,7 +211,7 @@ public class RestaurantPage extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.nav_bar_menu, menu);
-        final SearchView searchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
+        final SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
         searchView.setIconified(false);
         searchView.setQueryHint("Search for food, restaurants, ...");
         searchView.onActionViewExpanded();
@@ -197,8 +243,8 @@ public class RestaurantPage extends AppCompatActivity {
         Button btn_filter_rating;
         filterDialog.setContentView(R.layout.filter_dishes_popup);
         close_txt = (TextView) filterDialog.findViewById(R.id.close_txt);
-        btn_filter_alpha = (Button)filterDialog.findViewById(R.id.filter_dishes_alpha);
-        btn_filter_rating = (Button)filterDialog.findViewById(R.id.filter_dishes_rating);
+        btn_filter_alpha = (Button) filterDialog.findViewById(R.id.filter_dishes_alpha);
+        btn_filter_rating = (Button) filterDialog.findViewById(R.id.filter_dishes_rating);
         close_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,6 +256,7 @@ public class RestaurantPage extends AppCompatActivity {
     }
 
     // get the dish data for this restaurant
+<<<<<<< HEAD
     private void getDishData() {
         // get the 3 most popular dishes for this restaurant
         // create new dish objects for these popular dishes
@@ -231,6 +278,8 @@ public class RestaurantPage extends AppCompatActivity {
         dishes.add(new Dish("Dish2", "Description", 3.5, 70.5, R.drawable.menuyellow, "RestaurantName"));
         dishes.add(new Dish("Dish3", "Description", 3.2, 80, R.drawable.menuyellow, "RestaurantName"));
     }
+=======
+>>>>>>> adding dish items and designing new UI
 
 
     // switch to the restaurant owner edit restaurant page
@@ -270,6 +319,7 @@ public class RestaurantPage extends AppCompatActivity {
                     + restaurant_info.getString("city") + ", "
                     + restaurant_info.getString("state");
             restaurant_title.setText(restaurant_info.getString("name"));
+            restaurant_name = restaurant_info.getString("name");
             restaurant_location.setText(location);
             restaurant_phone.setText(restaurant_info.getString("phone"));
             restaurant_image_url = restaurant_info.getString("image");
@@ -278,7 +328,7 @@ public class RestaurantPage extends AppCompatActivity {
             Log.d("DEBUG", "ERROR: Could not extract JSON from restaurant info");
         }
     }
-    
+
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
@@ -299,9 +349,37 @@ public class RestaurantPage extends AppCompatActivity {
             }
             return mIcon11;
         }
+
         protected void onPostExecute(Bitmap result) {
 
             bmImage.setImageBitmap(result);
         }
+    }
+
+    class RequestThread extends Thread {
+
+        @Override
+        public void run() {
+            synchronized(this){
+                get_menu.get_request();
+                notify();
+
+            }
+
+
+        }
+    }
+
+    class DishThread extends Thread {
+
+        @Override
+        public void run() {
+            synchronized (this) {
+                dishes = get_menu.get_all_dishes();
+                notify();
+            }
+
+        }
+
     }
 }

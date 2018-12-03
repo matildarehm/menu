@@ -29,7 +29,7 @@
     <string name="fav_dish_rest_name">From The Mexican Restaurant</string>
 
     <!-- Verify Page string -->
-    <string name="verify_again"><b>Click here to resend</b></string>
+    <string name="verify_again"><b><u>RESEND CONFIRMATION</u></b></string>
 
 
 </resources>

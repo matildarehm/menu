@@ -1,7 +1,9 @@
 package com.example.menuui;
 
+import java.io.Serializable;
+
 // class for the dish objects
-class Dish {
+class Dish implements Serializable {
     String name;
     String description;
     double avg_rating;

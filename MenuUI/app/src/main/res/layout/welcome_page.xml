@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="95dp"
         android:background="@drawable/background_login"
         android:clickable="true"
         android:elevation="8dp"
@@ -60,7 +60,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="97dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="96dp"
         android:elevation="15dp"
         app:srcCompat="@drawable/newmenulogo" />
@@ -72,7 +72,7 @@
         android:layout_alignStart="@+id/login_button"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="53dp"
-        android:layout_marginBottom="145dp"
+        android:layout_marginBottom="135dp"
         android:fontFamily="@font/airbnbcereallight"
         android:text="HUNGRY? Let's eat!"
         android:textAllCaps="false"
@@ -82,19 +82,19 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="363dp"
-        android:layout_height="200dp"
+        android:layout_width="335dp"
+        android:layout_height="201dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="8dp"
-        android:elevation="5dp"
-        android:fontFamily="@font/airbnbcerealbold"
-        android:letterSpacing="-0.04"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="11dp"
+        android:elevation="10dp"
+        android:fontFamily="@font/leiralite"
         android:text="menu"
-        android:textColor="#ee8844"
-        android:textSize="122dp" />
+        android:textColor="@color/bright_orange"
+        android:textSize="142sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

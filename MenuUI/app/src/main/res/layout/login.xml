@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/firefly">
+    android:background="@color/firefly"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="248dp"
+        android:layout_height="187dp"
+        android:elevation="5dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/newmenulogo"/>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/brusherreg"
+        android:text="menu"
+        android:textColor="@color/bright_plum"
+        android:textSize="142sp"
+        android:textStyle="italic"/>
 
     <EditText
-
         android:id="@+id/username"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="203dp"
         android:background="@drawable/rounded_border"
+        android:drawableRight="@drawable/ic_person"
         android:ems="10"
         android:fontFamily="sans-serif"
         android:hint="Username"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textColorHint="#3d3a33"
-        android:drawableRight="@drawable/ic_person"
         android:textSize="18sp"
-        android:typeface="normal" />
+        android:typeface="normal"
+        android:layout_marginVertical="10dp"/>
 
     <EditText
         android:id="@+id/passText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="141dp"
         android:background="@drawable/rounded_border"
         android:drawableRight="@drawable/ic_lock"
         android:ems="10"
@@ -48,17 +55,24 @@
         android:padding="10dp"
         android:textColorHint="#3d3a33"
         android:textSize="18sp"
-        android:typeface="normal" />
+        android:typeface="normal"
+        android:layout_marginVertical="10dp"/>
+
+    <TextView
+        android:id="@+id/fyp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/airbnbcereallight"
+        android:text="Forgot your password?"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginVertical="5dp"/>
+
 
     <Button
         android:id="@+id/login_button"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="300dp"
         android:layout_height="65dp"
-        android:layout_alignStart="@+id/username"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="31dp"
         android:background="@drawable/loginbutton"
         android:clickable="true"
         android:fontFamily="@font/airbnbcerealbold"
@@ -66,50 +80,7 @@
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textSize="26sp" />
+        android:textSize="26sp"
+        android:layout_marginVertical="10dp"/>
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="248dp"
-        android:layout_height="187dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="69dp"
-        android:elevation="5dp"
-        app:srcCompat="@drawable/newmenulogo" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="255dp"
-        android:layout_height="156dp"
-        android:layout_above="@+id/username"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="61dp"
-        android:layout_marginEnd="65dp"
-        android:layout_marginBottom="22dp"
-        android:elevation="5dp"
-        android:fontFamily="@font/brusherreg"
-        android:letterSpacing="-0.04"
-        android:text="menu"
-        android:textColor="@color/bright_plum"
-        android:textSize="142sp"
-        android:textStyle="italic" />
-
-    <TextView
-        android:id="@+id/fyp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="-140dp"
-        android:layout_marginEnd="40dp"
-        android:fontFamily="@font/airbnbcereallight"
-        android:text="Forgot your password?"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-
-</RelativeLayout>
+</LinearLayout>

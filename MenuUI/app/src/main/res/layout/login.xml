@@ -94,7 +94,7 @@
         android:fontFamily="@font/brusherreg"
         android:letterSpacing="-0.04"
         android:text="menu"
-        android:textColor="@color/white"
+        android:textColor="@color/bright_plum"
         android:textSize="142sp"
         android:textStyle="italic" />
 

@@ -23,5 +23,10 @@
     <color name="dark_cyan">#0C8C94</color>
     <color name="peru">#DA895C</color>
     <color name="olive">#747450</color>
+    <color name="bright_plum">#993344</color>
+    <color name="amulet">#779988</color>
+    <color name="sage">#99aa88</color>
+    <color name="firefly">#112233</color>
+
 
 </resources>

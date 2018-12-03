@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
 import android.content.Intent;
+import android.widget.EditText;
 
 // AWS Cognito Imports
 import com.amazonaws.ClientConfiguration;
@@ -24,20 +25,29 @@ import com.amazonaws.services.cognitoidentityprovider.AmazonCognitoIdentityProvi
 
 import org.json.JSONException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class Register extends AppCompatActivity {
     private Button register_button;
-    private TextInputEditText username;
-    private TextInputEditText email;
-    private TextInputEditText password;
+    private EditText username;
+    private EditText email;
+    private EditText password;
+    String user_pass;
+    @BindView(R.id.input_name) EditText _nameText;
+    @BindView(R.id.input_email) EditText _emailText;
+    @BindView(R.id.input_password) EditText _passwordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        username = (TextInputEditText) findViewById(R.id.input_name);
-        email = (TextInputEditText) findViewById(R.id.input_email);
-        password = (TextInputEditText) findViewById(R.id.input_password);
+        username = (EditText) findViewById(R.id.input_name);
+        email = (EditText) findViewById(R.id.input_email);
+        password = (EditText) findViewById(R.id.input_password);
+
+
 
         register_button = (Button) findViewById(R.id.btn_signup);
         register_button.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +60,7 @@ public class Register extends AppCompatActivity {
     private void register_user() {
         String user_name = username.getText().toString();
         String user_email = email.getText().toString();
-        String user_pass = password.getText().toString();
+        user_pass = password.getText().toString();
 
         Parcel user_input = Parcel.obtain();
         user_input.writeString(user_name);
@@ -96,10 +106,10 @@ public class Register extends AppCompatActivity {
                              CognitoUserAttributes user_attr) {
 
         final String user_name = user_credentials.getUsername();
-        final String user_pass = user_credentials.getPassword();
+        final String user_password = user_credentials.getPassword();
 
         Log.i("creds", user_name);
-        Log.i("creds", user_pass);
+        Log.i("creds", user_password);
 
         SignUpHandler signupCallback = new SignUpHandler() {
             final String REGISTER_TAG = "Register Confirmation";
@@ -119,6 +129,7 @@ public class Register extends AppCompatActivity {
                     // This user needs to be confirmed and a confirmation code was sent to the user
                     // cognitoUserCodeDeliveryDetails will display email that code was sent to
                     // Get the confirmation code from user
+
                     verify_user (user_name);
                 }
                 else { Log.i(REGISTER_TAG, "User has previously been confirmed!"); }
@@ -131,7 +142,7 @@ public class Register extends AppCompatActivity {
             }
         };
 
-        userPool.signUpInBackground(user_name, user_pass, user_attr, null, signupCallback);
+        userPool.signUpInBackground(user_name, user_password, user_attr, null, signupCallback);
     }
 
     public void verify_user(String username) {
@@ -139,4 +150,6 @@ public class Register extends AppCompatActivity {
         verify_intent.putExtra("username", username);
         startActivity(verify_intent);
     }
+
+
 }

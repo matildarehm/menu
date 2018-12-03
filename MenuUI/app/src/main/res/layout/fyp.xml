@@ -20,7 +20,8 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:drawableRight="@drawable/ic_email"/>
 
     <Button
         android:id="@+id/fyp_button"
@@ -39,12 +40,16 @@
         android:textSize="24sp" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="279dp"
-        android:layout_height="250dp"
+        android:id="@+id/imageView8"
+        android:layout_width="248dp"
+        android:layout_height="187dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        app:srcCompat="@drawable/menuyellow" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="69dp"
+        android:elevation="5dp"
+        app:srcCompat="@drawable/newmenulogo" />
 
 </RelativeLayout>

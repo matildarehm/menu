@@ -8,7 +8,7 @@
     <color name="transparent">#00000000</color>
     <color name="textColor">#6e6e6e</color>
     <color name="darkgray">#6c6c6c</color>
-    <color name="nav_red">#c53c3c</color>
+    <color name="nav_red">#c43838</color>
     <color name="bright_salmon">#f9545b</color>
     <color name="light_pink">#e75b65</color>
     <color name="light_blue">#9ae1d4</color>
@@ -19,5 +19,9 @@
     <color name="teal_blue">#70bab7</color>
     <color name="bright_blue">#3642e5</color>
     <color name="purple">#c05</color>
+    <color name="screwdriver">#f54a0e</color>
+    <color name="dark_cyan">#0C8C94</color>
+    <color name="peru">#DA895C</color>
+    <color name="olive">#747450</color>
 
 </resources>

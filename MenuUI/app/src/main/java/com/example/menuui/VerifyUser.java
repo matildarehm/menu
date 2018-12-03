@@ -1,16 +1,13 @@
 package com.example.menuui;
 
-<<<<<<< HEAD
-=======
+
 import android.os.Bundle;
 import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
->>>>>>> adding dish items and designing new UI
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,16 +15,16 @@ import android.widget.EditText;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AnonymousAWSCredentials;
-import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserPool;
+
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.cognitoidentityprovider.AmazonCognitoIdentityProviderClient;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHandler;
 
+
 import org.json.JSONException;
 
-import java.io.Serializable;
 
 public class VerifyUser extends AppCompatActivity {
     private Button verify_button;
@@ -42,13 +39,7 @@ public class VerifyUser extends AppCompatActivity {
 
         Bundle user_credentials = getIntent().getExtras();
         final String user_name = user_credentials.getString("username");
-<<<<<<< HEAD
         code = (EditText) findViewById(R.id.code_verify);
-=======
-
-        code = (CodeInputView) findViewById(R.id.code_verify); ;
->>>>>>> adding dish items and designing new UI
-
 
         verify_button = (Button) findViewById(R.id.verify_pass);
         verify_button.setOnClickListener(new View.OnClickListener() {
@@ -78,9 +69,7 @@ public class VerifyUser extends AppCompatActivity {
                 }
             };
 
-            String userPoolId = "";
-            String clientId = "";
-            String clientSecret = "";
+
             Region REGION = Region.getRegion(Regions.US_EAST_2);
 
             AmazonCognitoIdentityProviderClient identityProviderClient = new AmazonCognitoIdentityProviderClient(new AnonymousAWSCredentials(),

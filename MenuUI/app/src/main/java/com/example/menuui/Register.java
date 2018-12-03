@@ -71,6 +71,7 @@ public class Register extends AppCompatActivity {
         user_attributes.addAttribute("given_name",user_name);
         user_attributes.addAttribute("email",user_email);
 
+
         String userPoolId = user_creds.getUserPoolId();
         String clientId = user_creds.getClientId();
         String clientSecret = user_creds.getClientSecret();
@@ -96,6 +97,9 @@ public class Register extends AppCompatActivity {
 
         final String user_name = user_credentials.getUsername();
         final String user_pass = user_credentials.getPassword();
+
+        Log.i("creds", user_name);
+        Log.i("creds", user_pass);
 
         SignUpHandler signupCallback = new SignUpHandler() {
             final String REGISTER_TAG = "Register Confirmation";

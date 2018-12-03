@@ -1,6 +1,7 @@
 package com.example.menuui;
 
 import java.io.Serializable;
+import java.util.Collections;
 
 // class for the dish objects
 class Dish implements Serializable {
@@ -19,4 +20,15 @@ class Dish implements Serializable {
         this.dish_img = dish_img;
         this.restaurant = restaurant;
     }
+
+    public String getDishName() {
+        String dish_name = this.name;
+        return dish_name;
+    }
+
+    public double getDishRating() {
+        double dish_rating = this.avg_rating;
+        return dish_rating;
+    }
+
 }

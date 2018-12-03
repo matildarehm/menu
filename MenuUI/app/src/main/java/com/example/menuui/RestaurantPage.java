@@ -38,6 +38,8 @@ import com.yelp.fusion.client.models.User;
 import org.json.JSONObject;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RestaurantPage extends AppCompatActivity {
@@ -160,7 +162,7 @@ public class RestaurantPage extends AppCompatActivity {
                     }
                 });
 
-        // get the dish data for the adapters
+        // get the dish data
         getDishData();
 
         //recycler view for most popular dishes - reuse the dish adapter
@@ -254,12 +256,29 @@ public class RestaurantPage extends AppCompatActivity {
 
     // get the dish data for this restaurant
     private void getDishData() {
-        // get the 3 most popular dishes for this restaurant
-        // create new dish objects for these popular dishes
+
+        // sort the dishes by rating
+        Collections.sort(dishes, new Comparator<Dish>() {
+            public int compare(Dish d1, Dish d2) {
+                return d1.getDishRating() > d2.getDishRating() ? 1 : d1.getDishRating() < d2.getDishRating() ? -1 : 0;
+            }
+        });
+
+        // get the top 3 rated dishes and add it to popular dishes (and remove it from the rest of the dishes)
+        Dish dish1 = dishes.remove(0);
+        Dish dish2 = dishes.remove(1);
+        Dish dish3 = dishes.remove(2);
         popular_dishes = new ArrayList<>();
-        popular_dishes.add(new Dish("Popular Dish1", "Description", 4.8, 95.0, R.drawable.menuyellow, "RestaurantName"));
-        popular_dishes.add(new Dish("Popular Dish2", "Description", 4.5, 90.0, R.drawable.menuyellow, "RestaurantName"));
-        popular_dishes.add(new Dish("Popular Dish3", "Description", 4.2, 92.0, R.drawable.menuyellow, "RestaurantName"));
+        popular_dishes.add(dish1);
+        popular_dishes.add(dish2);
+        popular_dishes.add(dish3);
+
+        // sort the rest of the dishes alphabetically
+        Collections.sort(dishes, new Comparator<Dish>() {
+            public int compare(Dish d1, Dish d2) {
+                return d1.getDishName().compareTo(d2.getDishName());
+            }
+        });
     }
 
     // switch to the restaurant owner edit restaurant page

@@ -20,13 +20,16 @@
     <color name="bright_blue">#3642e5</color>
     <color name="purple">#c05</color>
     <color name="screwdriver">#f54a0e</color>
-    <color name="dark_cyan">#0C8C94</color>
+    <color name="dark_cyan">#0c8c94</color>
     <color name="peru">#DA895C</color>
     <color name="olive">#747450</color>
     <color name="bright_plum">#993344</color>
     <color name="amulet">#779988</color>
     <color name="sage">#99aa88</color>
     <color name="firefly">#112233</color>
+    <color name="forest">#335544</color>
+    <color name="casper">#aabbcc</color>
+    <color name="yellow_orange">#fea31b</color>
 
 
 </resources>

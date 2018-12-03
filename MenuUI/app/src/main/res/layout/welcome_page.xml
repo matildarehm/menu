@@ -71,13 +71,13 @@
         android:layout_height="63dp"
         android:layout_alignStart="@+id/login_button"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="53dp"
-        android:layout_marginBottom="125dp"
-        android:fontFamily="@font/airbnbcereallight"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="140dp"
+        android:fontFamily="@font/leafy"
         android:text="HUNGRY? Let's eat!"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="45sp"
         android:textStyle="bold" />
 
     <TextView

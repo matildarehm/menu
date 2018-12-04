@@ -31,6 +31,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,8 +72,10 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
     // Search Limit
     private int numquery = 4;
 
+
     // Dialog for sort restaurants button
     Dialog filterDialog;
+    private boolean price_btn = true;
 
     // Views Layout information and restaurant information to be passed
     private ArrayList<Integer> all_image_id = new ArrayList<Integer>();
@@ -103,13 +107,10 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
     }
     // handle filter popup
     public void showFilterPopup(View view) {
+        filterDialog.setContentView(R.layout.sort_rest_popup);
         TextView close_txt;
-        Button btn_filter_alpha;
-        Button btn_filter_rating;
-        filterDialog.setContentView(R.layout.filter_dishes_popup);
+
         close_txt = (TextView) filterDialog.findViewById(R.id.close_txt);
-        btn_filter_alpha = (Button) filterDialog.findViewById(R.id.filter_dishes_alpha);
-        btn_filter_rating = (Button) filterDialog.findViewById(R.id.filter_dishes_rating);
         close_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

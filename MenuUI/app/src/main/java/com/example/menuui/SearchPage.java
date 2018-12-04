@@ -1,11 +1,14 @@
 package com.example.menuui;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.Image;
@@ -25,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -66,6 +70,9 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
     // Search Limit
     private int numquery = 4;
 
+    // Dialog for sort restaurants button
+    Dialog filterDialog;
+
     // Views Layout information and restaurant information to be passed
     private ArrayList<Integer> all_image_id = new ArrayList<Integer>();
     private ArrayList<Integer> all_label_id = new ArrayList<Integer>();
@@ -91,8 +98,27 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
 
         // Populate view with clickable restaurant pictures
         if (checkLocation()) setupNearbyRestaurants(passed_query);
+        // create dialog for dish filter popup
+        filterDialog = new Dialog(this);
     }
-
+    // handle filter popup
+    public void showFilterPopup(View view) {
+        TextView close_txt;
+        Button btn_filter_alpha;
+        Button btn_filter_rating;
+        filterDialog.setContentView(R.layout.filter_dishes_popup);
+        close_txt = (TextView) filterDialog.findViewById(R.id.close_txt);
+        btn_filter_alpha = (Button) filterDialog.findViewById(R.id.filter_dishes_alpha);
+        btn_filter_rating = (Button) filterDialog.findViewById(R.id.filter_dishes_rating);
+        close_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterDialog.dismiss();
+            }
+        });
+        filterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        filterDialog.show();
+    }
     // Set up Nav bar (hamburger menu)
     public void createNavBar(){
         // handle nav bar implementation
@@ -164,6 +190,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             Integer label_id = label.generateViewId();
             all_label_id.add(label_id);
             label.setId(label_id);
+            label.setTextSize(18);
             layout.addView(label);
 
             ImageView image = new ImageView(this);
@@ -354,7 +381,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                     for (int i = 0; i < numquery; i++){
                         TextView label = (TextView) findViewById(all_label_id.get(i));
                         ImageView image = (ImageView) findViewById(all_image_id.get(i));
-                        label.setText(businesses.get(i).getName());
+                        label.setText(String.valueOf(i+1) + ": " + businesses.get(i).getName() + businesses.get(i).getPrice());
                         new SearchPage.DownloadImageTask(image).execute(businesses.get(i).getImageUrl());
                         restaurant_info.add(getBusinessJSON(businesses.get(i)));
                     }

@@ -192,6 +192,7 @@ public class FetchMenu {
             Element dish_item = it1.next();
             String dish_title = dish_item.text();
             String dish_extract = dish_title.replaceAll("(\\$)?[0-9]+\\.*[0-9]*", "");
+            dish_extract = dish_extract.replaceAll("\\(", "").replaceAll("\\)","");
 
 
             String dish_info;

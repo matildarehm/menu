@@ -51,17 +51,17 @@
                             android:text = "Searches"
                             />
 
-                        <Button
-                            android:id="@+id/search_sort_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:background="@null"
-                            android:drawableLeft="@drawable/ic_restaurant_filter"
-                            android:layout_gravity="end"
-                            android:onClick="showFilterPopup"
-                            android:text="Sort"
-                            />
+                        <!--<Button-->
+                            <!--android:id="@+id/search_sort_button"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:background="@null"-->
+                            <!--android:drawableLeft="@drawable/ic_restaurant_filter"-->
+                            <!--android:layout_gravity="end"-->
+                            <!--android:onClick="showFilterPopup"-->
+                            <!--android:text="Sort"-->
+                            <!--/>-->
                     </RelativeLayout>
 
                 </LinearLayout>

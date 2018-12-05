@@ -25,7 +25,12 @@ public class DishPage extends AppCompatActivity {
     private Button leave_review;
     private DrawerLayout mDrawerLayout;
 
+    private String dish;
+
     private List<Review> reviews;
+
+    // temp: dish reviews database
+    private DishReviews review_db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,15 @@ public class DishPage extends AppCompatActivity {
                     }
                 });
 
+        // get dish name from intent -- and set the name
+        Intent intent = getIntent();
+        dish = intent.getStringExtra("dishName");
+        TextView dish_title = (TextView) findViewById(R.id.dish_title);
+        dish_title.setText(dish);
+
+
+        // temp: set reviews
+        setReviews();
 
         // Recycler View
         RecyclerView rv = (RecyclerView) findViewById(R.id.review_recycler);
@@ -99,13 +113,6 @@ public class DishPage extends AppCompatActivity {
         ReviewAdapter adapter = new ReviewAdapter(reviews);
         rv.setAdapter(adapter);
 
-
-        // get dish name from intent -- and set the name
-        Intent intent = getIntent();
-        String dish_name = intent.getStringExtra("dishName");
-        TextView dish_title = (TextView) findViewById(R.id.dish_title);
-        dish_title.setText(dish_name);
-
     }
 
     // nav bar
@@ -124,9 +131,11 @@ public class DishPage extends AppCompatActivity {
     // get/set reviews
     private void getReviews(){
         reviews = new ArrayList<>();
-        reviews.add(new Review("This dish was excellent", 5, true, "User1"));
-        reviews.add(new Review("This dish was delicious", 4, true, "User2"));
-        reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
+        List<Review> fetched_reviews = getReviewsFromDB();
+        reviews = fetched_reviews;
+//        reviews.add(new Review("This dish was excellent", 5, true, "User1"));
+//        reviews.add(new Review("This dish was delicious", 4, true, "User2"));
+//        reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
     }
 
     public void sendToLeaveReview(View view) {
@@ -143,6 +152,18 @@ public class DishPage extends AppCompatActivity {
         // get the restaurant name
 
     }
+
+    // temp: set review lists
+    public void setReviews() {
+        review_db = new DishReviews();
+    }
+
+    public List<Review> getReviewsFromDB() {
+        System.out.println("Get reviews from db");
+        System.out.println(dish);
+        return review_db.getReviews(dish);
+    }
+
 
 }
 

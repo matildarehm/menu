@@ -382,7 +382,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                     for (int i = 0; i < numquery; i++){
                         TextView label = (TextView) findViewById(all_label_id.get(i));
                         ImageView image = (ImageView) findViewById(all_image_id.get(i));
-                        label.setText(String.valueOf(i+1) + ": " + businesses.get(i).getName() + businesses.get(i).getPrice());
+                        label.setText(String.valueOf(i+1) + ": " + businesses.get(i).getName() + " " + businesses.get(i).getPrice());
                         new SearchPage.DownloadImageTask(image).execute(businesses.get(i).getImageUrl());
                         restaurant_info.add(getBusinessJSON(businesses.get(i)));
                     }

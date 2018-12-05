@@ -224,7 +224,7 @@ public class FetchMenu {
             System.out.println(dish_info);
 
 
-            int rating = get_rating(0, 5);
+            int rating = get_rating(3, 5);
             float rec = get_rec(20, 100);
 
 

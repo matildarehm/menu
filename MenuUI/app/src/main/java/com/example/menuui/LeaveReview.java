@@ -60,6 +60,12 @@ public class LeaveReview extends AppCompatActivity {
         String review_text;
         EditText review_edit = (EditText)findViewById(R.id.review_edit_text);
         review_text = review_edit.getText().toString();
+
+        // create review object to add
+        Review review = new Review(review_text, review_rating, recommend, "Alexis");
+        // add review
+        ((MenuApp) this.getApplication()).addReview(dish, review);
+
         // System.out.println(review_text);
 
         // Add the review to the database

@@ -191,6 +191,9 @@ public class RestaurantPage extends AppCompatActivity {
         DishAdapter adapter = new DishAdapter(dishes);
         menu_rv.setAdapter(adapter);
 
+        // temp: set dish reviews
+        ((MenuApp)this.getApplication()).setReviews();
+
     }
 
     // nav bar

@@ -29,9 +29,6 @@ public class DishPage extends AppCompatActivity {
 
     private List<Review> reviews;
 
-    // temp: dish reviews database
-    private DishReviews review_db;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +88,6 @@ public class DishPage extends AppCompatActivity {
         TextView dish_title = (TextView) findViewById(R.id.dish_title);
         dish_title.setText(dish);
 
-
-        // temp: set reviews
-        setReviews();
-
         // Recycler View
         RecyclerView rv = (RecyclerView) findViewById(R.id.review_recycler);
 
@@ -153,15 +146,11 @@ public class DishPage extends AppCompatActivity {
 
     }
 
-    // temp: set review lists
-    public void setReviews() {
-        review_db = new DishReviews();
-    }
-
+    // temp: get review lists
     public List<Review> getReviewsFromDB() {
         System.out.println("Get reviews from db");
         System.out.println(dish);
-        return review_db.getReviews(dish);
+        return ((MenuApp) this.getApplication()).getReviews(dish);
     }
 
 

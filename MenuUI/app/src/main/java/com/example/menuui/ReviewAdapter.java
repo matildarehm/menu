@@ -55,7 +55,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         else {
             reviewViewHolder.review_recommend.setText("No");
         }
-        reviewViewHolder.review_rating.setText(Integer.toString(reviews.get(i).rating));
+        reviewViewHolder.review_rating.setText(Float.toString(reviews.get(i).rating));
         reviewViewHolder.review_author.setText(reviews.get(i).author);
     }
 

@@ -49,6 +49,8 @@ import com.yelp.fusion.client.models.SearchResponse;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,11 +73,11 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
 
     // Search Limit
     private int numquery = 4;
-
+    private String last_query;
 
     // Dialog for sort restaurants button
     Dialog filterDialog;
-    private boolean price_btn = true;
+    private boolean price_btn = false;
 
     // Views Layout information and restaurant information to be passed
     private ArrayList<Integer> all_image_id = new ArrayList<Integer>();
@@ -88,7 +90,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         setContentView(R.layout.search_page);
 
         // get search information sent by user
-        String passed_query = getIntent().getStringExtra("SEARCH_INFO");
+        last_query = getIntent().getStringExtra("SEARCH_INFO");
         createNavBar();
 
         // Geolocation code
@@ -101,7 +103,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         mLocationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
 
         // Populate view with clickable restaurant pictures
-        if (checkLocation()) setupNearbyRestaurants(passed_query);
+        if (checkLocation()) setupNearbyRestaurants(last_query);
         // create dialog for dish filter popup
         filterDialog = new Dialog(this);
     }
@@ -110,10 +112,22 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         filterDialog.setContentView(R.layout.sort_rest_popup);
         TextView close_txt;
 
+        RadioGroup group = (RadioGroup) filterDialog.findViewById(R.id.optiongroup);
+        if (price_btn) group.check(R.id.sort_price);
+
         close_txt = (TextView) filterDialog.findViewById(R.id.close_txt);
         close_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RadioGroup group = (RadioGroup) filterDialog.findViewById(R.id.optiongroup);
+                int id = group.getCheckedRadioButtonId();
+                if (id == R.id.sort_dist) {
+                    price_btn = false;
+                }
+                else {
+                    price_btn = true;
+                }
+                new SearchPage.populate().execute(last_query);
                 filterDialog.dismiss();
             }
         });
@@ -229,6 +243,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                last_query = query;
                 new SearchPage.populate().execute(query);
                 searchView.clearFocus();
                 searchView.setQuery("", false);
@@ -379,10 +394,21 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                     // dialog(message);
                 } else {
                     ArrayList<Business> businesses = sr.getBusinesses();
+                    if (price_btn) {
+                        Collections.sort(businesses, new Comparator<Business>() {
+                            @Override
+                            public int compare(Business o1, Business o2) {
+                                if (o1.getPrice() == null || o2.getPrice() == null) return 1;
+                                return o1.getPrice().compareTo(o2.getPrice());
+                            }
+                        });
+                    }
                     for (int i = 0; i < numquery; i++){
                         TextView label = (TextView) findViewById(all_label_id.get(i));
                         ImageView image = (ImageView) findViewById(all_image_id.get(i));
-                        label.setText(String.valueOf(i+1) + ": " + businesses.get(i).getName() + " " + businesses.get(i).getPrice());
+                        String label_text = String.valueOf(i+1) + ". " + businesses.get(i).getName();
+                        if (businesses.get(i).getPrice() != null) label_text = label_text + "\t\t\t" + businesses.get(i).getPrice();
+                        label.setText(label_text);
                         new SearchPage.DownloadImageTask(image).execute(businesses.get(i).getImageUrl());
                         restaurant_info.add(getBusinessJSON(businesses.get(i)));
                     }

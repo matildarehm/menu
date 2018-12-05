@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 public class FetchMenu {
@@ -194,7 +195,6 @@ public class FetchMenu {
             String dish_extract = dish_title.replaceAll("(\\$)?[0-9]+\\.*[0-9]*", "");
             dish_extract = dish_extract.replaceAll("\\(", "").replaceAll("\\)","");
 
-
             String dish_info;
             Log.i("c", "completed");
 
@@ -223,9 +223,33 @@ public class FetchMenu {
             System.out.println(dish_extract);
             System.out.println(dish_info);
 
-            dishes.add(new Dish(dish_extract, dish_info, 3.7, 77.5, R.drawable.menuyellow, restaurant_name));
+
+            int rating = get_rating(0, 5);
+            float rec = get_rec(20, 100);
+
+
+            dishes.add(new Dish(dish_extract, dish_info, rating, rec, R.drawable.menuyellow, restaurant_name));
 
         }
+
+    }
+
+    public int get_rating(int min, int max) {
+        Random rand = new Random();
+
+        int result = rand.nextInt((max - min) + 1) + min;
+
+        return result;
+
+    }
+
+    public float get_rec(float min, float max) {
+        Random rand = new Random();
+
+        float result = rand.nextFloat() * (max - min) + min;
+
+        return result;
+
     }
 
 }

@@ -31,8 +31,9 @@
 
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+
                 <LinearLayout
                     android:id="@+id/linLayout"
                     android:layout_width="match_parent"
@@ -41,29 +42,29 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:orientation="vertical">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="36dp"
-                            android:text = "Searches"
-                            />
+                            android:text="Searches"
+                            android:textSize="36dp" />
 
                         <Button
                             android:id="@+id/search_sort_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
+                            android:layout_gravity="end"
                             android:background="@null"
                             android:drawableLeft="@drawable/ic_restaurant_filter"
-                            android:layout_gravity="end"
                             android:onClick="showFilterPopup"
-                            android:text="Sort"
-                            />
-                    </RelativeLayout>
+                            android:text="Sort" />
 
+                    </RelativeLayout>
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
 
@@ -72,6 +73,33 @@
         </LinearLayout>
 
     </FrameLayout>
+    <RelativeLayout
+        android:id="@+id/movepages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:onClick="decreasePage"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/arrow_back" />
+
+        <ImageButton
+            android:id="@+id/front"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:onClick="increasePage"
+            app:srcCompat="@drawable/arrow_forward" />
+
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

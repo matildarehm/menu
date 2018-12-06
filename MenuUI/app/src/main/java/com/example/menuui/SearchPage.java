@@ -29,6 +29,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -72,8 +73,9 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
     private long FASTEST_INTERVAL = 2000;
 
     // Search Limit
-    private int numquery = 4;
+    private int numquery = 5;
     private String last_query;
+    private int page = 0;
 
     // Dialog for sort restaurants button
     Dialog filterDialog;
@@ -121,18 +123,44 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             public void onClick(View v) {
                 RadioGroup group = (RadioGroup) filterDialog.findViewById(R.id.optiongroup);
                 int id = group.getCheckedRadioButtonId();
+                boolean old_btn = price_btn;
                 if (id == R.id.sort_dist) {
                     price_btn = false;
                 }
                 else {
                     price_btn = true;
                 }
+                if (old_btn != price_btn) page = 0;
                 new SearchPage.populate().execute(last_query);
                 filterDialog.dismiss();
             }
         });
         filterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         filterDialog.show();
+    }
+    public void decreasePage(View view){
+        if (page > 0){
+            page -= 1;
+            ImageButton front = (ImageButton) findViewById(R.id.front);
+            front.setVisibility(View.VISIBLE);
+            if (page == 0) {
+                ImageButton back = (ImageButton) findViewById(R.id.back);
+                back.setVisibility(View.INVISIBLE);
+            }
+            new SearchPage.populate().execute(last_query);
+        }
+    }
+    public void increasePage(View view){
+        if (page < 3){
+            page += 1;
+            ImageButton back = (ImageButton) findViewById(R.id.back);
+            back.setVisibility(View.VISIBLE);
+            if (page == 3) {
+                ImageButton front = (ImageButton) findViewById(R.id.front);
+                front.setVisibility(View.INVISIBLE);
+            }
+            new SearchPage.populate().execute(last_query);
+        }
     }
     // Set up Nav bar (hamburger menu)
     public void createNavBar(){
@@ -245,6 +273,11 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             public boolean onQueryTextSubmit(String query) {
                 last_query = query;
                 new SearchPage.populate().execute(query);
+                page = 0;
+                ImageButton front = (ImageButton) findViewById(R.id.front);
+                front.setVisibility(View.VISIBLE);
+                ImageButton back = (ImageButton) findViewById(R.id.back);
+                back.setVisibility(View.INVISIBLE);
                 searchView.clearFocus();
                 searchView.setQuery("", false);
                 return false;
@@ -398,19 +431,23 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                         Collections.sort(businesses, new Comparator<Business>() {
                             @Override
                             public int compare(Business o1, Business o2) {
-                                if (o1.getPrice() == null || o2.getPrice() == null) return 1;
+                                if (o1.getPrice() == null){
+                                    return (o2.getPrice() == null) ? 0 : 1;
+                                }
+                                if (o2.getPrice() == null) return -1;
                                 return o1.getPrice().compareTo(o2.getPrice());
                             }
                         });
                     }
                     for (int i = 0; i < numquery; i++){
+                        int j = page*5 + i;
                         TextView label = (TextView) findViewById(all_label_id.get(i));
                         ImageView image = (ImageView) findViewById(all_image_id.get(i));
-                        String label_text = String.valueOf(i+1) + ". " + businesses.get(i).getName();
-                        if (businesses.get(i).getPrice() != null) label_text = label_text + "\t\t\t" + businesses.get(i).getPrice();
+                        String label_text = String.valueOf(j+1) + ". " + businesses.get(j).getName();
+                        if (businesses.get(j).getPrice() != null) label_text = label_text + "\t\t\t" + businesses.get(j).getPrice();
                         label.setText(label_text);
-                        new SearchPage.DownloadImageTask(image).execute(businesses.get(i).getImageUrl());
-                        restaurant_info.add(getBusinessJSON(businesses.get(i)));
+                        new SearchPage.DownloadImageTask(image).execute(businesses.get(j).getImageUrl());
+                        restaurant_info.add(getBusinessJSON(businesses.get(j)));
                     }
                 }
             } catch (Exception e) {

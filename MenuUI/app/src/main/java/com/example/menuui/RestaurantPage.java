@@ -263,7 +263,7 @@ public class RestaurantPage extends AppCompatActivity {
         // sort the dishes by rating
         Collections.sort(dishes, new Comparator<Dish>() {
             public int compare(Dish d1, Dish d2) {
-                return d1.getDishRating() > d2.getDishRating() ? 1 : d1.getDishRating() < d2.getDishRating() ? -1 : 0;
+                return d1.getDishRating() < d2.getDishRating() ? 1 : d1.getDishRating() > d2.getDishRating() ? -1 : 0;
             }
         });
 

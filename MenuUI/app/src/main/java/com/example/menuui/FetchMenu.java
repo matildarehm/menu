@@ -224,8 +224,15 @@ public class FetchMenu {
             System.out.println(dish_info);
 
 
-            int rating = get_rating(3, 5);
-            float rec = get_rec(20, 100);
+            float rating = get_rating(2, 4);
+            float rec = get_rec(80, 100);
+
+            dish_extract = dish_extract.trim();
+            if (dish_extract.toLowerCase().equals("octopus")) {
+                System.out.println("here");
+                rating = 5;
+                rec = (float) 100;
+            }
 
 
             dishes.add(new Dish(dish_extract, dish_info, rating, rec, R.drawable.menuyellow, restaurant_name));

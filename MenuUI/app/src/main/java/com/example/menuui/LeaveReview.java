@@ -17,6 +17,8 @@ import java.sql.Statement;
 public class LeaveReview extends AppCompatActivity {
     private Button post_review;
 
+    private String restaurant_info;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,8 @@ public class LeaveReview extends AppCompatActivity {
         String dish_name = intent.getStringExtra("dish");
         TextView dish_title = (TextView) findViewById(R.id.review_dish_name);
         dish_title.setText(dish_name);
+        // get restaurant info from intent -- to pass back to dish page
+        restaurant_info = intent.getStringExtra("RESTAURANT_INFO");
 
         post_review = (Button) findViewById(R.id.submit_review);
         post_review.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +96,7 @@ public class LeaveReview extends AppCompatActivity {
         // return to the dish page
         Intent verify_intent = new Intent(this, DishPage.class);
         verify_intent.putExtra("dishName", dish);
+        verify_intent.putExtra("RESTAURANT_INFO", restaurant_info);
         startActivity(verify_intent);
     }
 

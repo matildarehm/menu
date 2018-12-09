@@ -136,6 +136,7 @@ public class DishPage extends AppCompatActivity {
 
         Intent leave_review_intent = new Intent(this, LeaveReview.class);
         leave_review_intent.putExtra("dish", dish);
+        leave_review_intent.putExtra("RESTAURANT_INFO", restaurant_info);
         startActivity(leave_review_intent);
     }
 

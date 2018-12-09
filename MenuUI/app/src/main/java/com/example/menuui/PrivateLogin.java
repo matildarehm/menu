@@ -100,7 +100,6 @@ public class PrivateLogin extends AppCompatActivity {
 
                 thisUser.getSessionInBackground(authenticationHandler);
 
-
             }
         });
     }

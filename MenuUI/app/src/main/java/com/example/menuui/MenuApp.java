@@ -29,7 +29,7 @@ public class MenuApp extends Application {
         beef_stew_reviews = new ArrayList<>();
         beef_stew_reviews.add(new Review("The noodles are very chewy and the soup is very aromatic", 5, true, "Jenna"));
         beef_stew_reviews.add(new Review("The beef was cooked just right", 4, true, "Joshua"));
-        beef_stew_reviews.add(new Review("I've had better noodle soups elsewhere", (float)2.5, false, "Anna"));
+        beef_stew_reviews.add(new Review("I've had better noodle soups elsewhere", (float)3.5, false, "Anna"));
     }
 
     List<Review> getReviews(String dish) {

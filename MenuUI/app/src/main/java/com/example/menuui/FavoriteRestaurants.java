@@ -64,11 +64,6 @@ public class FavoriteRestaurants extends AppCompatActivity {
                                 Intent home_intent = new Intent(FavoriteRestaurants.this, Landing.class);
                                 startActivity(home_intent);
                                 break;
-                            case R.id.nav_favorite_dishes:
-                                // send to favorite dishes page
-                                Intent fav_dishes_page_intent = new Intent(FavoriteRestaurants.this, FavoriteDishes.class);
-                                startActivity(fav_dishes_page_intent);
-                                break;
                             case R.id.nav_favorite_restaurants:
                                 // send to favorite restaurants page
                                 Intent fav_rest_page_intent = new Intent(FavoriteRestaurants.this, FavoriteRestaurants.class);

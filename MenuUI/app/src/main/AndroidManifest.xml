@@ -32,8 +32,6 @@
         <activity android:name=".Register" />
         <activity android:name=".FYP" />
         <activity android:name=".Landing" />
-        <activity android:name=".FavoriteDishes">
-        </activity>
         <activity android:name=".FavoriteRestaurants">
         </activity>
 
@@ -47,9 +45,7 @@
         <activity android:name=".VerifyUser" />
 
         <activity android:name=".LeaveReview"></activity>
-        <activity android:name=".RestaurantEdit"></activity>
         <activity android:name=".SearchPage"></activity>
-        <activity android:name=".AddDishPage"></activity>
 
     </application>
 </manifest>

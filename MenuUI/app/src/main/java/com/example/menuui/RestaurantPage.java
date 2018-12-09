@@ -55,6 +55,7 @@ public class RestaurantPage extends AppCompatActivity {
 
     // RestaurantPage info
     private JSONObject restaurant_info;
+    private String restaurant_info_string;
 
     // Restaurant image url
     private String restaurant_image_url;
@@ -69,11 +70,13 @@ public class RestaurantPage extends AppCompatActivity {
         // Retrieve data that was passed through intent
         try {
             restaurant_info = new JSONObject(getIntent().getStringExtra("RESTAURANT_INFO"));
+            restaurant_info_string = getIntent().getStringExtra("RESTAURANT_INFO");
         } catch (Exception e) {
             Log.d("DEBUG", "ERROR: " + e.toString());
         }
 
         if (restaurant_info != null) {
+            // get the menu dishes by scraping Zomato
             updateInfo();
 
             if (Looper.myLooper() == Looper.getMainLooper()) {
@@ -104,8 +107,6 @@ public class RestaurantPage extends AppCompatActivity {
                     }
 
                 }
-
-
             }
             System.out.println("Trying to get here");
         }
@@ -140,11 +141,6 @@ public class RestaurantPage extends AppCompatActivity {
                                 Intent home_intent = new Intent(RestaurantPage.this, Landing.class);
                                 startActivity(home_intent);
                                 break;
-                            case R.id.nav_favorite_dishes:
-                                // send to favorite dishes page
-                                Intent fav_dishes_page_intent = new Intent(RestaurantPage.this, FavoriteDishes.class);
-                                startActivity(fav_dishes_page_intent);
-                                break;
                             case R.id.nav_favorite_restaurants:
                                 // send to favorite restaurants page
                                 Intent fav_rest_page_intent = new Intent(RestaurantPage.this, FavoriteRestaurants.class);
@@ -156,8 +152,6 @@ public class RestaurantPage extends AppCompatActivity {
                                 startActivity(logout_intent);
                                 break;
                         }
-
-
                         return true;
                     }
                 });
@@ -171,7 +165,7 @@ public class RestaurantPage extends AppCompatActivity {
         LinearLayoutManager popular_llm = new LinearLayoutManager(this);
         popular_rv.setLayoutManager(popular_llm);
         // call the dish adapter on the popular dishes
-        DishAdapter popular_dish_adapter = new DishAdapter(popular_dishes);
+        DishAdapter popular_dish_adapter = new DishAdapter(popular_dishes, restaurant_info_string);
         popular_rv.setAdapter(popular_dish_adapter);
 
 
@@ -188,7 +182,7 @@ public class RestaurantPage extends AppCompatActivity {
         System.out.println("executed?");
 
         // call the dish adapter on the restaurant dishes
-        DishAdapter adapter = new DishAdapter(dishes);
+        DishAdapter adapter = new DishAdapter(dishes, restaurant_info_string);
         menu_rv.setAdapter(adapter);
 
         // temp: set dish reviews
@@ -287,24 +281,6 @@ public class RestaurantPage extends AppCompatActivity {
     // switch to the restaurant owner edit restaurant page
     public void goToEditRestaurant(View view) {
         // !!! check if the user is a verified owner of the restaurant !!!
-
-
-        // go to the edit restaurant page
-        // pass data through intent
-        TextView restaurant_title = findViewById(R.id.restaurant_title);
-        String restaurant = restaurant_title.getText().toString();
-        TextView restaurant_location = findViewById(R.id.restaurant_location);
-        String rest_loc = restaurant_location.getText().toString();
-        TextView restaurant_phone = findViewById(R.id.restaurant_phone);
-        String rest_phone = restaurant_phone.getText().toString();
-        String rest_image = restaurant_image_url;
-
-        Intent edit_restaurant_intent = new Intent(view.getContext(), RestaurantEdit.class);
-        edit_restaurant_intent.putExtra("restaurant", restaurant);
-        edit_restaurant_intent.putExtra("location", rest_loc);
-        edit_restaurant_intent.putExtra("phone", rest_phone);
-        edit_restaurant_intent.putExtra("image", rest_image);
-        view.getContext().startActivity(edit_restaurant_intent);
 
     }
 

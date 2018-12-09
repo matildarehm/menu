@@ -33,6 +33,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <Button
+                        android:id="@+id/back_to_restaurant_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@color/transparent"
+                        android:drawableLeft="@drawable/ic_arrow_back"
+                        android:onClick="sendBackToRestaurant"
+                        android:text="Back to restaurant" />
+
                     <TextView
                         android:id="@+id/dish_title"
                         android:layout_width="match_parent"
@@ -91,17 +101,6 @@
                             android:layout_weight="1"
                             android:text="Leave a Review"
                             android:onClick="sendToLeaveReview"
-                            android:textAllCaps="false" />
-
-                        <Button
-                            android:id="@+id/add_fav_dish_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
-                            android:text="Add to Favorites"
                             android:textAllCaps="false" />
 
                     </RelativeLayout>

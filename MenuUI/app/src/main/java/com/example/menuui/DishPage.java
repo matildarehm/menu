@@ -26,6 +26,7 @@ public class DishPage extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
     private String dish;
+    private String restaurant_info;
 
     private List<Review> reviews;
 
@@ -62,11 +63,6 @@ public class DishPage extends AppCompatActivity {
                                 Intent home_intent = new Intent(DishPage.this, Landing.class);
                                 startActivity(home_intent);
                                 break;
-                            case R.id.nav_favorite_dishes:
-                                // send to favorite dishes page
-                                Intent fav_dishes_page_intent = new Intent(DishPage.this, FavoriteDishes.class);
-                                startActivity(fav_dishes_page_intent);
-                                break;
                             case R.id.nav_favorite_restaurants:
                                 // send to favorite restaurants page
                                 Intent fav_rest_page_intent = new Intent(DishPage.this, FavoriteRestaurants.class);
@@ -87,6 +83,8 @@ public class DishPage extends AppCompatActivity {
         dish = intent.getStringExtra("dishName");
         TextView dish_title = (TextView) findViewById(R.id.dish_title);
         dish_title.setText(dish);
+        // get the restaurant info from intent -- for the back to restaurant button
+        restaurant_info = intent.getStringExtra("RESTAURANT_INFO");
 
         // Recycler View
         RecyclerView rv = (RecyclerView) findViewById(R.id.review_recycler);
@@ -142,8 +140,10 @@ public class DishPage extends AppCompatActivity {
     }
 
     public void sendBackToRestaurant(View view) {
-        // get the restaurant name
-
+        // use the restaurant info to go back to the restaurant page (load the restaurant page)
+        Intent restaurant_intent = new Intent(this, RestaurantPage.class);
+        restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_info);
+        startActivity(restaurant_intent);
     }
 
     // temp: get review lists

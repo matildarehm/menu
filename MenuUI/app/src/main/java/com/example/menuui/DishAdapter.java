@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 // Recycler View Adapter for Dishes on the RestaurantPage page
 public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder> {
+    // Restaurant info
+    private String restaurant_info;
 
     public static class DishViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
@@ -35,8 +39,9 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     }
 
     List<Dish> dishes;
-    DishAdapter(List<Dish> dishes) {
+    DishAdapter(List<Dish> dishes, String restaurant_info) {
         this.dishes = dishes;
+        this.restaurant_info = restaurant_info;
     }
 
     @Override
@@ -67,6 +72,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
 
                 Intent dish_reviews_intent = new Intent(view.getContext(), DishPage.class);
                 dish_reviews_intent.putExtra("dishName", dish);
+                dish_reviews_intent.putExtra("RESTAURANT_INFO", restaurant_info);
                 view.getContext().startActivity(dish_reviews_intent);
             }
         });

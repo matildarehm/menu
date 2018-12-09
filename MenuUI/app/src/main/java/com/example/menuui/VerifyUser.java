@@ -47,7 +47,6 @@ public class VerifyUser extends AppCompatActivity {
             public void onClick(View v) {
                 String verify_code = code.getCode();
                 new Confirm().execute(verify_code, user_name);
-
             }
         });
 

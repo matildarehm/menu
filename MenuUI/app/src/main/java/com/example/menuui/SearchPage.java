@@ -74,6 +74,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
 
     // Search Limit
     private int numquery = 5;
+    // Reset Variables
     private String last_query;
     private int page = 0;
 
@@ -106,10 +107,10 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
 
         // Populate view with clickable restaurant pictures
         if (checkLocation()) setupNearbyRestaurants(last_query);
-        // create dialog for dish filter popup
+        // create dialog for sort filter popup
         filterDialog = new Dialog(this);
     }
-    // handle filter popup
+    // handle filter popup. sort searches by distance or price
     public void showFilterPopup(View view) {
         filterDialog.setContentView(R.layout.sort_rest_popup);
         TextView close_txt;
@@ -138,6 +139,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
         filterDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         filterDialog.show();
     }
+    // change what page user is on for the search
     public void decreasePage(View view){
         if (page > 0){
             page -= 1;
@@ -150,6 +152,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
             new SearchPage.populate().execute(last_query);
         }
     }
+    // change what page user is on for the search
     public void increasePage(View view){
         if (page < 3){
             page += 1;

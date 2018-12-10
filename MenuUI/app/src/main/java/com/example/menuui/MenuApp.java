@@ -146,4 +146,37 @@ public class MenuApp extends Application {
         }
     }
 
+    
+    // reviews database (dishname, list of reviews)
+    private HashMap<String, List<Review>> reviews;
+    // dish ratings
+    private HashMap<String, List<Float>> ratings;
+
+    // get reviews from shared preferences
+    public void getSavedReviews() {
+        System.out.println("get saved reviews");
+        SharedPreferences shared_prefs = getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String hashmap_string = shared_prefs.getString("dishReviews","");
+        if (hashmap_string == "") {
+            System.out.println("hashmap_string is null");
+            // save initial reviews hashmap to shared preferences
+            HashMap<String, List<Review>> empty_reviews_map = new HashMap<String, List<Review>>();
+            //convert to string using gson
+            String hashMapString = gson.toJson(empty_reviews_map);
+            //save in shared prefs
+            shared_prefs.edit().putString("dishReviews", hashMapString).apply();
+            // get from shared prefs
+            String storedHashMapString = shared_prefs.getString("dishReviews", "");
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, List<Review>>>(){}.getType();
+            HashMap<String, List<Review>> reviews_map = gson.fromJson(storedHashMapString, type);
+            reviews = reviews_map;
+        }
+        else {
+            System.out.println("review hashmap string is not null");
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, List<Review>>>(){}.getType();
+            HashMap<String, List<Review>> reviews_map = gson.fromJson(hashmap_string, type);
+            reviews =  reviews_map;
+        }
+    }
 }

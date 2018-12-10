@@ -146,11 +146,10 @@ public class MenuApp extends Application {
         }
     }
 
-    
+
+
     // reviews database (dishname, list of reviews)
     private HashMap<String, List<Review>> reviews;
-    // dish ratings
-    private HashMap<String, List<Float>> ratings;
 
     // get reviews from shared preferences
     public void getSavedReviews() {
@@ -179,4 +178,141 @@ public class MenuApp extends Application {
             reviews =  reviews_map;
         }
     }
+
+    // save reviews hashmap to shared preferences
+    public void saveReviews() {
+        HashMap<String, List<Review>> map = reviews;
+        SharedPreferences shared_prefs = getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared_prefs.edit();
+        Gson gson = new Gson();
+        String hashmap_string = gson.toJson(map);
+        editor.putString("dishReviews", hashmap_string);
+        editor.apply();
+    }
+
+    // get list of reviews for a dish
+    public List<Review> getDishReviews(String dish) {
+        List<Review> dish_reviews = reviews.get(dish);
+        if (dish_reviews == null) {
+            // dish has no reviews
+            List<Review> empty_list = new ArrayList<Review>();
+            return empty_list;
+        }
+        else {
+            return dish_reviews;
+        }
+    }
+
+    // add review for a dish
+    public void addDishReview(String dish, Review review) {
+        // get the list of reviews for this dish
+        if (reviews.get(dish) == null) {
+            // dish has no reviews, add directly
+            List<Review> dish_reviews = new ArrayList<Review>();
+            // add this new restaurant to the list
+            dish_reviews.add(review);
+            // edit the hashmap entry or add a new entry if none exists
+            reviews.put(dish, dish_reviews);
+            // update the dish avg rating
+            updateDishRating(dish, review);
+        }
+        else {
+            // dish already exists in the hashmap
+            // get the dish's reviews list
+            List<Review> dish_reviews = reviews.get(dish);
+            // add this new review to the list
+            dish_reviews.add(review);
+            // edit the hashmap entry or add a new entry if none exists
+            reviews.put(dish, dish_reviews);
+            // update the dish avg rating
+            updateDishRating(dish, review);
+        }
+    }
+
+
+    // dish ratings data
+    private HashMap<String, List<Float>> ratings;
+    // get dish ratings from shared preferences
+    public void getRatings() {
+        System.out.println("get dish ratings");
+        SharedPreferences shared_prefs = getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String hashmap_string = shared_prefs.getString("dishRatings","");
+        if (hashmap_string == "") {
+            System.out.println("hashmap_string is null");
+            // save initial reviews hashmap to shared preferences
+            HashMap<String, List<Float>> empty_ratings_map = new HashMap<String, List<Float>>();
+            //convert to string using gson
+            String hashMapString = gson.toJson(empty_ratings_map);
+            //save in shared prefs
+            shared_prefs.edit().putString("dishRatings", hashMapString).apply();
+            // get from shared prefs
+            String storedHashMapString = shared_prefs.getString("dishRatings", "");
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, List<Float>>>(){}.getType();
+            HashMap<String, List<Float>> ratings_map = gson.fromJson(storedHashMapString, type);
+            ratings = ratings_map;
+        }
+        else {
+            System.out.println("rating hashmap string is not null");
+            java.lang.reflect.Type type = new TypeToken<HashMap<String, List<Float>>>(){}.getType();
+            HashMap<String, List<Float>> ratings_map = gson.fromJson(hashmap_string, type);
+            ratings =  ratings_map;
+        }
+    }
+
+    // save reviews hashmap to shared preferences
+    public void saveRatings() {
+        HashMap<String, List<Float>> map = ratings;
+        SharedPreferences shared_prefs = getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared_prefs.edit();
+        Gson gson = new Gson();
+        String hashmap_string = gson.toJson(map);
+        editor.putString("dishRatings", hashmap_string);
+        editor.apply();
+    }
+
+    // get rating for a dish
+    public Float getDishRating(String dish) {
+        Float dish_rating = ratings.get(dish).get(0);
+        if (dish_rating == null) {
+            // dish has no reviews
+            return 0f;
+        }
+        else {
+            return dish_rating;
+        }
+    }
+
+    // update rating for a dish
+    public void updateDishRating(String dish, Review review) {
+        // get the rating for this dish
+        if (ratings.get(dish) == null) {
+            // dish has no existing rating, add directly
+            // get the review rating
+            float dish_rating = review.rating;
+            // create the rating list -- index 0 stores the rating, index 1 stores the count of reviews for this dish
+            List<Float> rating_list = new ArrayList<Float>();
+            rating_list.add(dish_rating);
+            rating_list.add(1f);             // start with count = 1
+            // edit the hashmap entry or add a new entry if none exists
+            ratings.put(dish, rating_list);
+        }
+        else {
+            // dish already exists in the hashmap
+            // get the dish's current rating
+            List<Float> rating_list = ratings.get(dish);
+            Float dish_rating = rating_list.get(0);
+            Float review_count = rating_list.get(1);
+            // update the avg rating -- add the new review rating
+            Float new_rating = review.rating;
+            Float new_avg_rating = ((dish_rating * review_count) + new_rating) / (review_count + 1);
+            List<Float> new_rating_list = new ArrayList<Float>();
+            new_rating_list.add(new_avg_rating);
+            new_rating_list.add(review_count + 1);
+            // edit the hashmap entry or add a new entry if none exists
+            ratings.put(dish, new_rating_list);
+        }
+    }
+
+
 }

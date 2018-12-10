@@ -3,12 +3,15 @@ package com.example.menuui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Button;
+
+import org.json.JSONObject;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,6 +21,7 @@ public class LeaveReview extends AppCompatActivity {
     private Button post_review;
 
     private String restaurant_info;
+    private String restaurant_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,13 @@ public class LeaveReview extends AppCompatActivity {
         dish_title.setText(dish_name);
         // get restaurant info from intent -- to pass back to dish page
         restaurant_info = intent.getStringExtra("RESTAURANT_INFO");
+        // get the restaurant name
+        try {
+            restaurant_name = new JSONObject(restaurant_info).getString("name");
+        } catch (Exception e) {
+            restaurant_name = "";
+            Log.d("DEBUG", "ERROR: " + e.toString());
+        }
 
         post_review = (Button) findViewById(R.id.submit_review);
         post_review.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +107,7 @@ public class LeaveReview extends AppCompatActivity {
         // return to the dish page
         Intent verify_intent = new Intent(this, DishPage.class);
         verify_intent.putExtra("dishName", dish);
+        verify_intent.putExtra("restName", restaurant_name);
         verify_intent.putExtra("RESTAURANT_INFO", restaurant_info);
         startActivity(verify_intent);
     }

@@ -46,7 +46,7 @@ public class Register extends AppCompatActivity {
         username = (EditText) findViewById(R.id.input_name);
         email = (EditText) findViewById(R.id.input_email);
         password = (EditText) findViewById(R.id.input_password);
-        
+
 
         register_button = (Button) findViewById(R.id.btn_signup);
         register_button.setOnClickListener(new View.OnClickListener() {

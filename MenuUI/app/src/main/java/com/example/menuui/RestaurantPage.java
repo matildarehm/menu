@@ -206,38 +206,6 @@ public class RestaurantPage extends AppCompatActivity {
             TextView dishes_title = (TextView) findViewById(R.id.rest_dishes_title);
             dishes_title.setVisibility(View.INVISIBLE);
         }
-
-        getDishData();
-
-        //recycler view for most popular dishes - reuse the dish adapter
-        RecyclerView popular_rv = (RecyclerView) findViewById(R.id.restaurant_popular_recycler);
-        // linear layout manager for the popular dish recycler view
-        LinearLayoutManager popular_llm = new LinearLayoutManager(this);
-        popular_rv.setLayoutManager(popular_llm);
-        // call the dish adapter on the popular dishes
-        DishAdapter popular_dish_adapter = new DishAdapter(popular_dishes, restaurant_info_string, restaurant_name);
-        popular_rv.setAdapter(popular_dish_adapter);
-
-
-        // create dialog for dish filter popup
-        filterDialog = new Dialog(this);
-
-
-        // recycler view for dish cards
-        RecyclerView menu_rv = (RecyclerView) findViewById(R.id.restaurant_dishes_recycler);
-        // linear layout manager for the dish recycler view
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        menu_rv.setLayoutManager(llm);
-
-        System.out.println("executed?");
-
-        // call the dish adapter on the restaurant dishes
-        DishAdapter adapter = new DishAdapter(dishes, restaurant_info_string, restaurant_name);
-        menu_rv.setAdapter(adapter);
-
-        // temp: set dish reviews
-        ((MenuApp)this.getApplication()).setReviews();
-
     }
 
     // nav bar

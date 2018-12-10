@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -36,6 +37,8 @@ import com.mashape.unirest.http.async.RequestThread;
 import com.yelp.fusion.client.models.User;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -157,36 +160,51 @@ public class RestaurantPage extends AppCompatActivity {
                 });
 
         // get the dish data
-        getDishData();
+        if (dishes.size() != 0) {
+            // there are menu dishes for this restaurant -- hide no results message
+            TextView no_dish_tv = (TextView)findViewById(R.id.no_dishes_text);
+            no_dish_tv.setVisibility(View.INVISIBLE);
+            TextView pop_dishes_title = (TextView) findViewById(R.id.rest_pop_dish_title);
+            pop_dishes_title.setVisibility(View.VISIBLE);
+            TextView dishes_title = (TextView) findViewById(R.id.rest_dishes_title);
+            dishes_title.setVisibility(View.VISIBLE);
+            getDishData();
+            //recycler view for most popular dishes - reuse the dish adapter
+            RecyclerView popular_rv = (RecyclerView) findViewById(R.id.restaurant_popular_recycler);
+            // linear layout manager for the popular dish recycler view
+            LinearLayoutManager popular_llm = new LinearLayoutManager(this);
+            popular_rv.setLayoutManager(popular_llm);
+            // call the dish adapter on the popular dishes
+            DishAdapter popular_dish_adapter = new DishAdapter(popular_dishes, restaurant_info_string);
+            popular_rv.setAdapter(popular_dish_adapter);
 
-        //recycler view for most popular dishes - reuse the dish adapter
-        RecyclerView popular_rv = (RecyclerView) findViewById(R.id.restaurant_popular_recycler);
-        // linear layout manager for the popular dish recycler view
-        LinearLayoutManager popular_llm = new LinearLayoutManager(this);
-        popular_rv.setLayoutManager(popular_llm);
-        // call the dish adapter on the popular dishes
-        DishAdapter popular_dish_adapter = new DishAdapter(popular_dishes, restaurant_info_string);
-        popular_rv.setAdapter(popular_dish_adapter);
 
+            // recycler view for dish cards
+            RecyclerView menu_rv = (RecyclerView) findViewById(R.id.restaurant_dishes_recycler);
+            // linear layout manager for the dish recycler view
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            menu_rv.setLayoutManager(llm);
 
-        // create dialog for dish filter popup
-        filterDialog = new Dialog(this);
+            System.out.println("executed?");
 
+            // call the dish adapter on the restaurant dishes
+            DishAdapter adapter = new DishAdapter(dishes, restaurant_info_string);
+            menu_rv.setAdapter(adapter);
 
-        // recycler view for dish cards
-        RecyclerView menu_rv = (RecyclerView) findViewById(R.id.restaurant_dishes_recycler);
-        // linear layout manager for the dish recycler view
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        menu_rv.setLayoutManager(llm);
-
-        System.out.println("executed?");
-
-        // call the dish adapter on the restaurant dishes
-        DishAdapter adapter = new DishAdapter(dishes, restaurant_info_string);
-        menu_rv.setAdapter(adapter);
-
-        // temp: set dish reviews
-        ((MenuApp)this.getApplication()).setReviews();
+            // temp: set dish reviews
+            ((MenuApp)this.getApplication()).setReviews();
+        }
+        else {
+            // no menu dishes for this restaurant
+            // make no results message visible
+            TextView no_dish_tv = (TextView)findViewById(R.id.no_dishes_text);
+            no_dish_tv.setVisibility(View.VISIBLE);
+            // hide popular dishes and dishes header
+            TextView pop_dishes_title = (TextView) findViewById(R.id.rest_pop_dish_title);
+            pop_dishes_title.setVisibility(View.INVISIBLE);
+            TextView dishes_title = (TextView) findViewById(R.id.rest_dishes_title);
+            dishes_title.setVisibility(View.INVISIBLE);
+        }
 
     }
 

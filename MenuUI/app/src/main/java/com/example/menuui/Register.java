@@ -46,8 +46,7 @@ public class Register extends AppCompatActivity {
         username = (EditText) findViewById(R.id.input_name);
         email = (EditText) findViewById(R.id.input_email);
         password = (EditText) findViewById(R.id.input_password);
-
-
+        
 
         register_button = (Button) findViewById(R.id.btn_signup);
         register_button.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +148,11 @@ public class Register extends AppCompatActivity {
         Intent verify_intent = new Intent(this, VerifyUser.class);
         verify_intent.putExtra("username", username);
         startActivity(verify_intent);
+    }
+
+    public void goToLogin(View view) {
+        Intent login_intent = new Intent(this, Login.class);
+        startActivity(login_intent);
     }
 
 

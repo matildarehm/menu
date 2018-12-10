@@ -79,15 +79,18 @@
         android:typeface="normal"
         android:layout_marginVertical="5dp"/>
 
-    <TextView
+    <Button
         android:id="@+id/link_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:background="@color/transparent"
         android:fontFamily="@font/airbnbcereallight"
+        android:gravity="center"
+        android:onClick="goToLogin"
         android:text="Already a member? Log In"
         android:textColor="@color/white"
-        android:textSize="18dp"
-        android:layout_marginVertical="5dp"/>
+        android:textSize="18dp" />
 
     <Button
         android:id="@+id/btn_signup"

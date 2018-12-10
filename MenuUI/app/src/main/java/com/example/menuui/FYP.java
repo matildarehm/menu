@@ -19,7 +19,7 @@ public class FYP extends AppCompatActivity {
         reset_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                go_to_landing();
+                go_back();
 
             }
         });
@@ -36,9 +36,9 @@ public class FYP extends AppCompatActivity {
         );
     }
 
-    private void go_to_landing() {
-        Intent landing_intent = new Intent(this, Landing.class);
-        startActivity(landing_intent);
+    private void go_back() {
+        Intent welcome_intent = new Intent(this, MainActivity.class);
+        startActivity(welcome_intent);
     }
 }
 

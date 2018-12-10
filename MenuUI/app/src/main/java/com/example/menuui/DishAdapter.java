@@ -48,7 +48,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     DishAdapter(List<Dish> dishes, String restaurant_info, String rest_name) {
         this.dishes = dishes;
         this.restaurant_info = restaurant_info;
-        this.restaurant_name = rest_name;
+        restaurant_name = rest_name;
     }
     @Override
     public int getItemCount() {

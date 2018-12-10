@@ -69,6 +69,8 @@ public class DishPage extends AppCompatActivity {
                                 startActivity(fav_rest_page_intent);
                                 break;
                             case R.id.nav_logout:
+                                // save the user favorites hashmap to the shared preferences
+                                ((MenuApp)DishPage.this.getApplication()).saveHashMap();
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(DishPage.this, MainActivity.class);
                                 startActivity(logout_intent);
@@ -149,8 +151,6 @@ public class DishPage extends AppCompatActivity {
 
     // temp: get review lists
     public List<Review> getReviewsFromDB() {
-        System.out.println("Get reviews from db");
-        System.out.println(dish);
         return ((MenuApp) this.getApplication()).getReviews(dish);
     }
 

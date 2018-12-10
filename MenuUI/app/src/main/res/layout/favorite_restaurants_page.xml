@@ -45,6 +45,16 @@
 
                 </LinearLayout>
             </ScrollView>
+
+            <TextView
+                android:id="@+id/no_favs_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Favorited Restaurants!"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:visibility="invisible"/>
+
         </LinearLayout>
     </FrameLayout>
     <android.support.design.widget.NavigationView

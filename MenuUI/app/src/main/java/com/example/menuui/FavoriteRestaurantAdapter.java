@@ -29,8 +29,11 @@ public class FavoriteRestaurantAdapter extends RecyclerView.Adapter<FavoriteRest
     }
 
     List<Restaurant> restaurants;
-    FavoriteRestaurantAdapter(List<Restaurant> restaurants) {
+    List<String> restaurants_info;
+
+    FavoriteRestaurantAdapter(List<Restaurant> restaurants, List<String> restaurants_info) {
         this.restaurants = restaurants;
+        this.restaurants_info = restaurants_info;
     }
 
     @Override
@@ -46,21 +49,20 @@ public class FavoriteRestaurantAdapter extends RecyclerView.Adapter<FavoriteRest
     }
 
     @Override
-    public void onBindViewHolder(final FavoriteRestaurantViewHolder favoriteRestaurantViewHolder, int i) {
+    public void onBindViewHolder(final FavoriteRestaurantViewHolder favoriteRestaurantViewHolder, final int i) {
         favoriteRestaurantViewHolder.restaurant_name.setText(restaurants.get(i).name);
         favoriteRestaurantViewHolder.restaurant_photo.setImageResource(restaurants.get(i).restaurant_img);
 
-//        favoriteRestaurantViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                TextView dish_name = view.findViewById(R.id.rest_dish_title);
-//                String dish = dish_name.getText().toString();
-//
-//                Intent dish_reviews_intent = new Intent(view.getContext(), DishPage.class);
-//                dish_reviews_intent.putExtra("dishName", dish);
-//                view.getContext().startActivity(dish_reviews_intent);
-//            }
-//        });
+        favoriteRestaurantViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // get restaurant info
+                String restaurant_info = restaurants_info.get(restaurants.get(i).id);
+                Intent restaurant_intent = new Intent(view.getContext(), RestaurantPage.class);
+                restaurant_intent.putExtra("RESTAURANT_INFO", restaurant_info);
+                view.getContext().startActivity(restaurant_intent);
+            }
+        });
     }
 
     @Override

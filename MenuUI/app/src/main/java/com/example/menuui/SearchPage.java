@@ -184,9 +184,7 @@ public class SearchPage extends AppCompatActivity implements GoogleApiClient.Con
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
+                        // Update the UI based on the item selected
                         int id = menuItem.getItemId();
                         switch (id) {
                             case R.id.nav_homepage:

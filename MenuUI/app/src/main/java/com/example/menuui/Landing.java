@@ -115,9 +115,7 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
+                        // Update the UI based on the item selected
                         int id = menuItem.getItemId();
                         switch (id) {
                             case R.id.nav_homepage:
@@ -131,6 +129,8 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                                 startActivity(fav_rest_page_intent);
                                 break;
                             case R.id.nav_logout:
+                                // save the user favorites hashmap to the shared preferences
+                                ((MenuApp)Landing.this.getApplication()).saveHashMap();
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(Landing.this, MainActivity.class);
                                 startActivity(logout_intent);

@@ -97,9 +97,9 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.i("button clicked", "let'sgo");
+                Log.i("Login button clicked", "let'sgo");
                 String user = username.getText().toString();
-                Log.i("button clicked", user);
+                Log.i("Login button clicked", user);
                 pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password.getText().toString()) + "MENU";
 
                 Region REGION = Region.getRegion(Regions.US_EAST_2);
@@ -126,6 +126,11 @@ public class Login extends AppCompatActivity {
 
                 thisUser.getSessionInBackground(authenticationHandler);
 
+                // save username as current user
+                ((MenuApp) Login.this.getApplication()).setCurrentUser(user);
+
+                // get the user favorite restaurants hashmap from shared preferences
+                ((MenuApp) Login.this.getApplication()).getHashMap();
 
             }
         });

@@ -131,9 +131,7 @@ public class RestaurantPage extends AppCompatActivity {
                         // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
+                        // Update the UI based on the item selected
                         int id = menuItem.getItemId();
                         switch (id) {
                             case R.id.nav_homepage:
@@ -147,6 +145,8 @@ public class RestaurantPage extends AppCompatActivity {
                                 startActivity(fav_rest_page_intent);
                                 break;
                             case R.id.nav_logout:
+                                // save the user favorites hashmap to the shared preferences
+                                ((MenuApp)RestaurantPage.this.getApplication()).saveHashMap();
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(RestaurantPage.this, MainActivity.class);
                                 startActivity(logout_intent);
@@ -278,10 +278,11 @@ public class RestaurantPage extends AppCompatActivity {
         });
     }
 
-    // switch to the restaurant owner edit restaurant page
-    public void goToEditRestaurant(View view) {
-        // !!! check if the user is a verified owner of the restaurant !!!
-
+    // Add restaurant to favorite restaurants
+    public void addToFavorites(View view) {
+        String user = ((MenuApp)this.getApplication()).getCurrentUser();
+        ((MenuApp)this.getApplication()).addFavoriteRestaurant(user, restaurant_info_string);
+        System.out.println("Adding to restaurant to favorites");
     }
 
     /**

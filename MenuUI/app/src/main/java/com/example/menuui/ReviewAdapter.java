@@ -28,6 +28,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         }
     }
 
+//    FetchReviews all_reviews = new FetchMenu(this, "Big Apple Pizzeria");
+
     List<Review> reviews;
     ReviewAdapter(List<Review> reviews) {
         this.reviews = reviews;

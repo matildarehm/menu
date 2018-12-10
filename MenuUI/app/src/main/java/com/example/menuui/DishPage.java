@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,9 @@ public class DishPage extends AppCompatActivity {
 
     private String dish;
     private String restaurant_info;
-
+    String restaurant_name;
     private List<Review> reviews;
+    FetchReviews other_reviews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,10 @@ public class DishPage extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionbar.setTitle("Menu App");
 
+
+
+
+
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -50,6 +56,7 @@ public class DishPage extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+
                         // set item as selected
                         menuItem.setChecked(true);
                         // close drawer when item is tapped
@@ -83,6 +90,8 @@ public class DishPage extends AppCompatActivity {
         // get dish name from intent -- and set the name
         Intent intent = getIntent();
         dish = intent.getStringExtra("dishName");
+       restaurant_name = intent.getStringExtra("restName");
+        Log.i("restName", restaurant_name);
         TextView dish_title = (TextView) findViewById(R.id.dish_title);
         dish_title.setText(dish);
         // get the restaurant info from intent -- for the back to restaurant button
@@ -125,7 +134,39 @@ public class DishPage extends AppCompatActivity {
     private void getReviews(){
         reviews = new ArrayList<>();
         List<Review> fetched_reviews = getReviewsFromDB();
-        reviews = fetched_reviews;
+        other_reviews = new FetchReviews(this, restaurant_name);
+        Log.i("reviews working", "rest_name");
+        RequestThread get_request = new RequestThread();
+        get_request.start();
+
+        synchronized (get_request) {
+            try {
+                System.out.println("Waiting for request get to complete...");
+                get_request.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        ReviewThread get_reviews = new ReviewThread();
+        get_reviews.start();
+
+        synchronized (get_reviews) {
+            try {
+                System.out.println("Waiting for dish get to complete...");
+                get_reviews.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        List<Review> more_reviews = other_reviews.get_all_reviews();
+        List<Review> review_union = new ArrayList<Review>();
+        review_union.addAll(more_reviews);
+        review_union.addAll(fetched_reviews);
+        reviews = review_union;
 //        reviews.add(new Review("This dish was excellent", 5, true, "User1"));
 //        reviews.add(new Review("This dish was delicious", 4, true, "User2"));
 //        reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
@@ -154,6 +195,31 @@ public class DishPage extends AppCompatActivity {
         return ((MenuApp) this.getApplication()).getReviews(dish);
     }
 
+    class RequestThread extends Thread {
 
+        @Override
+        public void run() {
+            synchronized (this) {
+                other_reviews.get_request();
+                notify();
+            }
+
+        }
+
+    }
+
+    class ReviewThread extends Thread {
+
+        @Override
+        public void run() {
+            synchronized (this) {
+                reviews.addAll(other_reviews.get_all_reviews());
+                notify();
+            }
+
+        }
+
+    }
 }
+
 

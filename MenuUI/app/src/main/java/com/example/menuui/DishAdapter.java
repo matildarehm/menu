@@ -3,6 +3,7 @@ package com.example.menuui;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import java.util.List;
 
 // Recycler View Adapter for Dishes on the RestaurantPage page
 public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder> {
+
     // Restaurant info
     private String restaurant_info;
+    String restaurant_name;
 
     public static class DishViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
@@ -25,6 +28,9 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         TextView dish_description;
         TextView dish_recommended;
         ImageView dish_photo;
+
+
+
 
         DishViewHolder(View itemView) {
             super(itemView);
@@ -39,11 +45,11 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     }
 
     List<Dish> dishes;
-    DishAdapter(List<Dish> dishes, String restaurant_info) {
+    DishAdapter(List<Dish> dishes, String restaurant_info, String rest_name) {
         this.dishes = dishes;
         this.restaurant_info = restaurant_info;
+        this.restaurant_name = rest_name;
     }
-
     @Override
     public int getItemCount() {
         return dishes.size();
@@ -53,6 +59,8 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     public DishViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dish_card, viewGroup, false);
         DishViewHolder dvh = new DishViewHolder(v);
+
+
         return dvh;
     }
 
@@ -70,9 +78,11 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
                 TextView dish_name = view.findViewById(R.id.rest_dish_title);
                 String dish = dish_name.getText().toString();
 
+
                 Intent dish_reviews_intent = new Intent(view.getContext(), DishPage.class);
                 dish_reviews_intent.putExtra("dishName", dish);
                 dish_reviews_intent.putExtra("RESTAURANT_INFO", restaurant_info);
+                dish_reviews_intent.putExtra("restName", restaurant_name);
                 view.getContext().startActivity(dish_reviews_intent);
             }
         });

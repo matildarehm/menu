@@ -60,6 +60,10 @@ public class FetchMenu {
         url = "https://developers.zomato.com/api/v2.1/search?entity_id=128782&entity_type=subzone&q=" + getRestaurantQuery(restaurant_name) + "&count=1";
     }
 
+    private Context getContext() {
+        return RestaurantPage.getContext();
+    }
+
     private String getAPIKey() {
         String key = null;
         try {
@@ -223,18 +227,26 @@ public class FetchMenu {
             System.out.println(dish_extract);
             System.out.println(dish_info);
 
-
-            float rating = get_rating(2, 4);
-            float rec = get_rec(80, 100);
-
             dish_extract = dish_extract.trim();
-            if (dish_extract.toLowerCase().equals("octopus")) {
-                System.out.println("here");
-                rating = 5;
-                rec = (float) 100;
+
+            // add dummy data reviews for each dish
+            // dummy reviews
+            Review review1 = new Review("This dish was excellent", 5, true, "User1");
+            Review review2 = new Review("This dish was delicious", 4, true, "User2");
+            Review review3 = new Review("This dish was mediocre", 3,  true, "User3");
+            // check if there are already reviews for this dish
+            List<Review> dish_reviews = ((MenuApp)getContext().getApplicationContext()).getDishReviews(dish_extract);
+            if (dish_reviews.size() == 0) {
+                // if there are no reviews, add the 3 dummy reviews
+                ((MenuApp)getContext().getApplicationContext()).addDishReview(dish_extract, review1);
+                ((MenuApp)getContext().getApplicationContext()).addDishReview(dish_extract, review2);
+                ((MenuApp)getContext().getApplicationContext()).addDishReview(dish_extract, review3);
             }
 
+            float rating = ((MenuApp)getContext().getApplicationContext()).getDishRating(dish_extract);
+            float rec = ((MenuApp)getContext().getApplicationContext()).getDishRecommended(dish_extract);
 
+            // add this dish to the dishes list
             dishes.add(new Dish(dish_extract, dish_info, rating, rec, R.drawable.menuyellow, restaurant_name));
 
         }

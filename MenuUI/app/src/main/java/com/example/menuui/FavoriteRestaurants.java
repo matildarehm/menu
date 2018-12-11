@@ -78,6 +78,9 @@ public class FavoriteRestaurants extends AppCompatActivity {
                             case R.id.nav_logout:
                                 // save the user favorites hashmap to the shared preferences
                                 ((MenuApp)FavoriteRestaurants.this.getApplication()).saveHashMap();
+                                // save the reviews and ratings
+                                ((MenuApp)FavoriteRestaurants.this.getApplication()).saveReviews();
+                                ((MenuApp)FavoriteRestaurants.this.getApplication()).saveRatings();
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(FavoriteRestaurants.this, MainActivity.class);
                                 startActivity(logout_intent);

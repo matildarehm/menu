@@ -160,9 +160,17 @@ public class MenuApp extends Application {
         if (hashmap_string == "") {
             System.out.println("hashmap_string is null");
             // save initial reviews hashmap to shared preferences
-            HashMap<String, List<Review>> empty_reviews_map = new HashMap<String, List<Review>>();
-            //convert to string using gson
-            String hashMapString = gson.toJson(empty_reviews_map);
+            HashMap<String, List<Review>> initial_reviews_map = new HashMap<String, List<Review>>();
+
+            // setup initial reviews
+            // add some reviews
+//            Review r1 = new Review("The octopus was tender and flavorful.", 4f, true, "Benny");
+//            List<Review> octopus_reviews = new ArrayList<Review>();
+//            octopus_reviews.add(r1);
+//            initial_reviews_map.put("octopus", octopus_reviews);
+
+            //convert hashmap to string using gson
+            String hashMapString = gson.toJson(initial_reviews_map);
             //save in shared prefs
             shared_prefs.edit().putString("dishReviews", hashMapString).apply();
             // get from shared prefs
@@ -260,7 +268,7 @@ public class MenuApp extends Application {
         }
     }
 
-    // save reviews hashmap to shared preferences
+    // save ratings hashmap to shared preferences
     public void saveRatings() {
         HashMap<String, List<Float>> map = ratings;
         SharedPreferences shared_prefs = getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE);
@@ -273,13 +281,29 @@ public class MenuApp extends Application {
 
     // get rating for a dish
     public Float getDishRating(String dish) {
-        Float dish_rating = ratings.get(dish).get(0);
-        if (dish_rating == null) {
+        List<Float> rating_list = ratings.get(dish);
+        if (rating_list == null) {
             // dish has no reviews
             return 0f;
         }
         else {
+            Float dish_rating = ratings.get(dish).get(0);
             return dish_rating;
+        }
+    }
+
+    // get recommended value for a dish
+    public Float getDishRecommended(String dish) {
+        List<Float> rating_list = ratings.get(dish);
+        if (rating_list == null) {
+            // dish has no reviews
+            return 0f;
+        }
+        else {
+            Float yes_count = ratings.get(dish).get(2);
+            Float no_count = ratings.get(dish).get(3);
+            Float dish_recommended = yes_count/(yes_count + no_count) * 100;
+            return dish_recommended;
         }
     }
 
@@ -291,9 +315,18 @@ public class MenuApp extends Application {
             // get the review rating
             float dish_rating = review.rating;
             // create the rating list -- index 0 stores the rating, index 1 stores the count of reviews for this dish
+            // index 2 stores the count of yes recommendations, index 3 stores the count of the no recommendations
             List<Float> rating_list = new ArrayList<Float>();
             rating_list.add(dish_rating);
             rating_list.add(1f);             // start with count = 1
+            if (review.would_recommend == true) {
+                rating_list.add(1f);    // start with 1 yes
+                rating_list.add(0f);    // atart with 0 no
+            }
+            else if (review.would_recommend == false) {
+                rating_list.add(0f);    // start with 0 yes
+                rating_list.add(1f);    // start with 1 no
+            }
             // edit the hashmap entry or add a new entry if none exists
             ratings.put(dish, rating_list);
         }
@@ -307,8 +340,21 @@ public class MenuApp extends Application {
             Float new_rating = review.rating;
             Float new_avg_rating = ((dish_rating * review_count) + new_rating) / (review_count + 1);
             List<Float> new_rating_list = new ArrayList<Float>();
-            new_rating_list.add(new_avg_rating);
-            new_rating_list.add(review_count + 1);
+            new_rating_list.add(new_avg_rating);        // rating
+            new_rating_list.add(review_count + 1);      // review count
+            // update the avg recommended
+            Float current_yes = rating_list.get(2);
+            Float current_no = rating_list.get(3);
+            if (review.would_recommend == true) {
+                // add a yes and keep the no count
+                new_rating_list.add(current_yes+1);
+                new_rating_list.add(current_no);
+            }
+            else {
+                // keep the current yes count and add a no
+                new_rating_list.add(current_yes);
+                new_rating_list.add(current_no+1);
+            }
             // edit the hashmap entry or add a new entry if none exists
             ratings.put(dish, new_rating_list);
         }

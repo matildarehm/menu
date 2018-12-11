@@ -30,8 +30,6 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         ImageView dish_photo;
 
 
-
-
         DishViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.dish_cardv);
@@ -69,7 +67,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         dishViewHolder.dish_name.setText(dishes.get(i).name);
         dishViewHolder.dish_rating.setText(String.format("%.2f", dishes.get(i).avg_rating));
         dishViewHolder.dish_description.setText(dishes.get(i).description);
-        // dishViewHolder.dish_recommended.setText(String.format("%.2f", dishes.get(i).avg_recommended));
+        dishViewHolder.dish_recommended.setText(String.format("%.2f", dishes.get(i).avg_recommended));
         dishViewHolder.dish_photo.setImageResource(dishes.get(i).dish_img);
 
         dishViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

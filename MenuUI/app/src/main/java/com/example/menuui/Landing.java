@@ -131,6 +131,9 @@ public class Landing extends AppCompatActivity implements GoogleApiClient.Connec
                             case R.id.nav_logout:
                                 // save the user favorites hashmap to the shared preferences
                                 ((MenuApp)Landing.this.getApplication()).saveHashMap();
+                                // save the reviews and ratings
+                                ((MenuApp)Landing.this.getApplication()).saveReviews();
+                                ((MenuApp)Landing.this.getApplication()).saveRatings();
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(Landing.this, MainActivity.class);
                                 startActivity(logout_intent);

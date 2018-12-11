@@ -76,10 +76,13 @@ public class LeaveReview extends AppCompatActivity {
         EditText review_edit = (EditText)findViewById(R.id.review_edit_text);
         review_text = review_edit.getText().toString();
 
+        String review_user = ((MenuApp) this.getApplication()).getCurrentUser();
+
         // create review object to add
-        Review review = new Review(review_text, review_rating, recommend, "Alexis");
+        Review review = new Review(review_text, review_rating, recommend, review_user);
         // add review
-        ((MenuApp) this.getApplication()).addReview(dish, review);
+        // ((MenuApp) this.getApplication()).addReview(dish, review);
+        ((MenuApp) this.getApplication()).addDishReview(dish, review);
 
         // System.out.println(review_text);
 

@@ -1,6 +1,7 @@
 package com.example.menuui;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -65,10 +66,16 @@ public class RestaurantPage extends AppCompatActivity {
     private String restaurant_name;
     FetchMenu get_menu = null;
 
+    private static Context appContext;
+    public static Context getContext() {
+        return appContext;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant);
+        appContext = this;
 
         // Retrieve data that was passed through intent
         try {
@@ -150,6 +157,9 @@ public class RestaurantPage extends AppCompatActivity {
                             case R.id.nav_logout:
                                 // save the user favorites hashmap to the shared preferences
                                 ((MenuApp)RestaurantPage.this.getApplication()).saveHashMap();
+                                // save the reviews and ratings
+                                ((MenuApp)RestaurantPage.this.getApplication()).saveReviews();
+                                ((MenuApp)RestaurantPage.this.getApplication()).saveRatings();
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(RestaurantPage.this, MainActivity.class);
                                 startActivity(logout_intent);
@@ -160,7 +170,6 @@ public class RestaurantPage extends AppCompatActivity {
                 });
 
         // get the dish data
-
         if (dishes.size() != 0) {
             // there are menu dishes for this restaurant -- hide no results message
             TextView no_dish_tv = (TextView)findViewById(R.id.no_dishes_text);
@@ -193,7 +202,7 @@ public class RestaurantPage extends AppCompatActivity {
             menu_rv.setAdapter(adapter);
 
             // temp: set dish reviews
-            ((MenuApp)this.getApplication()).setReviews();
+//            ((MenuApp)this.getApplication()).setReviews();
         }
         else {
             // no menu dishes for this restaurant
@@ -271,6 +280,24 @@ public class RestaurantPage extends AppCompatActivity {
 
     // get the dish data for this restaurant
     private void getDishData() {
+
+//        // add dummy data reviews for each dish
+//        // dummy reviews
+//        Review review1 = new Review("This dish was excellent", 5, true, "User1");
+//        Review review2 = new Review("This dish was delicious", 4, true, "User2");
+//        Review review3 = new Review("This dish was mediocre", 3,  true, "User3");
+//        // set dummy data reviews for each dish
+//        for (int i = 0; i < dishes.size(); i++) {
+//            Dish dish = dishes.get(i);
+//            // check if there are already reviews for this dish
+//            List<Review> dish_reviews = ((MenuApp)this.getApplication()).getDishReviews(dish.name);
+//            if (dish_reviews.size() == 0) {
+//                // if there are no reviews, add the 3 dummy reviews
+//                ((MenuApp)this.getApplication()).addDishReview(dish.name, review1);
+//                ((MenuApp)this.getApplication()).addDishReview(dish.name, review2);
+//                ((MenuApp)this.getApplication()).addDishReview(dish.name, review3);
+//            }
+//        }
 
         // sort the dishes by rating
         Collections.sort(dishes, new Comparator<Dish>() {

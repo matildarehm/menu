@@ -132,6 +132,10 @@ public class Login extends AppCompatActivity {
                 // get the user favorite restaurants hashmap from shared preferences
                 ((MenuApp) Login.this.getApplication()).getHashMap();
 
+                // get saved dish reviews and ratings here from shared preferences
+                ((MenuApp) Login.this.getApplication()).getSavedReviews();
+                ((MenuApp) Login.this.getApplication()).getRatings();
+
             }
         });
     }

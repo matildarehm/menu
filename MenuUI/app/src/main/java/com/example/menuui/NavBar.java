@@ -57,6 +57,9 @@ public class NavBar extends AppCompatActivity {
                             case R.id.nav_logout:
                                 // save the user favorites hashmap to the shared preferences
                                 ((MenuApp)NavBar.this.getApplication()).saveHashMap();
+                                // save the reviews and ratings
+                                ((MenuApp)NavBar.this.getApplication()).saveReviews();
+                                ((MenuApp)NavBar.this.getApplication()).saveRatings();
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(NavBar.this, MainActivity.class);
                                 startActivity(logout_intent);

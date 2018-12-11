@@ -78,6 +78,9 @@ public class DishPage extends AppCompatActivity {
                             case R.id.nav_logout:
                                 // save the user favorites hashmap to the shared preferences
                                 ((MenuApp)DishPage.this.getApplication()).saveHashMap();
+                                // save the reviews and ratings
+                                ((MenuApp)DishPage.this.getApplication()).saveReviews();
+                                ((MenuApp)DishPage.this.getApplication()).saveRatings();
                                 // log out and send to the welcome page
                                 Intent logout_intent = new Intent(DishPage.this, MainActivity.class);
                                 startActivity(logout_intent);
@@ -97,24 +100,29 @@ public class DishPage extends AppCompatActivity {
         // get the restaurant info from intent -- for the back to restaurant button
         restaurant_info = intent.getStringExtra("RESTAURANT_INFO");
 
-        // Recycler View
-        RecyclerView rv = (RecyclerView) findViewById(R.id.review_recycler);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
+        // get the dish reviews
+        reviews = new ArrayList<Review>();
+        reviews = getReviewsFromDB();
+        if (reviews.size() != 0) {
+            // there are existing reviews
+            // Recycler View for reviews
+            RecyclerView rv = (RecyclerView) findViewById(R.id.review_recycler);
+
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
 //        mRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        rv.setLayoutManager(llm);
+            // use a linear layout manager
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            rv.setLayoutManager(llm);
+            // review recycler adapter
+            ReviewAdapter adapter = new ReviewAdapter(reviews);
+            rv.setAdapter(adapter);
+        }
 
         // get reviews
-        getReviews();
-
-        // review recycler adapter
-        ReviewAdapter adapter = new ReviewAdapter(reviews);
-        rv.setAdapter(adapter);
-
+//        getReviews();
     }
 
     // nav bar
@@ -167,9 +175,6 @@ public class DishPage extends AppCompatActivity {
         review_union.addAll(more_reviews);
         review_union.addAll(fetched_reviews);
         reviews = review_union;
-//        reviews.add(new Review("This dish was excellent", 5, true, "User1"));
-//        reviews.add(new Review("This dish was delicious", 4, true, "User2"));
-//        reviews.add(new Review("This dish was mediocre", 3,  true, "User3"));
     }
 
     public void sendToLeaveReview(View view) {
@@ -192,7 +197,8 @@ public class DishPage extends AppCompatActivity {
 
     // temp: get review lists
     public List<Review> getReviewsFromDB() {
-        return ((MenuApp) this.getApplication()).getReviews(dish);
+        // return ((MenuApp) this.getApplication()).getReviews(dish);
+        return ((MenuApp) this.getApplication()).getDishReviews(dish);
     }
 
     class RequestThread extends Thread {

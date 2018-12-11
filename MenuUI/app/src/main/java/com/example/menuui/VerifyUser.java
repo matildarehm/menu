@@ -112,7 +112,7 @@ public class VerifyUser extends AppCompatActivity {
     }
 
     private void go_to_landing() {
-        Intent landing_intent = new Intent(this, Landing.class);
+        Intent landing_intent = new Intent(this, Login.class);
         startActivity(landing_intent);
     }
 }

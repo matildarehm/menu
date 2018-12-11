@@ -10,6 +10,8 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserPool;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -107,7 +109,8 @@ class CognitoSettings implements Parcelable {
     }
 
     private void storePassword(String password) {
-        this.user_pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password) + "MENU";
+        this.user_pass = new String(Hex.encodeHex(DigestUtils.sha(password))) + "MENU";
+//        this.user_pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password) + "MENU";
     }
 
     public String getUserPoolId() { return this.userPoolId; }

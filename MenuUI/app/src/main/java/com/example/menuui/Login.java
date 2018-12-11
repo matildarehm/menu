@@ -29,6 +29,8 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.cognitoidentityprovider.AmazonCognitoIdentityProviderClient;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
 
 public class Login extends AppCompatActivity {
@@ -100,7 +102,8 @@ public class Login extends AppCompatActivity {
                 Log.i("Login button clicked", "let'sgo");
                 String user = username.getText().toString();
                 Log.i("Login button clicked", user);
-                pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password.getText().toString()) + "MENU";
+                pass = new String(Hex.encodeHex(DigestUtils.sha(password.getText().toString()))) + "MENU";
+//                pass = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password.getText().toString()) + "MENU";
 
                 Region REGION = Region.getRegion(Regions.US_EAST_2);
 
